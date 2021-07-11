@@ -15,5 +15,9 @@
   "bugs": {
     "url": "https://github.com/maskmanlucifer/hashcode/issues"
   },
-  "homepage": "https://github.com/maskmanlucifer/hashcode#readme"
+  "homepage": "https://github.com/maskmanlucifer/hashcode#readme",
+  "dependencies": {
+    "ejs": "^3.1.6",
+    "express": "^4.17.1"
+  }
 }
