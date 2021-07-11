@@ -1,0 +1,19 @@
+{
+  "name": "hashcode",
+  "version": "1.0.0",
+  "description": "\"a web app built on nodejs\"",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/maskmanlucifer/hashcode.git"
+  },
+  "author": "\"aman kumar singh\"",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/maskmanlucifer/hashcode/issues"
+  },
+  "homepage": "https://github.com/maskmanlucifer/hashcode#readme"
+}
