@@ -7,10 +7,13 @@ app.use(express.json());
 
 app.set('view engine', 'ejs');
 
-let user;
-
+// start -- non authorization routes
 app.get('/',(req,res)=>{
    res.render('home');
+});
+
+app.get('/home',(req,res)=>{
+  res.render('home');
 });
 
 app.get('/snippet',(req,res)=>{
@@ -20,6 +23,12 @@ app.get('/snippet',(req,res)=>{
 app.get('/contest',(req,res)=>{
   res.render('contest');
 });
+
+app.get('/visualizer',(req,res)=>{
+  res.render('visualizer');
+});
+
+// end -- non authorization routes
 
 app.listen(3000,()=>{
   console.log("You are listening to 3000 port");

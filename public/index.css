@@ -25,7 +25,7 @@
   }
   
   body::-webkit-scrollbar-track {
-    background: var(--bg-primary);
+    background: var(--bg-secondary);
   }
   
   body::-webkit-scrollbar-thumb {
@@ -134,7 +134,7 @@
   .navbar ul li .tooltip {
       position: absolute;
       height: 3rem;
-      width: 122px;
+      width: 6.5rem;
       left: 4rem;
       top: 0;
       transform: translateY(-50%);
@@ -161,3 +161,100 @@
 
   /* close < 104 tooltip styling */
   
+
+  /* open > 105  snippet filter_bar */
+   
+  .filter_bar {
+    width: 70%;
+    height: 60px;
+    background-color: var(--bg-secondary);
+    margin: auto;
+    border-radius: 9px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+  }
+
+  .filter_bar span {
+    padding : 4px;
+    padding-left: 6px;
+    padding-right: 6px;
+    background-color: var(--bg-primary);
+    border-radius: 4px;
+  }
+
+  .filter_bar span:hover {
+    cursor: pointer;
+  }
+
+  /* closse < 105  snippet filter_bar */
+
+  /* open > 106  snippet card_list */
+  
+  .card_list {
+    margin: auto;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    background-color: var(--bg-secondary);
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+    border-radius: 9px;
+    align-items: center;
+    justify-content: space-evenly;
+  }
+  .card_list span {
+    padding-top: 1rem;
+    font-size: 2.5rem;
+    border-bottom: 5px solid var(--text-secondary);
+  }
+  
+  .card_list a {
+    font-size: 1.5rem;
+    text-decoration: none;
+    color: var(--text-secondary);
+    margin: .75rem;
+    border-radius: 7px;
+    padding-left: 5px;
+    padding-right: 5px;
+  }
+  .card_list a:hover {
+    background-color: var(--bg-primary);
+  }
+  .card_list a:last-child {
+    margin-bottom: 2rem;
+  }
+  /* close < 106  snippet card_list */
+
+
+  /* open > 107 theme management  */
+
+  .dark {
+    --text-primary: #b6b6b6;
+    --text-secondary: #ececec;
+    --bg-primary: #626264;
+    --bg-secondary: #141418;
+  }
+  
+  .light {
+    --text-primary: #576e75;
+    --text-secondary: #35535c;
+    --bg-primary: #fdf6e3;
+    --bg-secondary: #f8e1a3;
+  }
+  
+  .theme-icon {
+    display: none;
+  }
+  
+  .dark #darkIcon {
+    display: block;
+  }
+  
+  .light #lightIcon {
+    display: block;
+  }
+
+  /* close < 107 theme management  */
+
