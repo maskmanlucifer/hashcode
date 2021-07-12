@@ -81,14 +81,7 @@
         <span id="stl">STL</span>
         <span id="buzz">BUZZ</span>
        </div>
-       <div class="card_list_stl stl show">
-        <span>Vector</span>
-        <div class="card_list_stl_content">
-        <p><strong>1. push_back(x) :</strong> Pushes element x at the end of vector.</p>
-        <p><strong>2. pop_back() :</strong> Pops element from the end of vector.</p>
-        <p><strong>3. size() :</strong> Returns size of vector.</p>
-        </div>
-       </div>
+       
        <div class="card_list_general general">
           <span>Platforms</span>
           <a href="https://codeforces.com/">Codeforces</a>
@@ -133,83 +126,212 @@
        <!-- adding buzz cards -->
 
        <div class="card_list_buzz buzz notshow">
-        <p>The upper bound on the number of divisors of any number n is roughly (n <sup>(1/3)</sup>).</p>
+        <p>The upper bound on the number of divisors of any number n is roughly (n <sup>(1/3)</sup>)</p>
        </div>
 
        <div class="card_list_buzz buzz notshow">
-        <p>The maximum gap between two consecutive primes for number ≤ 10<sup>9</sup> is around 300.</p>
+        <p>The maximum gap between two consecutive primes for number ≤ 10<sup>9</sup> is around 300</p>
        </div>
 
        <div class="card_list_buzz buzz notshow">
-        <p>For two numbers a and b : {(a + b) = (a xor b) + 2 * (a and b)}.</p>
+        <p>For two numbers a and b : (a + b) = (a xor b) + 2 * (a and b)</p>
        </div>
 
        <div class="card_list_buzz buzz notshow">
-        <p>Any even number greater than 2 can be split into two prime numbers.</p>
+        <p>Any even number greater than 2 can be split into two prime numbers</p>
        </div>
        
        <!-- adding stl cards -->
-       
        <div class="card_list_stl stl notshow">
-        <span>General</span>
+        <span class="heading">Mashup</span>
         <div class="card_list_stl_content">
+            <div class="stl_function">
+                <span class="highlight">isalpha(c)</span><span>Checks if character c is alphabet</span>
+            </div>
 
+            <div class="stl_function">
+                <span class="highlight">isdigit(c)</span><span>Checks if character c is digit (0-9)</span>
+            </div>
+
+            <div class="stl_function">
+                <span class="highlight">__gcd(x,y)</span><span>Returns GCD of x and y</span>
+            </div>
+
+            <div class="stl_function">
+                <span class="highlight">__builtin_popcount(x)</span><span>Returns number of set bits in unsigned int x</span>
+            </div>
+
+            <div class="stl_function">
+                <span class="highlight">min{x1,x2,x3...}</span><span>Returns min among x1,x2,x3...</span>
+            </div>
+
+            <div class="stl_function">
+                <span class="highlight">max_element(V.begin(),V.end())</span><span>Pointer to max element in vector V</span>
+            </div>
+
+        </div>
+       </div>
+       <div class="card_list_stl stl notshow">
+        <span class="heading">Vector</span>
+        <div class="card_list_stl_content">
+            <div class="stl_function">
+            <span class="highlight">V.push_back(x)</span><span>Pushes element x at the end of vector</span>
+            </div>
+
+            <div class="stl_function">
+            <span class="highlight">V.pop_back()</span><span>Pops element from the end of vector</span>
+            </div>
+
+            <div class="stl_function">
+                <span class="highlight">V.size()</span><span>Returns size of vector</span>
+            </div>
+
+            <div class="stl_function">
+                <span class="highlight">V.back()</span><span>Returns reference to vector's last element</span>
+            </div>
+
+            <div class="stl_function">
+                <span class="highlight">lower_bound(V.begin(),V.end(),x)</span><span>Returns pointer to the element >=x</span>
+            </div>
+
+            <div class="stl_function">
+                <span class="highlight">upper_bound(V.begin(),V.end(),x)</span><span>Returns pointer to the element >x</span>
+            </div>
+
+            <div class="stl_function">
+                <span class="highlight">binary_search(V.begin(),V.end(),x)</span><span>Check if x exist in V (sorted)</span>
+            </div>
+
+            <div class="stl_function">
+                <span class="highlight">reverse(V.begin(),V.end())</span><span>Reverses vector V</span>
+            </div>
+
+            <div class="stl_function">
+                <span class="highlight">sort(V.begin(),V.end())</span><span>Sort's vector V</span>
+            </div>
         </div>
        </div>
 
        <div class="card_list_stl stl notshow">
-        <span>Vector</span>
+        <span class="heading">Map</span>
         <div class="card_list_stl_content">
+            <div class="stl_function">
+                <span class="highlight">clear()</span><span>Erases all key-value pairs of map</span>
+            </div>
+
+            <div class="stl_function">
+                <span class="highlight">count(x)</span><span>Checks if key x exists in map</span>
+            </div>
+
+            <div class="stl_function">
+                <span class="highlight">find(x)</span><span>If find, returns pointer to key x</span>
+            </div>
+
+            <div class="stl_function">
+                <span class="highlight">size()</span><span>Returns size of map</span>
+            </div>
+        </div>
+       </div>
+       <div class="card_list_stl stl notshow">
+        <span class="heading">Set</span>
+        <div class="card_list_stl_content">
+            <div class="stl_function">
+                <span class="highlight">begin()</span><span>Returns pointer to first element</span>
+            </div>
+
+            <div class="stl_function">
+                <span class="highlight">rbegin()</span><span>Returns pointer to last element</span>
+            </div>
+
+            <div class="stl_function">
+                <span class="highlight">clear()</span><span>Erases all elements from set</span>
+            </div>
+
+            <div class="stl_function">
+                <span class="highlight">count(x)</span><span>Checks if x exists in set</span>
+            </div>
+
+            <div class="stl_function">
+                <span class="highlight">size()</span><span>Returns size of set</span>
+            </div>
+
+            <div class="stl_function">
+                <span class="highlight">insert(x)</span><span>Inserts element x in set</span>
+            </div>
+
+            <div class="stl_function">
+                <span class="highlight">find(x)</span><span>If exist, returns pointer to element x</span>
+            </div>
+
+            <div class="stl_function">
+                <span class="highlight">erase(x)</span><span>Erases element x, if x is value</span>
+            </div>
+            
+            <div class="stl_function">
+                <span class="highlight">erase(x)</span><span>Erases element at position x, if x is address</span>
+            </div>
+
+            <div class="stl_function">
+                <span class="highlight">st.lower_bound(x)</span><span>Returns pointer to element >= x</span>
+            </div>
+
+            <div class="stl_function">
+                <span class="highlight">st.upper_bound(x)</span><span>Returns pointer to element > x</span>
+            </div>
+        </div>
+       </div>
+       <div class="card_list_stl stl notshow">
+        <span class="heading">Queue</span>
+        <div class="card_list_stl_content">
+            <div class="stl_function">
+                <span class="highlight">back()</span><span>Reference to last element</span>
+            </div>
+
+            <div class="stl_function">
+                <span class="highlight">empty()</span><span>Checks if queue is empty</span>
+            </div>
+
+            <div class="stl_function">
+                <span class="highlight">front()</span><span>Reference to first element</span>
+            </div>
+
+            <div class="stl_function">
+                <span class="highlight">push(x)</span><span>Pushes x at the back of queue</span>
+            </div>
+
+            <div class="stl_function">
+                <span class="highlight">pop()</span><span>Pops element from back of queue</span>
+            </div>
+
+            <div class="stl_function">
+                <span class="highlight">size()</span><span>Returns size of queue</span>
+            </div>
 
         </div>
        </div>
-
        <div class="card_list_stl stl notshow">
-        <span>Stack</span>
+        <span class="heading">Stack</span>
         <div class="card_list_stl_content">
+            <div class="stl_function">
+                <span class="highlight">push(x)</span><span>Push x at the top of stack</span>
+            </div>
 
-        </div>
-       </div>
+            <div class="stl_function">
+                <span class="highlight">pop()</span><span>Pop element from top of x</span>
+            </div>
 
-       <div class="card_list_stl stl notshow">
-        <span>Queue</span>
-        <div class="card_list_stl_content">
+            <div class="stl_function">
+                <span class="highlight">top()</span><span>Reference to element at top of stack</span>
+            </div>
 
-        </div>
-       </div>
+            <div class="stl_function">
+                <span class="highlight">size()</span><span>Returns size of stack</span>
+            </div>
 
-       <div class="card_list_stl stl notshow">
-        <span>Priority Queue</span>
-        <div class="card_list_stl_content">
+            <div class="stl_function">
+                <span class="highlight">empty()</span><span>Checks if stack is empty</span>
+            </div>
 
-        </div>
-       </div>
-
-       <div class="card_list_stl stl notshow">
-        <span>Ordered Set</span>
-        <div class="card_list_stl_content">
-
-        </div>
-       </div>
-
-       <div class="card_list_stl stl notshow">
-        <span>Unordered Set</span>
-        <div class="card_list_stl_content">
-
-        </div>
-       </div>
-
-       <div class="card_list_stl stl notshow">
-        <span>Ordered Map</span>
-        <div class="card_list_stl_content">
-
-        </div>
-       </div>
-
-       <div class="card_list_stl stl notshow">
-        <span>Unordered Map</span>
-        <div class="card_list_stl_content">
-        
         </div>
        </div>
     </main>

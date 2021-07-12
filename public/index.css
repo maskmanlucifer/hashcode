@@ -180,6 +180,7 @@
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
+    border: 2px solid var(--text-secondary);
   }
 
   .filter_bar span {
@@ -208,15 +209,17 @@
     border-radius: 9px;
     align-items: center;
     justify-content: space-evenly;
+    border: 2px solid var(--text-secondary);
   }
   .card_list_general span {
-    padding-top: 1rem;
-    font-size: 2.5rem;
-    border-bottom: 5px solid var(--text-secondary);
+    width: 100%;
+    text-align: center;
+    font-size: 2rem;
+    border-bottom: 2px solid var(--text-secondary);
   }
   
   .card_list_general a {
-    font-size: 1.5rem;
+    font-size: 1.4rem;
     text-decoration: none;
     color: var(--text-secondary);
     margin: .75rem;
@@ -276,11 +279,13 @@
     color: var(--text-primary);
     width: 70%;
     border-radius: 9px;
+    border: 2px solid var(--text-secondary);
+  
   }
 
   .card_list_buzz p{
-    font-size: 1.5rem;
-    padding: 2rem;
+    font-size: 1.1rem;
+    padding: 1rem;
   }
 
   /* closed < 108  snippet card_list_buzz */
@@ -295,11 +300,12 @@
     color: var(--text-primary);
     width: 70%;
     border-radius: 9px;
+    border: 2px solid var(--text-secondary);
   }
 
-  .card_list_stl span{
+  .card_list_stl .heading{
     font-size: 2rem;
-    border-bottom: 3px solid var(--text-secondary);
+    border-bottom: 2px solid var(--text-secondary);
     display: block;
     text-align: center;
   }
@@ -308,16 +314,35 @@
     padding-bottom: 2rem;
     width: 90%;
   }
-  .card_list_stl_content p{
-    font-size: 1.2rem;
+  .card_list_stl_content .stl_function {
+    font-size: 1rem;
+    width: 99%;
+    margin: auto;
+    display: flex;
+    flex-direction: row;
+    background-color: var(--bg-primary);
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 5px;
+    margin-top: 8px;
+    padding:5px;
+    
   }
-  
+  .card_list_stl_content .stl_function .highlight {
+    background-color: var(--bg-secondary);
+    padding: 4px;
+    border-radius: 6px;
+    padding-left: 6px;
+    padding-right: 6px;
+    font-weight: 500;
+  }
   /* closed < 109  snippet card_list_stl */
 
 
   .active {
     background-color: var(--bg-primary);
-    }
+    border: 2px solid var(--text-secondary);
+  }
   
   .notshow {
     display: none;
