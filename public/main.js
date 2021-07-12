@@ -1,3 +1,4 @@
+
 // theme change implementation
 const themeMap = {
     dark: "light",
@@ -19,4 +20,34 @@ function toggleTheme() {
 $(".theme-icon").click(function(e){
     e.preventDefault();
     toggleTheme();
+});
+
+$("#general").click(function(e){
+    e.preventDefault();
+    $("#stl").removeClass('active');
+    $("#buzz").removeClass('active');
+    $("#general").addClass('active');
+    $(".general").removeClass('notshow');
+    $(".stl").addClass('notshow');
+    $(".buzz").addClass('notshow');
+});
+
+$("#stl").click(function(e){
+    e.preventDefault();
+    $("#buzz").removeClass('active');
+    $("#general").removeClass('active');
+    $("#stl").addClass('active');
+    $(".stl").removeClass('notshow');
+    $(".general").addClass('notshow');
+    $(".buzz").addClass('notshow');
+});
+
+$("#buzz").click(function(e){
+    e.preventDefault();
+    $("#stl").removeClass('active');
+    $("#general").removeClass('active');
+    $("#buzz").addClass('active');
+    $(".buzz").removeClass('notshow');
+    $(".stl").addClass('notshow');
+    $(".general").addClass('notshow');
 });

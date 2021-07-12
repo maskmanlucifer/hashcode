@@ -6,6 +6,8 @@
     --bg-primary: #23232e;
     --bg-secondary: #141418;
  }
+
+ 
   
   body {
     color: var(--text-primary);
@@ -102,7 +104,8 @@
     color: var(--text-primary);
   }
   .theme_counter i {
-    background-color: var(--bg-primary);
+    background-color: var(--text-primary);
+    color: var(--bg-secondary);
     border-radius: 50%;
     padding: 4px;
     cursor: pointer;
@@ -113,8 +116,11 @@
   }
   #count {
     padding: 4px;
+    padding-left: 6px;
+    padding-right: 6px;
     border-radius: 5px;
-    background-color: var(--bg-primary);
+    background-color: var(--text-primary);
+    color: var(--bg-secondary);
   }
   .banner span {
     font-size: 4rem;
@@ -123,7 +129,7 @@
 
   #site-name {
     font-family: 'Roboto Slab', serif;
-    color: var(--bg-primary);
+    color: var(--bg-secondary);
     background-color: var(--text-primary);
     padding: 8px;
     border-radius: 1rem;
@@ -180,19 +186,18 @@
     padding : 4px;
     padding-left: 6px;
     padding-right: 6px;
-    background-color: var(--bg-primary);
     border-radius: 4px;
   }
 
-  .filter_bar span:hover {
+  .filter_bar span:hover { 
     cursor: pointer;
   }
 
   /* closse < 105  snippet filter_bar */
 
-  /* open > 106  snippet card_list */
+  /* open > 106  snippet card_list_general */
   
-  .card_list {
+  .card_list_general {
     margin: auto;
     margin-top: 2rem;
     margin-bottom: 1rem;
@@ -204,13 +209,13 @@
     align-items: center;
     justify-content: space-evenly;
   }
-  .card_list span {
+  .card_list_general span {
     padding-top: 1rem;
     font-size: 2.5rem;
     border-bottom: 5px solid var(--text-secondary);
   }
   
-  .card_list a {
+  .card_list_general a {
     font-size: 1.5rem;
     text-decoration: none;
     color: var(--text-secondary);
@@ -219,13 +224,15 @@
     padding-left: 5px;
     padding-right: 5px;
   }
-  .card_list a:hover {
+  .card_list_general a:hover {
     background-color: var(--bg-primary);
   }
-  .card_list a:last-child {
+  .card_list_general a:last-child {
     margin-bottom: 2rem;
   }
-  /* close < 106  snippet card_list */
+  
+  
+  /* close < 106  snippet card_list_general */
 
 
   /* open > 107 theme management  */
@@ -258,3 +265,60 @@
 
   /* close < 107 theme management  */
 
+  
+  /* open > 108  snippet card_list_buzz */
+  
+  .card_list_buzz {
+    margin: auto;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    background-color: var(--bg-secondary);
+    color: var(--text-primary);
+    width: 70%;
+    border-radius: 9px;
+  }
+
+  .card_list_buzz p{
+    font-size: 1.5rem;
+    padding: 2rem;
+  }
+
+  /* closed < 108  snippet card_list_buzz */
+
+  /* open > 109  snippet card_list_stl */
+
+  .card_list_stl {
+    margin: auto;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    background-color: var(--bg-secondary);
+    color: var(--text-primary);
+    width: 70%;
+    border-radius: 9px;
+  }
+
+  .card_list_stl span{
+    font-size: 2rem;
+    border-bottom: 3px solid var(--text-secondary);
+    display: block;
+    text-align: center;
+  }
+  .card_list_stl_content {
+    margin: auto;
+    padding-bottom: 2rem;
+    width: 90%;
+  }
+  .card_list_stl_content p{
+    font-size: 1.2rem;
+  }
+  
+  /* closed < 109  snippet card_list_stl */
+
+
+  .active {
+    background-color: var(--bg-primary);
+    }
+  
+  .notshow {
+    display: none;
+  }
