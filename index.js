@@ -1,5 +1,5 @@
 const express = require('express');
-const fs = require('fs');
+
 const app=express();
 
 app.use(express.static('public'));
@@ -16,8 +16,8 @@ app.get('/home',(req,res)=>{
   res.render('home');
 });
 
-app.get('/snippet',(req,res)=>{
-  res.render('snippet');
+app.get('/fizzbuzz',(req,res)=>{
+  res.render('fizzbuzz');
 });
 
 app.get('/contest',(req,res)=>{

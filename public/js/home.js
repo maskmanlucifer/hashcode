@@ -1,4 +1,4 @@
-
+$(document).ready(function() {
 // theme change implementation
 const themeMap = {
     dark: "light",
@@ -20,4 +20,6 @@ function toggleTheme() {
 $(".theme-icon").click(function(e){
     e.preventDefault();
     toggleTheme();
+});
+
 });

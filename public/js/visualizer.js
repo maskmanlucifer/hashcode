@@ -1,4 +1,3 @@
-let url = "https://codeforces.com/api/";
 
 $(document).ready(function() {
 
@@ -27,15 +26,6 @@ $(".theme-icon").click(function(e){
 });
 
 
-
-$('#submit').click(function(e){
-  e.preventDefault();
-
-  let handle = $('#handle').val().trim();
-  let level = $('select option:selected').val();
-  console.log(level,handle);
-
-});
 
 
 });

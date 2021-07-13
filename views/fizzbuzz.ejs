@@ -4,9 +4,10 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700&display=swap" rel="stylesheet"/>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="stylesheet" href="/css/index.css">
@@ -16,8 +17,9 @@
     <nav class="navbar">
         <ul class="navbar-nav">
             <li>
-                <a href="#">
-                    <i class="material-icons">tag</i>
+                <a href="#" id="theme">
+                    <i class="material-icons theme-icon" id="darkIcon" >light_mode</i>
+                    <i class="material-icons theme-icon" id="lightIcon" >dark_mode</i>
                 </a>
                 <span class="tooltip">hashcode</span>
             </li>
@@ -28,10 +30,10 @@
                 <span class="tooltip">homepage</span>
             </li>
             <li>
-                <a href="./snippet">
+                <a href="#">
                     <i class="material-icons">code</i>
                 </a>
-                <span class="tooltip">snippets</span>
+                <span class="tooltip">fizzbuzz</span>
             </li>
             <li>
                 <a href="./contest">
@@ -77,34 +79,34 @@
     <main class="main">
        <div class="filter_bar">
         <!-- all gerenal cards -->
-        <span id="general" class="active">GENERAL</span>
+        <span id="fizz" class="active">FIZZ</span>
         <span id="stl">STL</span>
         <span id="buzz">BUZZ</span>
        </div>
        
-       <div class="card_list_general general">
+       <div class="card_list_fizz fizz">
           <span>Platforms</span>
           <a href="https://codeforces.com/">Codeforces</a>
           <a href="https://www.codechef.com/">Codechef</a>
           <a href="https://atcoder.jp/">Atcoder</a>
        </div>
 
-       <div class="card_list_general general">
+       <div class="card_list_fizz fizz">
         <span>IDEs</span>
         <a href="https://www.sublimetext.com/3">Sublime-Text (Offline)</a>
         <a href="https://cpeditor.org/">CP Editor (Offline)</a>
         <a href="https://www.codechef.com/ide">Codechef (Online)</a>
        </div>
        
-       <div class="card_list_general general">
+       <div class="card_list_fizz fizz">
         <span>Tools</span>
         <a href="https://oeis.org/">OEIS (Finding number patterns)</a>
-        <a href="https://cfviz.netlify.app/">CF viz (Growth tracker)</a>
+        <a href="https://cfviz.netlify.app/">CF Viz (Growth tracker)</a>
         <a href="https://chrome.google.com/webstore/detail/cf-predictor/ocfloejijfhhkkdmheodbaanephbnfhn">CF predictor (Rating predictor)</a>
         <a href="https://visualgo.net/en">Visu Algo (Algorithm visualizer)</a>
        </div>
 
-       <div class="card_list_general general">
+       <div class="card_list_fizz fizz">
         <span>You tube channels</span>
         <a href="https://www.youtube.com/channel/UCBr_Fu6q9iHYQCh13jmpbrg">Errichto</a>
         <a href="https://www.youtube.com/channel/UCpvS3EykHW--l0ogUhMEjEw">GalenCoin</a>
@@ -114,7 +116,7 @@
         <a href="https://www.youtube.com/channel/UCGS5ZzcSAymQbWZvNoKOFhQ/featured">Demoralizer</a>
        </div>
 
-       <div class="card_list_general general">
+       <div class="card_list_fizz fizz">
         <span>Coding Competitions</span>
         <a href="https://icpc.global/">ACM ICPC</a>
         <a href="https://www.facebook.com/hackercup/">Facebook Hacker Cup</a>
@@ -286,11 +288,11 @@
             </div>
 
             <div class="stl_function">
-                <span class="highlight">min{x1,x2,x3...}</span><span>Returns min among x1,x2,x3...</span>
+                <span class="highlight">min({x1,x2,..})</span><span>Returns min among x1,x2.. </span>
             </div>
 
             <div class="stl_function">
-                <span class="highlight">max_element(V.begin(),V.end())</span><span>Pointer to max element in vector V</span>
+                <span class="highlight">max_element(v.begin(),v.end())</span><span>Pointer to max element in vector V</span>
             </div>
 
         </div>
@@ -315,27 +317,27 @@
             </div>
 
             <div class="stl_function">
-                <span class="highlight">lower_bound(V.begin(),V.end(),x)</span><span>Returns pointer to the element >=x</span>
+                <span class="highlight">lower_bound(v.begin(),v.end(),x)</span><span>Returns pointer to the element >=x</span>
             </div>
 
             <div class="stl_function">
-                <span class="highlight">upper_bound(V.begin(),V.end(),x)</span><span>Returns pointer to the element >x</span>
+                <span class="highlight">upper_bound(v.begin(),v.end(),x)</span><span>Returns pointer to the element >x</span>
             </div>
 
             <div class="stl_function">
-                <span class="highlight">binary_search(V.begin(),V.end(),x)</span><span>Check if x exist in V (sorted)</span>
+                <span class="highlight">binary_search(v.begin(),v.end(),x)</span><span>Check if x exist in V (sorted)</span>
             </div>
 
             <div class="stl_function">
-                <span class="highlight">reverse(V.begin(),V.end())</span><span>Reverses vector V</span>
+                <span class="highlight">reverse(v.begin(),v.end())</span><span>Reverses vector V</span>
             </div>
 
             <div class="stl_function">
-                <span class="highlight">sort(V.begin(),V.end())</span><span>Sort's vector V</span>
+                <span class="highlight">sort(v.begin(),v.end())</span><span>Sort's vector V</span>
             </div>
         </div>
        </div>
     </main>
-    <script src="/js/snippet.js"></script>
+    <script src="/js/fizzbuzz.js"></script>
 </body>
 </html> 

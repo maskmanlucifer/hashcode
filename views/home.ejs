@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -6,6 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700&display=swap" rel="stylesheet"/>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -18,8 +21,9 @@
     <nav class="navbar">
         <ul class="navbar-nav">
             <li>
-                <a href="#">
-                    <i class="material-icons">tag</i>
+                <a href="#" id="theme">
+                    <i class="material-icons theme-icon" id="darkIcon" >light_mode</i>
+                    <i class="material-icons theme-icon" id="lightIcon" >dark_mode</i>
                 </a>
                 <span class="tooltip">hashcode</span>
             </li>
@@ -30,10 +34,10 @@
                 <span class="tooltip">homepage</span>
             </li>
             <li>
-                <a href="./snippet">
+                <a href="./fizzbuzz">
                     <i class="material-icons">code</i>
                 </a>
-                <span class="tooltip">snippets</span>
+                <span class="tooltip">fizzbuzz</span>
             </li>
             <li>
                 <a href="./contest">
@@ -83,10 +87,8 @@
         <span>TO</span>
         <span id="site-name">HASHCODE</span>
        </div>
-       <div class="theme_counter">
-        <i class="material-icons theme-icon" id="darkIcon" >light_mode</i>
-        <i class="material-icons theme-icon" id="lightIcon" >dark_mode</i>
-        <span id="count">Total Nerds : 1200</span>
+       <div class="site_info">
+           <p>A website developed for attempting multiple format virtual contests cooked using codeforces problems</p>
        </div>
     </main>
     <script src="/js/home.js"></script>

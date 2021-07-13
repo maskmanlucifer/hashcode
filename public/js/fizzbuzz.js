@@ -1,4 +1,4 @@
-
+$(document).ready(function() {
 // theme change implementation
 const themeMap = {
     dark: "light",
@@ -22,12 +22,12 @@ $(".theme-icon").click(function(e){
     toggleTheme();
 });
 
-$("#general").click(function(e){
+$("#fizz").click(function(e){
     e.preventDefault();
     $("#stl").removeClass('active');
     $("#buzz").removeClass('active');
-    $("#general").addClass('active');
-    $(".general").removeClass('notshow');
+    $("#fizz").addClass('active');
+    $(".fizz").removeClass('notshow');
     $(".stl").addClass('notshow');
     $(".buzz").addClass('notshow');
 });
@@ -35,19 +35,22 @@ $("#general").click(function(e){
 $("#stl").click(function(e){
     e.preventDefault();
     $("#buzz").removeClass('active');
-    $("#general").removeClass('active');
+    $("#fizz").removeClass('active');
     $("#stl").addClass('active');
     $(".stl").removeClass('notshow');
-    $(".general").addClass('notshow');
+    $(".fizz").addClass('notshow');
     $(".buzz").addClass('notshow');
 });
 
 $("#buzz").click(function(e){
     e.preventDefault();
     $("#stl").removeClass('active');
-    $("#general").removeClass('active');
+    $("#fizz").removeClass('active');
     $("#buzz").addClass('active');
     $(".buzz").removeClass('notshow');
     $(".stl").addClass('notshow');
-    $(".general").addClass('notshow');
+    $(".fizz").addClass('notshow');
+});
+
+
 });
