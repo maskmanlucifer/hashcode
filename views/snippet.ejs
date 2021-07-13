@@ -9,7 +9,7 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700&display=swap" rel="stylesheet"/>
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="/css/index.css">
     <title>hashcode</title>
 </head>
 <body>
@@ -142,78 +142,9 @@
        </div>
        
        <!-- adding stl cards -->
-       <div class="card_list_stl stl notshow">
-        <span class="heading">Mashup</span>
-        <div class="card_list_stl_content">
-            <div class="stl_function">
-                <span class="highlight">isalpha(c)</span><span>Checks if character c is alphabet</span>
-            </div>
-
-            <div class="stl_function">
-                <span class="highlight">isdigit(c)</span><span>Checks if character c is digit (0-9)</span>
-            </div>
-
-            <div class="stl_function">
-                <span class="highlight">__gcd(x,y)</span><span>Returns GCD of x and y</span>
-            </div>
-
-            <div class="stl_function">
-                <span class="highlight">__builtin_popcount(x)</span><span>Returns number of set bits in unsigned int x</span>
-            </div>
-
-            <div class="stl_function">
-                <span class="highlight">min{x1,x2,x3...}</span><span>Returns min among x1,x2,x3...</span>
-            </div>
-
-            <div class="stl_function">
-                <span class="highlight">max_element(V.begin(),V.end())</span><span>Pointer to max element in vector V</span>
-            </div>
-
-        </div>
-       </div>
-       <div class="card_list_stl stl notshow">
-        <span class="heading">Vector</span>
-        <div class="card_list_stl_content">
-            <div class="stl_function">
-            <span class="highlight">V.push_back(x)</span><span>Pushes element x at the end of vector</span>
-            </div>
-
-            <div class="stl_function">
-            <span class="highlight">V.pop_back()</span><span>Pops element from the end of vector</span>
-            </div>
-
-            <div class="stl_function">
-                <span class="highlight">V.size()</span><span>Returns size of vector</span>
-            </div>
-
-            <div class="stl_function">
-                <span class="highlight">V.back()</span><span>Returns reference to vector's last element</span>
-            </div>
-
-            <div class="stl_function">
-                <span class="highlight">lower_bound(V.begin(),V.end(),x)</span><span>Returns pointer to the element >=x</span>
-            </div>
-
-            <div class="stl_function">
-                <span class="highlight">upper_bound(V.begin(),V.end(),x)</span><span>Returns pointer to the element >x</span>
-            </div>
-
-            <div class="stl_function">
-                <span class="highlight">binary_search(V.begin(),V.end(),x)</span><span>Check if x exist in V (sorted)</span>
-            </div>
-
-            <div class="stl_function">
-                <span class="highlight">reverse(V.begin(),V.end())</span><span>Reverses vector V</span>
-            </div>
-
-            <div class="stl_function">
-                <span class="highlight">sort(V.begin(),V.end())</span><span>Sort's vector V</span>
-            </div>
-        </div>
-       </div>
 
        <div class="card_list_stl stl notshow">
-        <span class="heading">Map</span>
+        <span class="heading">Ordered Map</span>
         <div class="card_list_stl_content">
             <div class="stl_function">
                 <span class="highlight">clear()</span><span>Erases all key-value pairs of map</span>
@@ -233,7 +164,7 @@
         </div>
        </div>
        <div class="card_list_stl stl notshow">
-        <span class="heading">Set</span>
+        <span class="heading">Ordered Set</span>
         <div class="card_list_stl_content">
             <div class="stl_function">
                 <span class="highlight">begin()</span><span>Returns pointer to first element</span>
@@ -334,7 +265,77 @@
 
         </div>
        </div>
+
+       <div class="card_list_stl stl notshow">
+        <span class="heading">Mashup</span>
+        <div class="card_list_stl_content">
+            <div class="stl_function">
+                <span class="highlight">isalpha(c)</span><span>Checks if character c is alphabet</span>
+            </div>
+
+            <div class="stl_function">
+                <span class="highlight">isdigit(c)</span><span>Checks if character c is digit (0-9)</span>
+            </div>
+
+            <div class="stl_function">
+                <span class="highlight">__gcd(x,y)</span><span>Returns GCD of x and y</span>
+            </div>
+
+            <div class="stl_function">
+                <span class="highlight">__builtin_popcount(x)</span><span>Returns number of set bits in unsigned int x</span>
+            </div>
+
+            <div class="stl_function">
+                <span class="highlight">min{x1,x2,x3...}</span><span>Returns min among x1,x2,x3...</span>
+            </div>
+
+            <div class="stl_function">
+                <span class="highlight">max_element(V.begin(),V.end())</span><span>Pointer to max element in vector V</span>
+            </div>
+
+        </div>
+       </div>
+       <div class="card_list_stl stl notshow">
+        <span class="heading">Vector</span>
+        <div class="card_list_stl_content">
+            <div class="stl_function">
+            <span class="highlight">push_back(x)</span><span>Pushes element x at the end of vector</span>
+            </div>
+
+            <div class="stl_function">
+            <span class="highlight">pop_back()</span><span>Pops element from the end of vector</span>
+            </div>
+
+            <div class="stl_function">
+                <span class="highlight">size()</span><span>Returns size of vector</span>
+            </div>
+
+            <div class="stl_function">
+                <span class="highlight">back()</span><span>Returns reference to vector's last element</span>
+            </div>
+
+            <div class="stl_function">
+                <span class="highlight">lower_bound(V.begin(),V.end(),x)</span><span>Returns pointer to the element >=x</span>
+            </div>
+
+            <div class="stl_function">
+                <span class="highlight">upper_bound(V.begin(),V.end(),x)</span><span>Returns pointer to the element >x</span>
+            </div>
+
+            <div class="stl_function">
+                <span class="highlight">binary_search(V.begin(),V.end(),x)</span><span>Check if x exist in V (sorted)</span>
+            </div>
+
+            <div class="stl_function">
+                <span class="highlight">reverse(V.begin(),V.end())</span><span>Reverses vector V</span>
+            </div>
+
+            <div class="stl_function">
+                <span class="highlight">sort(V.begin(),V.end())</span><span>Sort's vector V</span>
+            </div>
+        </div>
+       </div>
     </main>
-    <script src="main.js"></script>
+    <script src="/js/snippet.js"></script>
 </body>
 </html> 

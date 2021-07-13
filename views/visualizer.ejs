@@ -9,7 +9,7 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700&display=swap" rel="stylesheet"/>
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="/css/index.css">
     <title>hashcode</title>
 </head>
 <body>
@@ -75,8 +75,36 @@
         </ul>
     </nav>
     <main class="main">
-       
+        <div class="filter_bar">
+            <!-- all gerenal cards -->
+            <span id="level" class="active">LEVEL</span>
+            <span id="contest">CONTEST</span>
+        </div>
+        <div class="level_handle">
+            <form id="visualizer_form">
+            <select id="level">
+                <option value="newbie">Newbie</option>
+                <option value="pupil">Pupil</option>
+                <option value="specialist">Specialist</option>
+                <option value="expert">Expert</option>
+                <option value="cm">Candidate Master</option>
+                <option value="master">Master</option>
+                <option value="im">International Master</option>
+                <option value="gm">Grandmaster</option>
+                <option value="igm">International Grandmaster</option>
+                <option value="lgm">Legendary Grandmaster</option>
+            </select>
+            <input type="text" placeholder="Enter Handle" name="handle" id="handle">
+            <input type="button" value="visualize"  id="submit">
+            </form>
+        </div>
+        <div class="error"></div>
+        <div class="info_to_user">
+            <p>Select the level</p>
+            <p>(Enter or Not Enter) you handle</p>
+            <p>Press visualize</p>
+        </div>
     </main>
-    <script src="main.js"></script>
+    <script src="/js/visualizer.js"></script>
 </body>
 </html> 

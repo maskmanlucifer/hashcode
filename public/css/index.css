@@ -89,6 +89,7 @@
     justify-content: center;
     align-items: center;
     color: var(--text-primary);
+    border: 2px solid var(--text-secondary);
   }
   .theme_counter {
     margin: auto;
@@ -102,10 +103,12 @@
     justify-content: space-around;
     align-items: center;
     color: var(--text-primary);
+    border: 2px solid var(--text-secondary);
   }
   .theme_counter i {
     background-color: var(--text-primary);
     color: var(--bg-secondary);
+    border: 2px solid var(--text-secondary);
     border-radius: 50%;
     padding: 4px;
     cursor: pointer;
@@ -113,6 +116,7 @@
   .theme_counter span {
     font-size: 1.5rem;
     font-weight: 600;
+    border: 1px solid var(--text-secondary);
   }
   #count {
     padding: 4px;
@@ -133,6 +137,7 @@
     background-color: var(--text-primary);
     padding: 8px;
     border-radius: 1rem;
+    border: 2px solid var(--text-secondary);
   }
   /* close < 103 homepage styles */
     
@@ -337,7 +342,62 @@
     font-weight: 500;
   }
   /* closed < 109  snippet card_list_stl */
+  
+  /* open < 110  dropdown_visualizer */
+   
+  .level_handle {
+    width: 70%;
+    margin: auto;
+    margin-top: 3rem;
+  }
 
+  .level_handle form {
+    height: 150px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    margin-bottom: 4rem;
+  }
+
+  .level_handle form select {
+    padding: 8px;
+    font-size: 1.2rem;
+    background-color: var(--bg-secondary);
+    color: var(--text-secondary);
+    border: 2px solid var(--text-secondary);
+  }
+  .level_handle form input {
+    padding: 8px;
+    font-size: 1.2rem;
+    background-color: var(--bg-secondary);
+    color: var(--text-secondary);
+    border: 2px solid var(--text-secondary);
+  }
+  .level_handle form #submit {
+    border: 2px solid var(--text-secondary);
+    cursor: pointer;
+    font-weight: bold;
+  }
+  .info_to_user {
+    width: 70%;
+    margin: auto;
+    margin-top: 2rem;
+    background-color: var(--bg-secondary);
+    color: var(--text-primary);
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 2px solid var(--text-secondary);
+    justify-content: space-evenly;
+  }
+
+  .info_to_user p{
+    font-size: 1.3rem;
+    padding: 2px;
+  }
+  
+  /* closed > 110  dropdown_visualizer */
 
   .active {
     background-color: var(--bg-primary);
@@ -346,4 +406,9 @@
   
   .notshow {
     display: none;
+  }
+  .error {
+    color: var(--text-secondary);
+    font-size: 1rem;
+    padding: 3px;
   }
