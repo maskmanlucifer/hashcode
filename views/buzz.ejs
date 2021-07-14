@@ -1,20 +1,16 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700&display=swap" rel="stylesheet"/>
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/css/index.css">
-    
     <title>hashcode</title>
 </head>
 <body>
@@ -28,13 +24,13 @@
                 <span class="tooltip">HASHCODE</span>
             </li>
             <li>
-                <a href="#">
+                <a href="./">
                     <i class="material-icons">home</i>
                 </a>
                 <span class="tooltip">HOMEPAGE</span>
             </li>
             <li>
-                <a href="./fizz">
+                <a href="#">
                     <i class="material-icons">code</i>
                 </a>
                 <span class="tooltip">FIZZBUZZ</span>
@@ -81,16 +77,32 @@
         </ul>
     </nav>
     <main class="main">
+       <div class="filter_bar">
+        <!-- all gerenal cards -->
+        <span id="fizz" class="active">FIZZ</span>
+        <span id="stl">STL</span>
+        <span id="buzz">BUZZ</span>
        </div>
-       <div class="banner">
-        <span>WELCOME</span>
-        <span>TO</span>
-        <span id="site-name">HASHCODE</span>
+       
+       <!-- adding buzz cards -->
+
+       <div class="card_list_buzz">
+        <p>The upper bound on the number of divisors of any number n is roughly (n <sup>(1/3)</sup>)</p>
        </div>
-       <div class="site_info">
-           <p>A website developed for attempting multiple format virtual contests cooked using codeforces problems</p>
+
+       <div class="card_list_buzz">
+        <p>The maximum gap between two consecutive primes for number ≤ 10<sup>9</sup> is around 300</p>
        </div>
+
+       <div class="card_list_buzz">
+        <p>For two numbers a and b : (a + b) = (a xor b) + 2 * (a and b)</p>
+       </div>
+
+       <div class="card_list_buzz">
+        <p>Any even number greater than 2 can be split into two prime numbers</p>
+       </div>
+       
     </main>
-    <script src="/js/home.js"></script>
+    <script src="/js/fizzbuzz.js"></script>
 </body>
 </html> 

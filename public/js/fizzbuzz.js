@@ -1,4 +1,3 @@
-$(document).ready(function() {
 // theme change implementation
 const themeMap = {
     dark: "light",
@@ -22,35 +21,19 @@ $(".theme-icon").click(function(e){
     toggleTheme();
 });
 
-$("#fizz").click(function(e){
-    e.preventDefault();
-    $("#stl").removeClass('active');
-    $("#buzz").removeClass('active');
-    $("#fizz").addClass('active');
-    $(".fizz").removeClass('notshow');
-    $(".stl").addClass('notshow');
-    $(".buzz").addClass('notshow');
-});
+const fizz = document.querySelector('#fizz');
+const stl = document.querySelector('#stl');
+const buzz = document.querySelector('#buzz');
 
-$("#stl").click(function(e){
-    e.preventDefault();
-    $("#buzz").removeClass('active');
-    $("#fizz").removeClass('active');
-    $("#stl").addClass('active');
-    $(".stl").removeClass('notshow');
-    $(".fizz").addClass('notshow');
-    $(".buzz").addClass('notshow');
-});
+$('#fizz').click(()=>{
+    window.location.replace("http://localhost:3000/fizz");
+})
 
-$("#buzz").click(function(e){
-    e.preventDefault();
-    $("#stl").removeClass('active');
-    $("#fizz").removeClass('active');
-    $("#buzz").addClass('active');
-    $(".buzz").removeClass('notshow');
-    $(".stl").addClass('notshow');
-    $(".fizz").addClass('notshow');
-});
+$('#buzz').click(()=>{
+    window.location.replace("http://localhost:3000/buzz");
+})
 
+$('#stl').click(()=>{
+    window.location.replace("http://localhost:3000/stl");
+})
 
-});

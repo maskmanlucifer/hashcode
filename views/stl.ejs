@@ -21,131 +21,71 @@
                     <i class="material-icons theme-icon" id="darkIcon" >light_mode</i>
                     <i class="material-icons theme-icon" id="lightIcon" >dark_mode</i>
                 </a>
-                <span class="tooltip">hashcode</span>
+                <span class="tooltip">HASHCODE</span>
             </li>
             <li>
-                <a href="./home">
+                <a href="./">
                     <i class="material-icons">home</i>
                 </a>
-                <span class="tooltip">homepage</span>
+                <span class="tooltip">HOMEPAGE</span>
             </li>
             <li>
                 <a href="#">
                     <i class="material-icons">code</i>
                 </a>
-                <span class="tooltip">fizzbuzz</span>
+                <span class="tooltip">FIZZBUZZ</span>
             </li>
             <li>
                 <a href="./contest">
                     <i class="material-icons">emoji_objects</i>
                 </a>
-                <span class="tooltip">contests</span>
+                <span class="tooltip">CONTESTS</span>
             </li>
             <li>
                 <a href="./visualizer">
                     <i class="material-icons">assessment</i>
                 </a>
-                <span class="tooltip">visualizer</span>
+                <span class="tooltip">VISUALIZER</span>
             </li>
             <%if(1){%>
             <li>
                 <a href="./profile">
                     <i class="material-icons">account_circle</i>
                 </a>
-                <span class="tooltip">profile</span>
+                <span class="tooltip">PROFILE</span>
             </li>
             <%} else {%>
             <li>
                 <a href="#">
                     <i class="material-icons">login</i>
                 </a>
-                <span class="tooltip">login</span>
+                <span class="tooltip">LOGIN</span>
             </li>
             <%}%>
             <li>
                 <a href="./home">
                     <i class="material-icons">logout</i>
                 </a>
-                <span class="tooltip">logout</span>
+                <span class="tooltip">LOGOUT</span>
             </li>
             <li>
-                <a href="#">
+                <a href="https://github.com/maskmanlucifer/hashcode">
                     <i class="material-icons">view_in_ar</i>
                 </a>
-                <span class="tooltip">source code</span>
+                <span class="tooltip">SOURCE CODE</span>
             </li>
         </ul>
     </nav>
     <main class="main">
        <div class="filter_bar">
         <!-- all gerenal cards -->
-        <span id="fizz" class="active">FIZZ</span>
+        <span id="fizz">FIZZ</span>
         <span id="stl">STL</span>
         <span id="buzz">BUZZ</span>
        </div>
-       
-       <div class="card_list_fizz fizz">
-          <span>Platforms</span>
-          <a href="https://codeforces.com/">Codeforces</a>
-          <a href="https://www.codechef.com/">Codechef</a>
-          <a href="https://atcoder.jp/">Atcoder</a>
-       </div>
-
-       <div class="card_list_fizz fizz">
-        <span>IDEs</span>
-        <a href="https://www.sublimetext.com/3">Sublime-Text (Offline)</a>
-        <a href="https://cpeditor.org/">CP Editor (Offline)</a>
-        <a href="https://www.codechef.com/ide">Codechef (Online)</a>
-       </div>
-       
-       <div class="card_list_fizz fizz">
-        <span>Tools</span>
-        <a href="https://oeis.org/">OEIS (Finding number patterns)</a>
-        <a href="https://cfviz.netlify.app/">CF Viz (Growth tracker)</a>
-        <a href="https://chrome.google.com/webstore/detail/cf-predictor/ocfloejijfhhkkdmheodbaanephbnfhn">CF predictor (Rating predictor)</a>
-        <a href="https://visualgo.net/en">Visu Algo (Algorithm visualizer)</a>
-       </div>
-
-       <div class="card_list_fizz fizz">
-        <span>You tube channels</span>
-        <a href="https://www.youtube.com/channel/UCBr_Fu6q9iHYQCh13jmpbrg">Errichto</a>
-        <a href="https://www.youtube.com/channel/UCpvS3EykHW--l0ogUhMEjEw">GalenCoin</a>
-        <a href="https://www.youtube.com/channel/UCXbCohpE9IoVQUD2Ifg1d1g">SecondThread</a>
-        <a href="https://www.youtube.com/channel/UCKuDLsO0Wwef53qdHPjbU2Q">WilliamLin</a>
-        <a href="https://www.youtube.com/c/ecnerwala">Ecnerwala</a>
-        <a href="https://www.youtube.com/channel/UCGS5ZzcSAymQbWZvNoKOFhQ/featured">Demoralizer</a>
-       </div>
-
-       <div class="card_list_fizz fizz">
-        <span>Coding Competitions</span>
-        <a href="https://icpc.global/">ACM ICPC</a>
-        <a href="https://www.facebook.com/hackercup/">Facebook Hacker Cup</a>
-        <a href="https://codingcompetitions.withgoogle.com/codejam">Google Code Jam</a>
-        <a href="https://codingcompetitions.withgoogle.com/hashcode/">Google Hashcode</a>
-        <a href="https://tco20.topcoder.com/">Topcoder Open</a>
-       </div>
-
-       <!-- adding buzz cards -->
-
-       <div class="card_list_buzz buzz notshow">
-        <p>The upper bound on the number of divisors of any number n is roughly (n <sup>(1/3)</sup>)</p>
-       </div>
-
-       <div class="card_list_buzz buzz notshow">
-        <p>The maximum gap between two consecutive primes for number ≤ 10<sup>9</sup> is around 300</p>
-       </div>
-
-       <div class="card_list_buzz buzz notshow">
-        <p>For two numbers a and b : (a + b) = (a xor b) + 2 * (a and b)</p>
-       </div>
-
-       <div class="card_list_buzz buzz notshow">
-        <p>Any even number greater than 2 can be split into two prime numbers</p>
-       </div>
-       
        <!-- adding stl cards -->
 
-       <div class="card_list_stl stl notshow">
+       <div class="card_list_stl">
         <span class="heading">Ordered Map</span>
         <div class="card_list_stl_content">
             <div class="stl_function">
@@ -165,7 +105,7 @@
             </div>
         </div>
        </div>
-       <div class="card_list_stl stl notshow">
+       <div class="card_list_stl">
         <span class="heading">Ordered Set</span>
         <div class="card_list_stl_content">
             <div class="stl_function">
@@ -213,7 +153,7 @@
             </div>
         </div>
        </div>
-       <div class="card_list_stl stl notshow">
+       <div class="card_list_stl">
         <span class="heading">Queue</span>
         <div class="card_list_stl_content">
             <div class="stl_function">
@@ -242,7 +182,7 @@
 
         </div>
        </div>
-       <div class="card_list_stl stl notshow">
+       <div class="card_list_stl">
         <span class="heading">Stack</span>
         <div class="card_list_stl_content">
             <div class="stl_function">
@@ -268,7 +208,7 @@
         </div>
        </div>
 
-       <div class="card_list_stl stl notshow">
+       <div class="card_list_stl">
         <span class="heading">Mashup</span>
         <div class="card_list_stl_content">
             <div class="stl_function">
@@ -297,7 +237,7 @@
 
         </div>
        </div>
-       <div class="card_list_stl stl notshow">
+       <div class="card_list_stl">
         <span class="heading">Vector</span>
         <div class="card_list_stl_content">
             <div class="stl_function">

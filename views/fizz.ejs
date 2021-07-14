@@ -1,20 +1,16 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700&display=swap" rel="stylesheet"/>
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/css/index.css">
-    
     <title>hashcode</title>
 </head>
 <body>
@@ -28,13 +24,13 @@
                 <span class="tooltip">HASHCODE</span>
             </li>
             <li>
-                <a href="#">
+                <a href="./">
                     <i class="material-icons">home</i>
                 </a>
                 <span class="tooltip">HOMEPAGE</span>
             </li>
             <li>
-                <a href="./fizz">
+                <a href="#">
                     <i class="material-icons">code</i>
                 </a>
                 <span class="tooltip">FIZZBUZZ</span>
@@ -81,16 +77,54 @@
         </ul>
     </nav>
     <main class="main">
+       <div class="filter_bar">
+        <!-- all gerenal cards -->
+        <span id="fizz">FIZZ</span>
+        <span id="stl">STL</span>
+        <span id="buzz">BUZZ</span>
        </div>
-       <div class="banner">
-        <span>WELCOME</span>
-        <span>TO</span>
-        <span id="site-name">HASHCODE</span>
+       
+       <div class="card_list_fizz">
+          <span>Platforms</span>
+          <a href="https://codeforces.com/">Codeforces</a>
+          <a href="https://www.codechef.com/">Codechef</a>
+          <a href="https://atcoder.jp/">Atcoder</a>
        </div>
-       <div class="site_info">
-           <p>A website developed for attempting multiple format virtual contests cooked using codeforces problems</p>
+
+       <div class="card_list_fizz fizz">
+        <span>IDEs</span>
+        <a href="https://www.sublimetext.com/3">Sublime-Text (Offline)</a>
+        <a href="https://cpeditor.org/">CP Editor (Offline)</a>
+        <a href="https://www.codechef.com/ide">Codechef (Online)</a>
+       </div>
+       
+       <div class="card_list_fizz fizz">
+        <span>Tools</span>
+        <a href="https://oeis.org/">OEIS (Finding number patterns)</a>
+        <a href="https://cfviz.netlify.app/">CF Viz (Growth tracker)</a>
+        <a href="https://chrome.google.com/webstore/detail/cf-predictor/ocfloejijfhhkkdmheodbaanephbnfhn">CF predictor (Rating predictor)</a>
+        <a href="https://visualgo.net/en">Visu Algo (Algorithm visualizer)</a>
+       </div>
+
+       <div class="card_list_fizz fizz">
+        <span>You tube channels</span>
+        <a href="https://www.youtube.com/channel/UCBr_Fu6q9iHYQCh13jmpbrg">Errichto</a>
+        <a href="https://www.youtube.com/channel/UCpvS3EykHW--l0ogUhMEjEw">GalenCoin</a>
+        <a href="https://www.youtube.com/channel/UCXbCohpE9IoVQUD2Ifg1d1g">SecondThread</a>
+        <a href="https://www.youtube.com/channel/UCKuDLsO0Wwef53qdHPjbU2Q">WilliamLin</a>
+        <a href="https://www.youtube.com/c/ecnerwala">Ecnerwala</a>
+        <a href="https://www.youtube.com/channel/UCGS5ZzcSAymQbWZvNoKOFhQ/featured">Demoralizer</a>
+       </div>
+
+       <div class="card_list_fizz fizz">
+        <span>Coding Competitions</span>
+        <a href="https://icpc.global/">ACM ICPC</a>
+        <a href="https://www.facebook.com/hackercup/">Facebook Hacker Cup</a>
+        <a href="https://codingcompetitions.withgoogle.com/codejam">Google Code Jam</a>
+        <a href="https://codingcompetitions.withgoogle.com/hashcode/">Google Hashcode</a>
+        <a href="https://tco20.topcoder.com/">Topcoder Open</a>
        </div>
     </main>
-    <script src="/js/home.js"></script>
+    <script src="/js/fizzbuzz.js"></script>
 </body>
 </html> 

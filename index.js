@@ -1,10 +1,13 @@
 const express = require('express');
+let fs = require('fs');
 
 const app=express();
+const fizzbuzzRoutes = require('./routes/fizzbuzzRoutes');
+
 
 app.use(express.static('public'));
 app.use(express.json());
-
+app.use(fizzbuzzRoutes);
 app.set('view engine', 'ejs');
 
 // start -- non authorization routes
@@ -12,21 +15,17 @@ app.get('/',(req,res)=>{
    res.render('home');
 });
 
-app.get('/home',(req,res)=>{
-  res.render('home');
-});
+// app.get('/load',(req,res)=>{
+//   fs.readFile("./db.json", "utf8", (err, jsonString) => {
+//     if (err) {
+//       res.send();
+//       return;
+//     }
+//     let data=JSON.parse(jsonString);
+//     res.send(data);
+//   });
+// })
 
-app.get('/fizzbuzz',(req,res)=>{
-  res.render('fizzbuzz');
-});
-
-app.get('/contest',(req,res)=>{
-  res.render('contest');
-});
-
-app.get('/visualizer',(req,res)=>{
-  res.render('visualizer');
-});
 
 // end -- non authorization routes
 
