@@ -1,6 +1,4 @@
 
-$.get('http://localhost:3000/load',(data,status)=>{
-    console.log(status);
     var ctx = document.getElementById('myChart1').getContext('2d');
     Chart.defaults.font.size = 18;
     Chart.defaults.color = '#F1C40F';
@@ -10,7 +8,7 @@ $.get('http://localhost:3000/load',(data,status)=>{
             labels: ['NEWBIE', 'PUPIL', 'SPECIALIST', 'EXPERT', 'CM', 'MASTER','IM','GM','IGM','LGM'],
             datasets: [{
                 label: '# OF USERS',
-                data: data.nerdCount,
+                data: [60,30,50,10,10,20,10,30,40,10],
                 backgroundColor: [
                     'rgb(128 , 128 , 128 , 0.3)',
                     'rgba(58, 235, 52, 0.3)',
@@ -66,8 +64,8 @@ $.get('http://localhost:3000/load',(data,status)=>{
         data: {
             labels: ['NEWBIE', 'PUPIL', 'SPECIALIST', 'EXPERT', 'CM', 'MASTER','IM','GM','IGM','LGM'],
             datasets: [{
-                label: '# OF USERS',
-                data: data.problemCount,
+                label: '# OF PROBLEMS',
+                data: [60,30,50,10,10,20,10,30,40,10],
                 backgroundColor: [
                     'rgb(128 , 128 , 128 , 0.3)',
                     'rgba(58, 235, 52, 0.3)',
@@ -102,7 +100,7 @@ $.get('http://localhost:3000/load',(data,status)=>{
             plugins: {
                 title: {
                     display: true,
-                    text: 'NUMBER OF USERS IN EACH LEVEL',
+                    text: 'AVG NUMBER OF PROBLEM SOLVED',
                     color:'#F1C40F'
                 },
                 legend: {
@@ -123,8 +121,8 @@ $.get('http://localhost:3000/load',(data,status)=>{
         data: {
             labels: ['NEWBIE', 'PUPIL', 'SPECIALIST', 'EXPERT', 'CM', 'MASTER','IM','GM','IGM','LGM'],
             datasets: [{
-                label: '# OF USERS',
-                data: data.contestCount,
+                label: '# OF CONTEST',
+                data: [60,30,50,10,10,20,10,30,40,10],
                 backgroundColor: [
                     'rgb(128 , 128 , 128 , 0.3)',
                     'rgba(58, 235, 52, 0.3)',
@@ -159,7 +157,7 @@ $.get('http://localhost:3000/load',(data,status)=>{
             plugins: {
                 title: {
                     display: true,
-                    text: 'NUMBER OF USERS IN EACH LEVEL',
+                    text: 'AVG NUMBER OF CONTEST GIVEN',
                     color:'#F1C40F'
                 },
                 legend: {
@@ -171,4 +169,5 @@ $.get('http://localhost:3000/load',(data,status)=>{
             }
         }
     });
-})
+
+    console.log("me");

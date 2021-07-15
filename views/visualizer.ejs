@@ -9,7 +9,6 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300&display=swap" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="stylesheet" href="/css/index.css">
     <title>hashcode</title>
 </head>
@@ -39,7 +38,7 @@
                     <i class="material-icons">emoji_objects</i>
                 </a>
                 <span class="tooltip">CONTESTS</span>
-            </li>
+            </li> 
             <li>
                 <a href="#">
                     <i class="material-icons">assessment</i>
@@ -78,34 +77,34 @@
     </nav>
     <main class="main">
        <div class="big-box">
-        <div class="filter_bar">
+        <div class="filter_bar_visualizer">
             <span>VISUALIZER</span>
            </div>
-           
            <div class="card_list">
                 <span>LEVEL</span>
-                <select name="" id="">
-                    <option value="newbie">NEWBIE</option>
-                    <option value="pupil">PUPIL</option>
-                    <option value="specialist">SPECIALIST</option>
-                    <option value="expert">EXPERT</option>
-                    <option value="cm">CANDIDATE MASTER</option>
-                    <option value="master">MASTER</option>
-                    <option value="im">INTERNATIONAL MASTER</option>
-                    <option value="gm">GRANDMASTER</option>
-                    <option value="igm">INTERNATIONAL GRANDMASTER</option>
-                    <option value="lgm">LEGENDARY GRANDMASTER</option>
-                </select>
-                <button>GO</button>
+                <div class="info">
+                    <p>Bar graph of number of current users at that level</p>
+                    <p>Bar graph of Avarage number of problems solved by users to first time touch that level</p>
+                    <p>Bar graph of Avarage number of contest given by users to first time touch that level</p>
+                    <p>Rating-wise count table of number of problem solved by users to be at that level</p>
+                </div>
+                <button><a href="/visualizer/level">GO</a></button>
            </div>
 
            <div class="card_list">
             <span>CONTEST</span>
-            <input type="text" placeholder="PASTE CONTEST URL">
+            <input type="text" placeholder="ENTER CONTEST NO.">
             <button>GO</button>
+            <div class="info">
+                <p>Bar graph of how many users of level x solved particular problem</p>
+                <p>Seperate bar graph for each problem</p>
+                <p>Contest no. can be found in url of that contest</p>
+            </div>
          </div>
        </div>
     </main>
-    
+    <script>
+        
+    </script>
 </body>
 </html> 
