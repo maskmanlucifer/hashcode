@@ -74,9 +74,7 @@
     background-color: var(--bg-primary);
     color: var(--extra);
   }
-  #theme:hover {
-    background-color: var(--bg-secondary);
-  }
+  
   /* close < 102 nav bar general styling */
   
   /* open > 103 homepage styles */
@@ -117,7 +115,7 @@
     width: 70%;
     height: 6rem;
     border-radius: 1rem;
-    font-size: 1.2rem;
+    font-size: 1.3rem;
     text-align: center;
     display: flex;
     flex-direction: row;
@@ -125,7 +123,6 @@
     justify-content: center;
     margin-top: 1rem;
     border: 2px solid var(--border);
-    font-weight: 600;
   }
 
   .site_info p {
@@ -149,7 +146,6 @@
       opacity: 0;
       pointer-events: none;
       font-size: 13px;
-      font-weight: 600;
   }
 
   .navbar ul li .tooltip {
@@ -184,7 +180,7 @@
     
   }
 
-  .filter_bar span {
+  .filter_bar span { 
     padding : 4px;
     padding-left: 6px;
     padding-right: 6px;
@@ -241,40 +237,6 @@
   
   
   /* close < 106  snippet card_list_general */
-
-
-  /* open > 107 theme management  */
-
-  .dark {
-    --text-primary: #b6b6b6;
-    --text-secondary: #ececec;
-    --bg-primary: #626264;
-    --bg-secondary: #141418;
-    --extra: #fb923c;
-  }
-  
-  .light {
-    --text-primary: #576e75;
-    --text-secondary: #35535c;
-    --bg-primary: #fdf6e3;
-    --bg-secondary: #f8e1a3;
-    --extra: #f87171;
-  }
-  
-  .theme-icon {
-    display: none;
-  }
-  
-  .dark #darkIcon {
-    display: inline;
-  }
-  
-  .light #lightIcon {
-    display: inline;
-  }
-
-  /* close < 107 theme management  */
-
   
   /* open > 108  snippet card_list_buzz */
   
@@ -292,7 +254,7 @@
   .card_list_buzz p{
     font-size: 1.1rem;
     padding: 1rem;
-    font-weight: 600;
+    color: var(--text-primary);
   }
 
   /* closed < 108  snippet card_list_buzz */
@@ -320,7 +282,6 @@
     margin: auto;
     padding-bottom: 2rem;
     width: 90%;
-    font-weight: 600;
   }
   .card_list_stl_content .stl_function {
     font-size: 1rem;
@@ -334,6 +295,7 @@
     border-radius: 8px;
     margin-top: 8px;
     padding:5px;
+    color: var(--text-primary);
   }
   .card_list_stl_content .stl_function .highlight {
     background-color: var(--bg-secondary);
@@ -341,7 +303,7 @@
     border-radius: 8px;
     padding-left: 6px;
     padding-right: 6px;
-    font-weight: 600;
+    color: var(--text-primary);
 
   }
   .card_list_stl_content .stl_function .highlight:hover {
@@ -350,46 +312,64 @@
   }
   /* closed < 109  snippet card_list_stl */
   
-  /* open < 110  dropdown_visualizer */
-   
-  .select_filter {
-    width: 70%;
-    margin: auto;
-    margin-top: 1rem;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    
-  }
-  .select_filter select {
-    padding: 8px;
-    border: 2px solid var(--text-primary);
-    background-color: var(--bg-primary);
-    border-radius: 3px;
-    font-size: 1rem;
-  }
-  .select_filter button {
-    width: 6rem;
-    padding: 8px;
-    margin-left: 1rem;
-    font-size: 1rem;
-    cursor: pointer;
-    border: 2px solid var(--text-primary);
-    border-radius: 6px;
-    font-weight: 600;
-    color: var(--text-secondary);
-    background-color: var(--bg-secondary);
-  }
-  /* closed > 110  dropdown_visualizer */
- 
-  /* open < 111 chart_boxes */
-  .chart_box {
-    width: 70%;
+  /* open > 110 visualizer page */
+  .card_list {
     margin: auto;
     margin-top: 2rem;
-    margin-bottom: 2rem;
-    border: 2px solid #0a1d22;
-    padding: 8px;
-    border-radius: 8px;
+    margin-bottom: 1rem;
+    background-color: var(--bg-secondary);
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+    border-radius: 9px;
+    align-items: center;
+    justify-content: space-evenly;
   }
-  /* close > 111 chart_boxes */
+  .card_list span {
+    width: 100%;
+    text-align: center;
+    font-size: 2rem;
+    border-bottom: 2px solid var(--text-secondary);
+    color: var(--text-secondary);
+    font-weight: 600;
+  }
+  .card_list select{
+    margin: auto;
+    margin-top: 1rem;
+    width: 60%;
+    height: 2.6rem;
+    padding: 4px;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    font-size: 1rem;
+    border-radius: 4px;
+  }
+  .card_list input{
+    margin: auto;
+    margin-top: 1rem;
+    width: 60%;
+    height: 2rem;
+    padding: 2px;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    font-size: 1rem;
+    border-radius: 4px;
+  }
+  .card_list button {
+    margin-top: 1rem;
+    height: 2.2rem;
+    margin-bottom: 1rem;
+    width: 7rem;
+    padding: 2px;
+    border-radius: 12px;
+    background-color: var(--bg-primary);
+    font-size: 1.2rem;
+    color: var(--text-secondary);
+  }
+  .card_list button:hover {
+    cursor: pointer;
+  }
+  input:focus,select:focus {
+    outline: none;
+  }
+  /* close < 110 visualizer page */

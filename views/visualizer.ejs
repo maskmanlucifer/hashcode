@@ -7,7 +7,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300&display=swap" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="stylesheet" href="/css/index.css">
@@ -17,9 +17,8 @@
     <nav class="navbar">
         <ul class="navbar-nav">
             <li>
-                <a href="#" id="theme">
-                    <i class="material-icons theme-icon" id="darkIcon" >light_mode</i>
-                    <i class="material-icons theme-icon" id="lightIcon" >dark_mode</i>
+                <a href="#">
+                    <i class="material-icons">tag</i>
                 </a>
                 <span class="tooltip">HASHCODE</span>
             </li>
@@ -54,6 +53,12 @@
                 </a>
                 <span class="tooltip">PROFILE</span>
             </li>
+            <li>
+                <a href="/logout">
+                    <i class="material-icons">logout</i>
+                </a>
+                <span class="tooltip">LOGOUT</span>
+            </li>
             <%} else {%>
             <li>
                 <a href="/google">
@@ -62,12 +67,7 @@
                 <span class="tooltip">LOGIN</span>
             </li>
             <%}%>
-            <li>
-                <a href="/logout">
-                    <i class="material-icons">logout</i>
-                </a>
-                <span class="tooltip">LOGOUT</span>
-            </li>
+            
             <li>
                 <a href="https://github.com/maskmanlucifer/hashcode">
                     <i class="material-icons">view_in_ar</i>
@@ -77,40 +77,35 @@
         </ul>
     </nav>
     <main class="main">
-        <!-- <canvas id="myChart"></canvas> -->
+       <div class="big-box">
         <div class="filter_bar">
-            <!-- all gerenal cards -->
-            <span id="fizz" class="active">LEVEL</span>
-            <span id="stl">CONTEST</span>
-        </div>
-        <div class="select_filter">
-            <select name="" id="">
-                <option value="all">ALL</option>
-                <option value="newbie">NEWBIE</option>
-                <option value="pupil">PUPIL</option>
-                <option value="specialist">SPECIALIST</option>
-                <option value="expert">EXPERT</option>
-                <option value="cm">CANDIDATE MASTER</option>
-                <option value="master">MASTER</option>
-                <option value="im">INTERNATIONAL MASTER</option>
-                <option value="gm">GRANDMASTER</option>
-                <option value="igm">INTERNATIONAL GRANDMASTER</option>
-                <option value="lgm">LEGENDARY GRANDMASTER</option>
-            </select>
+            <span>VISUALIZER</span>
+           </div>
+           
+           <div class="card_list">
+                <span>LEVEL</span>
+                <select name="" id="">
+                    <option value="newbie">NEWBIE</option>
+                    <option value="pupil">PUPIL</option>
+                    <option value="specialist">SPECIALIST</option>
+                    <option value="expert">EXPERT</option>
+                    <option value="cm">CANDIDATE MASTER</option>
+                    <option value="master">MASTER</option>
+                    <option value="im">INTERNATIONAL MASTER</option>
+                    <option value="gm">GRANDMASTER</option>
+                    <option value="igm">INTERNATIONAL GRANDMASTER</option>
+                    <option value="lgm">LEGENDARY GRANDMASTER</option>
+                </select>
+                <button>GO</button>
+           </div>
+
+           <div class="card_list">
+            <span>CONTEST</span>
+            <input type="text" placeholder="PASTE CONTEST URL">
             <button>GO</button>
-        </div>
-        <div class="chart_box">
-            <canvas id="myChart1"></canvas>
-        </div>
-
-        <div class="chart_box">
-            <canvas id="myChart2"></canvas>
-        </div>
-
-        <div class="chart_box">
-            <canvas id="myChart3"></canvas>
-        </div>
+         </div>
+       </div>
     </main>
-    <script src="/js/visualizer.js"></script>
+    
 </body>
 </html> 

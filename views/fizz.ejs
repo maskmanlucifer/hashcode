@@ -8,7 +8,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700&display=swap" rel="stylesheet"/>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="stylesheet" href="/css/index.css">
     <title>hashcode</title>
@@ -17,9 +16,8 @@
     <nav class="navbar">
         <ul class="navbar-nav">
             <li>
-                <a href="#" id="theme">
-                    <i class="material-icons theme-icon" id="darkIcon" >light_mode</i>
-                    <i class="material-icons theme-icon" id="lightIcon" >dark_mode</i>
+                <a href="#">
+                    <i class="material-icons">tag</i>
                 </a>
                 <span class="tooltip">HASHCODE</span>
             </li>
@@ -54,6 +52,12 @@
                 </a>
                 <span class="tooltip">PROFILE</span>
             </li>
+            <li>
+                <a href="/logout">
+                    <i class="material-icons">logout</i>
+                </a>
+                <span class="tooltip">LOGOUT</span>
+            </li>
             <%} else {%>
             <li>
                 <a href="/google">
@@ -62,12 +66,6 @@
                 <span class="tooltip">LOGIN</span>
             </li>
             <%}%>
-            <li>
-                <a href="/logout">
-                    <i class="material-icons">logout</i>
-                </a>
-                <span class="tooltip">LOGOUT</span>
-            </li>
             <li>
                 <a href="https://github.com/maskmanlucifer/hashcode">
                     <i class="material-icons">view_in_ar</i>
@@ -78,7 +76,6 @@
     </nav>
     <main class="main">
        <div class="filter_bar">
-        <!-- all gerenal cards -->
         <span id="fizz">FIZZ</span>
         <span id="stl">STL</span>
         <span id="buzz">BUZZ</span>
@@ -91,14 +88,14 @@
           <a href="https://atcoder.jp/">Atcoder</a>
        </div>
 
-       <div class="card_list_fizz fizz">
+       <div class="card_list_fizz">
         <span>IDEs</span>
         <a href="https://www.sublimetext.com/3">Sublime-Text (Offline)</a>
         <a href="https://cpeditor.org/">CP Editor (Offline)</a>
         <a href="https://www.codechef.com/ide">Codechef (Online)</a>
        </div>
        
-       <div class="card_list_fizz fizz">
+       <div class="card_list_fizz">
         <span>Tools</span>
         <a href="https://oeis.org/">OEIS (Finding number patterns)</a>
         <a href="https://cfviz.netlify.app/">CF Viz (Growth tracker)</a>
@@ -106,7 +103,7 @@
         <a href="https://visualgo.net/en">Visu Algo (Algorithm visualizer)</a>
        </div>
 
-       <div class="card_list_fizz fizz">
+       <div class="card_list_fizz">
         <span>You tube channels</span>
         <a href="https://www.youtube.com/channel/UCBr_Fu6q9iHYQCh13jmpbrg">Errichto</a>
         <a href="https://www.youtube.com/channel/UCpvS3EykHW--l0ogUhMEjEw">GalenCoin</a>
@@ -116,7 +113,7 @@
         <a href="https://www.youtube.com/channel/UCGS5ZzcSAymQbWZvNoKOFhQ/featured">Demoralizer</a>
        </div>
 
-       <div class="card_list_fizz fizz">
+       <div class="card_list_fizz">
         <span>Coding Competitions</span>
         <a href="https://icpc.global/">ACM ICPC</a>
         <a href="https://www.facebook.com/hackercup/">Facebook Hacker Cup</a>

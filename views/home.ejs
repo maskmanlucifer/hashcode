@@ -7,10 +7,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700&display=swap" rel="stylesheet"/>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/css/index.css">
@@ -21,9 +19,8 @@
     <nav class="navbar">
         <ul class="navbar-nav">
             <li>
-                <a href="#" id="theme">
-                    <i class="material-icons theme-icon" id="darkIcon" >light_mode</i>
-                    <i class="material-icons theme-icon" id="lightIcon" >dark_mode</i>
+                <a href="#">
+                    <i class="material-icons">tag</i>
                 </a>
                 <span class="tooltip">HASHCODE</span>
             </li>
@@ -34,29 +31,35 @@
                 <span class="tooltip">HOMEPAGE</span>
             </li>
             <li>
-                <a href="./fizz">
+                <a href="/fizz">
                     <i class="material-icons">code</i>
                 </a>
                 <span class="tooltip">FIZZBUZZ</span>
             </li>
             <li>
-                <a href="./contest">
+                <a href="/contest">
                     <i class="material-icons">emoji_objects</i>
                 </a>
                 <span class="tooltip">CONTESTS</span>
             </li>
             <li>
-                <a href="./visualizer">
+                <a href="/visualizer">
                     <i class="material-icons">assessment</i>
                 </a>
                 <span class="tooltip">VISUALIZER</span>
             </li>
             <%if(user){%>
             <li>
-                <a href="./profile">
+                <a href="/profile">
                     <i class="material-icons">account_circle</i>
                 </a>
                 <span class="tooltip">PROFILE</span>
+            </li>
+            <li>
+                <a href="/logout">
+                    <i class="material-icons">logout</i>
+                </a>
+                <span class="tooltip">LOGOUT</span>
             </li>
             <%} else {%>
             <li>
@@ -66,12 +69,7 @@
                 <span class="tooltip">LOGIN</span>
             </li>
             <%}%>
-            <li>
-                <a href="./home">
-                    <i class="material-icons">logout</i>
-                </a>
-                <span class="tooltip">LOGOUT</span>
-            </li>
+            
             <li>
                 <a href="https://github.com/maskmanlucifer/hashcode">
                     <i class="material-icons">view_in_ar</i>
@@ -88,7 +86,7 @@
         <span id="site-name">HASHCODE</span>
        </div>
        <div class="site_info">
-           <p>A website developed for attempting multiple format virtual contests cooked using codeforces problems</p>
+           <p>A website developed for attempting multiple format virtual contests cooked using Codeforces problems</p>
        </div>
     </main>
     <script src="/js/home.js"></script>
