@@ -1,6 +1,6 @@
 const router = require('express').Router();
 
-router.get('/contest',(req,res)=>{
+router.get('/visualizer',(req,res)=>{
    res.render('visualizer',{user:req.user}); 
 });
 

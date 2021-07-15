@@ -1,33 +1,51 @@
 const express = require('express');
-let fs = require('fs');
 
-const app=express();
+require('dotenv').config();
+
+const mongoose = require('mongoose');
+
+const passport = require('passport');
+
+const authRoutes = require('./routes/authRoutes');
+const profileRoutes = require('./routes/profileRoutes');
+const passportConfig = require('./passport/passportConfig');
+const cookiesession = require('cookie-session');
+const User = require('./models/userModel');
 const fizzbuzzRoutes = require('./routes/fizzbuzzRoutes');
+const visualizerRoutes = require('./routes/visualizerRoutes');
+mongoose.set('useFindAndModify', false);
+let url=process.env.url;
 
-
-app.use(express.static('public'));
-app.use(express.json());
-app.use(fizzbuzzRoutes);
-app.set('view engine', 'ejs');
-
-// start -- non authorization routes
-app.get('/',(req,res)=>{
-   res.render('home');
+mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex:true  },()=>{
+  console.log("Database is connected");
 });
 
-// app.get('/load',(req,res)=>{
-//   fs.readFile("./db.json", "utf8", (err, jsonString) => {
-//     if (err) {
-//       res.send();
-//       return;
-//     }
-//     let data=JSON.parse(jsonString);
-//     res.send(data);
-//   });
-// })
+const app=express();
+
+app.use(express.static('public'));
+
+app.use(express.json());
+
+app.use(cookiesession({
+  maxAge: 24*60*60*1000,
+  keys: [process.env.KEY]
+}))
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+app.use(authRoutes);
+app.use(profileRoutes);
+app.use(fizzbuzzRoutes);
+app.use(visualizerRoutes);
 
 
-// end -- non authorization routes
+app.set('view engine', 'ejs');
+
+app.get('/',(req,res)=>{
+   res.render('home',{user:req.user});
+});
+
 
 app.listen(3000,()=>{
   console.log("You are listening to 3000 port");

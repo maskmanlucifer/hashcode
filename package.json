@@ -17,8 +17,14 @@
   },
   "homepage": "https://github.com/maskmanlucifer/hashcode#readme",
   "dependencies": {
+    "cookie-session": "^1.4.0",
+    "dot-env": "0.0.1",
+    "dotenv": "^10.0.0",
     "ejs": "^3.1.6",
     "express": "^4.17.1",
-    "method-override": "^3.0.0"
+    "method-override": "^3.0.0",
+    "mongoose": "^5.13.2",
+    "passport": "^0.4.1",
+    "passport-google-oauth20": "^2.0.0"
   }
 }

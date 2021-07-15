@@ -16,61 +16,62 @@
     <nav class="navbar">
         <ul class="navbar-nav">
             <li>
-                <a href="#">
-                    <i class="material-icons">tag</i>
+                <a href="#" id="theme">
+                    <i class="material-icons theme-icon" id="darkIcon" >light_mode</i>
+                    <i class="material-icons theme-icon" id="lightIcon" >dark_mode</i>
                 </a>
-                <span class="tooltip">hashcode</span>
+                <span class="tooltip">HASHCODE</span>
             </li>
             <li>
-                <a href="./home">
+                <a href="/">
                     <i class="material-icons">home</i>
                 </a>
-                <span class="tooltip">homepage</span>
+                <span class="tooltip">HOMEPAGE</span>
             </li>
             <li>
-                <a href="./snippet">
+                <a href="/fizz">
                     <i class="material-icons">code</i>
                 </a>
-                <span class="tooltip">snippets</span>
+                <span class="tooltip">FIZZBUZZ</span>
             </li>
             <li>
-                <a href="./contest">
+                <a href="#">
                     <i class="material-icons">emoji_objects</i>
                 </a>
-                <span class="tooltip">contests</span>
+                <span class="tooltip">CONTESTS</span>
             </li>
             <li>
-                <a href="./visualizer">
+                <a href="/visualizer">
                     <i class="material-icons">assessment</i>
                 </a>
-                <span class="tooltip">visualizer</span>
+                <span class="tooltip">VISUALIZER</span>
             </li>
-            <%if(1){%>
+            <%if(user){%>
             <li>
-                <a href="./profile">
+                <a href="/profile">
                     <i class="material-icons">account_circle</i>
                 </a>
-                <span class="tooltip">profile</span>
+                <span class="tooltip">PROFILE</span>
             </li>
             <%} else {%>
             <li>
-                <a href="#">
+                <a href="/google">
                     <i class="material-icons">login</i>
                 </a>
-                <span class="tooltip">login</span>
+                <span class="tooltip">LOGIN</span>
             </li>
             <%}%>
             <li>
-                <a href="./home">
+                <a href="/logout">
                     <i class="material-icons">logout</i>
                 </a>
-                <span class="tooltip">logout</span>
+                <span class="tooltip">LOGOUT</span>
             </li>
             <li>
-                <a href="#">
+                <a href="https://github.com/maskmanlucifer/hashcode">
                     <i class="material-icons">view_in_ar</i>
                 </a>
-                <span class="tooltip">source code</span>
+                <span class="tooltip">SOURCE CODE</span>
             </li>
         </ul>
     </nav>

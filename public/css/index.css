@@ -67,7 +67,7 @@
       color: var(--text-secondary);
       padding: 12px;
       padding-top: 17px;
-      border-radius: 7px;
+      border-radius: 7px; 
   }
 
   .navbar ul li a:hover {
