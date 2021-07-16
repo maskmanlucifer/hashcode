@@ -4,10 +4,6 @@ router.get('/visualizer',(req,res)=>{
    res.render('visualizer',{user:req.user}); 
 });
 
-router.get('/visualizer/level',(req,res)=>{
-   res.render('levelv',{user:req.user}); 
-});
-
 router.get('/visualizer/contest/:contestno',(req,res)=>{
    res.render('contestv',{user:req.user}); 
 });

@@ -80,31 +80,29 @@
         <div class="filter_bar_visualizer">
             <span>VISUALIZER</span>
            </div>
-           <div class="card_list">
-                <span>LEVEL</span>
-                <div class="info">
-                    <p>Bar graph of number of current users at that level</p>
-                    <p>Bar graph of Avarage number of problems solved by users to first time touch that level</p>
-                    <p>Bar graph of Avarage number of contest given by users to first time touch that level</p>
-                    <p>Rating-wise count table of number of problem solved by users to be at that level</p>
-                </div>
-                <button><a href="/visualizer/level">GO</a></button>
-           </div>
+           
 
            <div class="card_list">
             <span>CONTEST</span>
-            <input type="text" placeholder="ENTER CONTEST NO.">
-            <button>GO</button>
+            <input type="text" placeholder="ENTER CONTEST NO." id="contest_no">
+            <button id="contest_button">GO</button>
             <div class="info">
                 <p>Bar graph of how many users of level x solved particular problem</p>
                 <p>Seperate bar graph for each problem</p>
                 <p>Contest no. can be found in url of that contest</p>
             </div>
-         </div>
+            </div>
+
+            <div class="card_list">
+                <span>PROFILE</span>
+                <div class="info">
+                    <p>(Bar , Doughnut etc.) Graphs for almost everything about your profile</p>
+                    <p>Comparing two users profile</p>
+                </div>
+                <button><a href="https://cfviz.netlify.app/">CFVIZ</a></button>
+           </div>
        </div>
     </main>
-    <script>
-        
-    </script>
+    <script src="/js/visualizer.js"></script>
 </body>
 </html> 

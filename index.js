@@ -3,7 +3,7 @@ const express = require('express');
 require('dotenv').config();
 
 const mongoose = require('mongoose');
-
+const fetch = require("node-fetch");
 const passport = require('passport');
 
 const authRoutes = require('./routes/authRoutes');
@@ -11,7 +11,6 @@ const profileRoutes = require('./routes/profileRoutes');
 const passportConfig = require('./passport/passportConfig');
 const cookiesession = require('cookie-session');
 const User = require('./models/userModel');
-const Level = require('./models/levelModel');
 const fizzbuzzRoutes = require('./routes/fizzbuzzRoutes');
 const visualizerRoutes = require('./routes/visualizerRoutes');
 mongoose.set('useFindAndModify', false);
@@ -46,14 +45,6 @@ app.set('view engine', 'ejs');
 app.get('/',(req,res)=>{
    res.render('home',{user:req.user});
 });
-
-let obj = {
-  levelname:"newbie",
-  usercount:0,
-  contestcount:0,
-  problemcount:[]
-};
-
 
 
 app.listen(3000,()=>{
