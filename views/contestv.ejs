@@ -52,7 +52,7 @@
                 </a>
                 <span class="tooltip">PROFILE</span>
             </li>
-            <li>
+            <li> 
                 <a href="/logout">
                     <i class="material-icons">logout</i>
                 </a>
@@ -76,19 +76,16 @@
         </ul>
     </nav>
     <main class="main">
-        <p id="heading">val</p>
-        <div class="chart_box">
-            <canvas id="myChart1"></canvas>
+        <div id="contest_id" style="display: none;"><%=contestID%></div>
+        <div class="filter_bar_contest_visualizer">
+            <a href="https://codeforces.com/contest/<%=contestID%>"> <%=contestName%> </a>
         </div>
-
+        <%for(let i=0;i<problems.length;i++){%>
         <div class="chart_box">
-            <canvas id="myChart2"></canvas>
+        <a href="https://codeforces.com/contest/<%=contestID%>/problem/<%=problems[i]%>">PROBLEM - <%=problems[i]%></a>
+        <canvas id="myChart<%=i%>"></canvas>
         </div>
-
-        <div class="chart_box">
-            <canvas id="myChart3"></canvas>
-        </div>
-
+        <%}%>
     </main>
     <script src="/js/visualizer.js"></script>
 </body>

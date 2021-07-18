@@ -77,15 +77,16 @@
     </nav>
     <main class="main">
        <div class="big-box">
-        <div class="filter_bar_visualizer">
+           <div class="filter_bar_visualizer">
             <span>VISUALIZER</span>
            </div>
            
-
-           <div class="card_list">
+ 
+            <div class="card_list">
             <span>CONTEST</span>
-            <input type="text" placeholder="ENTER CONTEST NO." id="contest_no">
-            <button id="contest_button">GO</button>
+            <input type="number" placeholder="ENTER CONTEST NO." id="contest_no">
+            <button class="contest_button">GO</button>
+            <div class="contestError"></div>
             <div class="info">
                 <p>Bar graph of how many users of level x solved particular problem</p>
                 <p>Seperate bar graph for each problem</p>
@@ -103,6 +104,38 @@
            </div>
        </div>
     </main>
-    <script src="/js/visualizer.js"></script>
+    <script>
+        let contestError = document.querySelector('.contestError');
+        
+        $('.contest_button').click((e)=>{
+            e.preventDefault();
+            contestError.textContent='';
+            let contestNumber = document.getElementById('contest_no').value;
+            let uri = `https://codeforces.com/api/contest.standings?contestId=${contestNumber}&from=1&count=1`;
+            fetch(uri)
+            .then((res)=>{
+                return res.json();
+            })
+            .then((data)=>{
+                console.log(data);
+               if(data.status !== "OK") {
+                  contestError.textContent = "Contest does not exist";
+               } else {
+                   let uri1 = "/visualizer/contest/"+contestNumber;
+                $.ajax({
+                    type: 'GET',
+                    url: uri1,
+                    success: function(data){
+                        location.assign(uri1);
+                    }
+                });
+               }
+            })
+            .catch((err)=>{
+                contestError.textContent = err.message;
+            })
+            console.log(contestNumber);
+        });
+    </script>
 </body>
 </html> 
