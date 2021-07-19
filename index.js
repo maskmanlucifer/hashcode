@@ -13,6 +13,7 @@ const cookiesession = require('cookie-session');
 const User = require('./models/userModel');
 const fizzbuzzRoutes = require('./routes/fizzbuzzRoutes');
 const visualizerRoutes = require('./routes/visualizerRoutes');
+const contestRoutes = require('./routes/contestRoutes');
 mongoose.set('useFindAndModify', false);
 let url=process.env.url;
 
@@ -38,6 +39,7 @@ app.use(authRoutes);
 app.use(profileRoutes);
 app.use(fizzbuzzRoutes);
 app.use(visualizerRoutes);
+app.use(contestRoutes);
 
 
 app.set('view engine', 'ejs');
@@ -46,6 +48,9 @@ app.get('/',(req,res)=>{
    res.render('home',{user:req.user});
 });
 
+app.get('/error',(req,res)=>{
+  res.render('error',{user:req.user});
+})
 
 app.listen(3000,()=>{
   console.log("You are listening to 3000 port");

@@ -332,10 +332,10 @@ input::-webkit-inner-spin-button {
   .card_list span {
     width: 100%;
     text-align: center;
-    font-size: 2rem;
+    font-size: 1.7rem;
     border-bottom: 2px solid var(--text-secondary);
     color: var(--text-secondary);
-    font-weight: 600;
+
   }
   .card_list select{
     margin: auto;
@@ -357,7 +357,7 @@ input::-webkit-inner-spin-button {
     padding: 1px;
     padding-left: 10px;
     background-color: var(--bg-primary);
-    color: var(--text-primary);
+    color: var(--text-secondary);
     font-size: .90rem;
     border-radius: 15px;
     border: 2px solid var(--text-primary);
@@ -365,7 +365,7 @@ input::-webkit-inner-spin-button {
   .card_list .info{
     color: var(--text-secondary);
     padding: 8px;
-    background-color: var(--bg-primary);
+    
     margin-top: 1rem;
     margin-bottom: 1rem;
     border-radius: 10px;
@@ -380,7 +380,7 @@ input::-webkit-inner-spin-button {
     width: 7rem;
     padding: 2px;
     border-radius: 12px;
-    background-color: var(--bg-primary);
+    background-color: var(--bg-secondary);
     color: var(--text-secondary);
     font-size: 1.2rem;
     
@@ -407,8 +407,7 @@ input::-webkit-inner-spin-button {
     justify-content: space-around;
     align-items: center;
     color: var(--text-secondary);
-    font-weight: 600;
-    font-size: 2.2rem;
+    font-size: 2rem;
     
   }
 
@@ -482,3 +481,175 @@ input::-webkit-inner-spin-button {
   }
 
   /* closed < 112 contest_visualizer page */
+
+  /* open > 113 contest page */
+
+  .filter_bar_contest {
+    width: 70%;
+    height: 60px;
+    background-color: var(--bg-secondary);
+    margin: auto;
+    border-radius: 9px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    color: var(--text-secondary);
+    
+  }
+
+  .filter_bar_contest span { 
+    padding : 4px;
+    padding-left: 6px;
+    padding-right: 6px;
+    border-radius: 10px;
+    background-color: var(--bg-primary);
+    color: var(--extra);
+    font-size: 1.5rem;
+  }
+  
+  .card_list_contest {
+    margin: auto;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    background-color: var(--bg-secondary);
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+    border-radius: 9px;
+    align-items: center;
+    justify-content: space-evenly;
+  
+  }
+  .card_list_contest span {
+    width: 100%;
+    text-align: center;
+    font-size: 2rem;
+    border-bottom: 2px solid var(--text-secondary);
+    color: var(--text-secondary);
+  }
+  
+  .card_list_contest .instructions {
+    color: var(--text-secondary);
+    padding: 8px;
+    box-shadow: 10px 10px var(--bg-primary);
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    border-radius: 10px;
+    border: 2px solid var(--extra);
+    text-align: center;
+    font-size: 1.1rem;
+  }
+  
+  
+  .card_list_contest button {
+    margin-top: 1rem;
+    height: 2.2rem;
+    margin-bottom: 1rem;
+    width: 7rem;
+    padding: 2px;
+    border-radius: 12px;
+    background-color: var(--bg-secondary);
+    color: var(--text-secondary);
+    font-size: 1.2rem;
+    
+    border: 2px solid var(--extra);
+  }
+  .card_list_contest button a{
+    text-decoration: none;
+    color: var(--text-secondary);
+  }
+  .card_list_contest button:hover {
+    cursor: pointer;
+    box-shadow: 4px 4px var(--bg-primary);
+  }
+  /* closed < 113 contest page */
+
+
+  /* open > 114 mashup page */
+
+     .create_button {
+       margin: auto;
+       width: 17ch;
+       display: flex;
+       flex-direction: row;
+       margin-top: 1rem;
+       height: 50px;
+       background-color: var(--bg-secondary);
+       align-items: center;
+       justify-content: space-evenly;
+       border-radius: 38px;
+     }
+     .create_button i {
+       font-size: 2.2rem;
+     }
+     .create_button span {
+       font-size: 1.4rem;
+     }
+     .create_button:hover {
+       cursor: pointer;
+     } 
+     .card_list_mashup {
+      margin: auto;
+      margin-top: 2rem;
+      margin-bottom: 1rem;
+      background-color: var(--bg-secondary);
+      display: flex;
+      flex-direction: column;
+      width: 70%;
+      border-radius: 9px;
+      align-items: center;
+      justify-content: space-evenly;
+    
+    }
+    .card_list_mashup span {
+      width: 100%;
+      text-align: center;
+      font-size: 2rem;
+      border-bottom: 2px solid var(--text-secondary);
+      color: var(--text-primary);
+    }
+    .card_list_mashup .contest_box {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      border: 2px solid var(--extra);
+      border-radius: 20px;
+      width: 90%;
+      margin-top: 1rem;
+    }
+    .contest_box span {
+      font-size: 1.5rem;
+    }
+    .contest_box:last-child {
+      margin-bottom: 1rem;
+    }
+    .contest_box .info_contest {
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-around;
+      align-items: center;
+    }
+    .contest_box .info_contest p {
+      font-size: 1.3rem;
+      color: var(--text-secondary);
+    }
+    .contest_box a {
+      text-decoration: none;
+      padding-bottom: 3px;
+      font-size: 1.2rem;
+      color: var(--extra);
+    }
+  /* close < 114 mashup page */
+
+
+  /* open > 115 lockout page */
+
+
+  /* close < 115 lockout page */
+
+  /* open > 116 speedrun page */
+
+
+  /* close < 116 speedrun page */

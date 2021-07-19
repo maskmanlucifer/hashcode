@@ -48,6 +48,7 @@ let findLevel = (rating) =>{
 let dataExtract =  async (contestID)=>{
   let url = "https://codeforces.com/api/contest.standings?contestId=";
   url += contestID;
+  
   let standing = await fetch(url);
   if(standing.status !== 200) {
       throw new Error('Contest not exist');
@@ -63,6 +64,7 @@ let dataExtract =  async (contestID)=>{
   
   let url1 = "https://codeforces.com/api/contest.ratingChanges?contestId=";
   url1 += contestID;
+
   let ratingChange = await fetch(url1);
 
   let data1 = await ratingChange.json();

@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="/css/index.css">
     <title>hashcode</title>
 </head>
-<body>
+<body> 
     <nav class="navbar">
         <ul class="navbar-nav">
             <li>
@@ -34,7 +34,7 @@
                 <span class="tooltip">FIZZBUZZ</span>
             </li>
             <li>
-                <a href="#">
+                <a href="/contest">
                     <i class="material-icons">emoji_objects</i>
                 </a>
                 <span class="tooltip">CONTESTS</span>
@@ -66,6 +66,7 @@
                 <span class="tooltip">LOGIN</span>
             </li>
             <%}%>
+            
             <li>
                 <a href="https://github.com/maskmanlucifer/hashcode">
                     <i class="material-icons">view_in_ar</i>
@@ -76,46 +77,67 @@
     </nav>
     <main class="main">
         <div class="filter_bar_contest">
-            <span>CONTESTS</span>
-        </div>
-        <div class="card_list_contest">
             <span>MASHUP</span>
-            <div class="instructions">
-                <p>This format of contest is mainly for practicing problem in groups</p>
-                <p>You can create public as well as private mashups</p>
-                <p>In private mashups registration will be done through secret link</p>
-                <p>Max number of problems in a mashup can be &les;= 10</p>
-                <p>Each problem will have certain fixed point which will decrease with time</p>
-                <p>Rank list will be generated on the basis of total score at that instance of time</p>
-                <p>Registartion for mashup will end 30 sec. before start time</p>
+        </div>
+        <div class="create_button"><i class="material-icons">add_circle_outline</i><span>CREATE</span></div>
+        <div class="card_list_mashup">
+            <span>ONGOING</span>
+            <div class="contest_box">
+                <span>Mashup # 2</span>
+                <div class="info_contest">
+                   <p>Start time :</p>
+                   <p>Duration : </p>
+                </div>
+                <div class="info_contest">
+                    <p>Difficulty level :</p>
+                    <p>Problem count : </p>
+                 </div>
+                <a href="">ENTER</a>
             </div>
-            <button><a href="/contest/mashup">ENTER</a></button>
-         </div>
-         <div class="card_list_contest">
-            <span>LOCKOUT</span>
-            <div class="instructions">
-                <p>This format of contest is mainly for 1 v/s 1 challenges</p>
-                <p>You can create private as well as public lockout matches</p>
-                <p>There will be only 2 participants in a lockout match</p>
-                <p>The participant who will solve certain problem first will receive 100 point</p>
-                <p>Other participant will receive 0 point for the same problem</p>
-                <p>Rank list will be generated on the basis of total score at that instance of time</p>
-                <p>Registartion for lockout will end 30 sec. before start time</p>
+            <div class="contest_box">
+                <span>Mashup # 2</span>
+                <div class="info_contest">
+                   <p>Start time :</p>
+                   <p>Duration : </p>
+                </div>
+                <div class="info_contest">
+                    <p>Difficulty level :</p>
+                    <p>Problem count : </p>
+                 </div>
+                <a href="">ENTER</a>
             </div>
-            <button><a href="/contest/lockout">ENTER</a></button>
-         </div>
-         <div class="card_list_contest">
-            <span>SPEEDRUN</span>
-            <div class="instructions">
-                <p>This format of contest is for improving speed for mainly (A,B,C) problems</p>
-                <p>You can choose number of total problems and time duration for each problem</p>
-                <p>Each problem will be added 20 sec. after ending of previous problem time</p>
-                <p>You can choose level of problems (Easy[A], Medium[B,C], Hard[C,D])</p>
-                <p>Registartion for speedrun will end 30 sec. before start time</p>
+        </div>
+        <div class="card_list_mashup">
+            <span>UPCOMING</span>
+            <div class="contest_box">
+                <span>Mashup # 2</span>
+                <div class="info_contest">
+                   <p>Start time :</p>
+                   <p>Duration : </p>
+                </div>
+                <div class="info_contest">
+                    <p>Difficulty level :</p>
+                    <p>Problem count : </p>
+                 </div>
+                <a href="">ENTER</a>
             </div>
-            <button><a href="/contest/speedrun">ENTER</a></button>
-         </div>
+        </div>
+        <div class="card_list_mashup">
+            <span>PAST</span>
+            <div class="contest_box">
+                <span>Mashup # 2</span>
+                <div class="info_contest">
+                   <p>Start time :</p>
+                   <p>Duration : </p>
+                </div>
+                <div class="info_contest">
+                    <p>Difficulty level :</p>
+                    <p>Problem count : </p>
+                 </div>
+                <a href="">ENTER</a>
+            </div>
+        </div>
     </main>
-    <script src="main.js"></script>
+    <script src="/js/home.js"></script>
 </body>
 </html> 
