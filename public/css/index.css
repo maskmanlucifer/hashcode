@@ -568,7 +568,7 @@ input::-webkit-inner-spin-button {
 
   /* open > 114 mashup page */
 
-     .create_button {
+     .create_button a{
        margin: auto;
        width: 17ch;
        display: flex;
@@ -579,6 +579,8 @@ input::-webkit-inner-spin-button {
        align-items: center;
        justify-content: space-evenly;
        border-radius: 38px;
+       text-decoration: none;
+       color: var(--text-primary);
      }
      .create_button i {
        font-size: 2.2rem;
@@ -634,6 +636,9 @@ input::-webkit-inner-spin-button {
     .contest_box .info_contest p {
       font-size: 1.3rem;
       color: var(--text-secondary);
+      margin-top: 0;
+      margin-bottom: 0;
+      padding: 6px;
     }
     .contest_box a {
       text-decoration: none;
@@ -643,13 +648,105 @@ input::-webkit-inner-spin-button {
     }
   /* close < 114 mashup page */
 
+  .card_list_form {
+    margin: auto;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    background-color: var(--bg-secondary);
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+    border-radius: 9px;
+    align-items: center;
+    justify-content: space-evenly;
+  
+  }
+  .card_list_form span {
+    width: 100%;
+    text-align: center;
+    font-size: 1.7rem;
+    border-bottom: 2px solid var(--text-secondary);
+    color: var(--text-primary);
+  }
+  .card_list_form .row {
+    width: 90%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-top: 18px;
+    margin-bottom: 18px;
+    font-size: 1.2rem;
+    color: var(--text-secondary);
+  }
+  .card_list_form .row input {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    border-radius: 8px;
+    margin-left: 8px;
+    font-size: .90rem;
+  }
 
-  /* open > 115 lockout page */
+  .card_list_form .row select {
+    width: 10rem;
+    padding: 6px;
+    padding-right: 8px;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    border-radius: 3px;
+    margin-left: 8px;
+    font-size: .90rem;
+  }
+  
 
+  .card_list_form .row button {
+    width: 6rem;
+    background-color: var(--bg-secondary);
+    border: 2px solid var(--extra);
+    color: var(--text-secondary);
+    font-size: 1.2rem;
+    border-radius: 10px;
+    padding: 8px;
+  }
+  .card_list_form .row button:hover {
+    cursor: pointer;
+  }
+  .link {
+    width: 70%;
+    margin: auto;
+    text-align: center;
+    padding: 5px;
+    border-radius: 8px;
+  }
+  .link_info {
+    width: 70%;
+    margin: auto;
+    text-align: center;
+    padding: 5px;
+    border-radius: 8px;
+  }
+  .link a{
+    text-decoration: none;
+    color: var(--extra);
+    font-size: 1.3rem;
+    padding: 6px;
+    border-radius: 8px;
+    text-align: center;
+    background-color: var(--bg-secondary);
+  }
+  .link a:hover {
+    cursor: pointer;
+  }
+  .link_info p {
+    color: var(--text-secondary);
+    font-size: 1.3rem;
+    padding: 6px;
+    border-radius: 8px;
+    text-align: center;
+    background-color: var(--bg-secondary);
+  }
+  /* open > 115 form pages */
 
-  /* close < 115 lockout page */
+   
+  /* close < 115 form pages */
 
-  /* open > 116 speedrun page */
-
-
-  /* close < 116 speedrun page */
+  

@@ -16,4 +16,15 @@ router.get('/contest/speedrun',(req,res)=>{
    res.render('speedrun',{user:req.user}); 
 });
 
+router.get('/contest/mashup/create',(req,res)=>{
+   res.render('formMashup',{user:req.user});
+});
+
+router.get('/contest/lockout/create',(req,res)=>{
+   res.render('formLockout',{user:req.user});
+});
+
+router.get('/contest/speedrun/create',(req,res)=>{
+   res.render('formSpeedrun',{user:req.user});
+});
 module.exports = router;

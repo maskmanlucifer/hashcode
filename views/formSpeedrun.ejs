@@ -47,7 +47,7 @@
             </li>
             <%if(user){%>
             <li>
-                <a href="/profile">
+                <a href="#">
                     <i class="material-icons">account_circle</i>
                 </a>
                 <span class="tooltip">PROFILE</span>
@@ -76,67 +76,49 @@
         </ul>
     </nav>
     <main class="main">
-        <div class="filter_bar_contest">
-            <span>MASHUP</span>
-        </div>
-        <div class="create_button"><a href="/contest/lockout/create"><i class="material-icons">add</i><span>CREATE</span></a></div>
-        <div class="card_list_mashup">
-            <span>ONGOING</span>
-            <div class="contest_box">
-                <span>Mashup # 2</span>
-                <div class="info_contest">
-                   <p>Start time :</p>
-                   <p>Duration : </p>
-                </div>
-                <div class="info_contest">
-                    <p>Problem range :</p>
-                    <p>Problem count : </p>
-                 </div>
-                <a href="">ENTER</a>
+        <div class="card_list_form">
+            <span>Create Speedrun</span>
+            <div class="row">
+                <label for="difficulty">
+                    Difficulty level of contest : 
+                </label>
+                <select name="visibility" id="visibility" required>
+                   <option value="easy">Easy (800 - 1400)</option>
+                   <option value="medium">Medium (1500 - 1900)</option>
+                   <option value="hard">Hard (2000 - 2300)</option>
+                </select>
             </div>
-            <div class="contest_box">
-                <span>Mashup # 2</span>
-                <div class="info_contest">
-                   <p>Start time :</p>
-                   <p>Duration : </p>
-                </div>
-                <div class="info_contest">
-                    <p>Problem range :</p>
-                    <p>Problem count : </p>
-                 </div>
-                <a href="">ENTER</a>
+            <div class="row">
+                <label for="no_of_problems">
+                    Number of Problems : 
+                </label>
+                <input type="number" id="no_of_problems" required max="7">
             </div>
-        </div>
-        <div class="card_list_mashup">
-            <span>UPCOMING</span>
-            <div class="contest_box">
-                <span>Mashup # 2</span>
-                <div class="info_contest">
-                   <p>Start time :</p>
-                   <p>Duration : </p>
-                </div>
-                <div class="info_contest">
-                    <p>Problem range :</p>
-                    <p>Problem count : </p>
-                 </div>
-                <a href="">ENTER</a>
+
+            <div class="row">
+                <label for="start_date">
+                    Start time : 
+                </label>
+                <input type="date" id="start_date" required>
+                <input type="time" id="start_time" required>
+            </div>
+
+            <div class="row">
+                <label for="visibility">
+                    Type of contest : 
+                </label>
+                <select name="visibility" id="visibility" required>
+                   <option value="private">Private</option>
+                   <option value="public">Public</option>
+                </select>
+            </div>
+
+            <div class="row">
+                <button>Create</button>
             </div>
         </div>
-        <div class="card_list_mashup">
-            <span>PAST</span>
-            <div class="contest_box">
-                <span>Mashup # 2</span>
-                <div class="info_contest">
-                   <p>Start time :</p>
-                   <p>Duration : </p>
-                </div>
-                <div class="info_contest">
-                    <p>Problem range :</p>
-                    <p>Problem count : </p>
-                 </div>
-                <a href="">ENTER</a>
-            </div>
-        </div>
+        <div class="link"></div>
+        <div class="link_info"></div>
     </main>
     <script src="/js/home.js"></script>
 </body>

@@ -10,11 +10,37 @@ const authRoutes = require('./routes/authRoutes');
 const profileRoutes = require('./routes/profileRoutes');
 const passportConfig = require('./passport/passportConfig');
 const cookiesession = require('cookie-session');
+
 const User = require('./models/userModel');
+const Mashup = require('./models/mashupModel');
+const Lockout = require('./models/lockoutModel');
+const Speedrun = require('./models/speedrunModel');
+
+
+
 const fizzbuzzRoutes = require('./routes/fizzbuzzRoutes');
 const visualizerRoutes = require('./routes/visualizerRoutes');
 const contestRoutes = require('./routes/contestRoutes');
 mongoose.set('useFindAndModify', false);
+
+let obj = {
+  starttimeSecond: 1600,
+  durationtimeSecond: 1800,
+  author: "maskman_lucifer",
+  visibility : "private",
+  minRange : 1800,
+  maxRange : 2000,
+  registered :[{ handle : "maskman_lucifer", email : "amanmarksingh@gmail.com" },{ handle : "maskman_lucifer", email : "amanmarksingh@gmail.com" }],
+  numberofProblems : 10,
+  problems: [{ contestID: 1550, index : "B1", points : 1800},{ contestID: 1550, index : "B2", points : 1900}],
+  rankList : []
+};
+
+new Mashup(obj).save().then(()=>{
+  console.log("saved");
+}).catch(()=>{
+  console.log("failed");
+})
 let url=process.env.url;
 
 mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex:true  },()=>{
