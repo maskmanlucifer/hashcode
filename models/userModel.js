@@ -10,7 +10,10 @@ const userSchema = new mongoose.Schema({
     name:{
       type: String
     },
-    contestList : [{
+    ishandle :{
+      type : Boolean
+    },
+    contestlist : [{
       type: String,
       contestID : Number
     }]

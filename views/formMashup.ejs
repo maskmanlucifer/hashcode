@@ -122,22 +122,30 @@
                 <button id="submit">Create</button>
             </div>
             <p class="contestError" style="font-size: 17px;"></p>
-        </div>
+        </div> 
         
         <div class="link"></div>
         <div class="link_info"></div>
     </main>
     <script>
         let perror=document.querySelector('.contestError');
-        
+        let link=document.querySelector('.link');
+        let link_info=document.querySelector('.link_info');
         $('button').click(async (e) => {
             e.preventDefault();
             perror.textContent = '';
+            link.innerHTML = '';
+            link_info.innerHTML = '';
             let duration=document.querySelector('#duration').value;
             let min_level=document.querySelector('#min_level').value;
             let max_level=document.querySelector('#max_level').value;
-            let starttime=document.querySelector('#start_date').value;
+            let starttime=document.querySelector('#start_date').valueAsNumber;
             let no_of_problems=document.querySelector('#no_of_problems').value;
+            const secondsSinceEpoch = Math.round(Date.now() / 1000);
+            let date = new Date();
+            let offset = date.getTimezoneOffset() * 60*1000;
+            starttime += offset;
+            starttime /= 1000.0;
             let visibility=$("select#visibility option").filter(":selected").val();
             try { 
             const res = await fetch('/mashup/create', { 
@@ -150,9 +158,13 @@
             { 
                 perror.textContent=data.errors;
             }
-            if(data.user)
+            if(data.info)
             {
-                location.assign('/contest/mashup');
+                link_info.innerHTML = `<p>${data.info}</p>`;
+            }
+            if(data.link)
+            {
+                link.innerHTML = `<a href="${data.link}">${data.link}</a>`;
             }
             }
             catch (err) {

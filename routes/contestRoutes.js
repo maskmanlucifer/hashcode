@@ -62,60 +62,40 @@ router.get('/contest/speedrun/:contestId',(req,res)=>{
 });
 
 router.post('/mashup/create',async (req,res)=>{
-  let user= 0;
-  if(!user) {
-   res.status(400).json({ errors : 'You are not logged in' ,user:0});
-//   } else if(!user.cfusername) {
-//    res.status(400).json({ errors : 'Please set your codeforces handle in profile page' });
+  let {duration,min_level,max_level,starttime,no_of_problems,visibility} = req.body;
+  let user=req.user;
+  if(user === undefined) {
+   res.status(400).json({ errors : 'You are not logged in' });
+  } else if(!user.ishandle) {
+   res.status(400).json({ errors : 'Please set your codeforces handle in profile page' });
   }  else {
-    
      let size = await Mashup.estimatedDocumentCount();
      
     let obj = {
-      contestID : size+1,
-       starttimeSecond:{
-         type: Number
-       },
-       durationtimeSecond: {
-         type: Number
-       },
-       author:{
-         type: String
-       },
-       visibility : {
-         type: String
-       },
-       minRange : {
-         type:Number
-       },
-       maxRange : {
-           type : Number
-       },
-       phase : {
-         type : String
-       },
+       contestID : size+1,
+       starttimeSecond:starttime,
+       durationtimeSecond: duration,
+       author: user.cfusername,
+       visibility : visibility,
+       minRange : min_level,
+       maxRange : max_level,
+       phase : "UPCOMING",
        registered :[{
-         handle : String,
-         email : String
+         handle : user.cfusername,
+         email : user.googleid
        }],
-       numberofProblems : {
-           type : Number
-       },
-       problems: [{
-           contestID: Number,
-           index : String,
-           points : Number
-       }],
-       rankList : [{
-           handle: String,
-           points : Number,
-           problemResults : [{
-               contestID: Number,
-               submissionID: Number
-           }]
-       }]
+       numberofProblems : no_of_problems,
+       problems: [],
+       rankList : []
     };
-    res.status(201).json({ user:1 });
+
+    let response = await new Mashup(obj).save();
+
+    if(visibility === "PRIVATE") {
+      res.status(201).json({ info : `Your private MASHUP # ${size+1} is created, share above link to whom you want to invite` , link : 'https://codeforces.com/' });
+    } else {
+      res.status(201).json({ info : `Your  MASHUP # ${size+1} is created , Enjoy the contest`});
+    }
   }
   
 });
