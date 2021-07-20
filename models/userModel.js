@@ -10,12 +10,10 @@ const userSchema = new mongoose.Schema({
     name:{
       type: String
     },
-    mashuplist :{
-      type: Array
-    },
-    lockoutlist :{
-      type: Array
-    }
+    contestList : [{
+      type: String,
+      contestID : Number
+    }]
 });
 
 const User = mongoose.model('user', userSchema);

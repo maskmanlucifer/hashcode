@@ -61,5 +61,62 @@ router.get('/contest/speedrun/:contestId',(req,res)=>{
    res.render('speedrunContest',{user:req.user});
 });
 
-
+router.post('/mashup/create',async (req,res)=>{
+  let user= 0;
+  if(!user) {
+   res.status(400).json({ errors : 'You are not logged in' ,user:0});
+//   } else if(!user.cfusername) {
+//    res.status(400).json({ errors : 'Please set your codeforces handle in profile page' });
+  }  else {
+    
+     let size = await Mashup.estimatedDocumentCount();
+     
+    let obj = {
+      contestID : size+1,
+       starttimeSecond:{
+         type: Number
+       },
+       durationtimeSecond: {
+         type: Number
+       },
+       author:{
+         type: String
+       },
+       visibility : {
+         type: String
+       },
+       minRange : {
+         type:Number
+       },
+       maxRange : {
+           type : Number
+       },
+       phase : {
+         type : String
+       },
+       registered :[{
+         handle : String,
+         email : String
+       }],
+       numberofProblems : {
+           type : Number
+       },
+       problems: [{
+           contestID: Number,
+           index : String,
+           points : Number
+       }],
+       rankList : [{
+           handle: String,
+           points : Number,
+           problemResults : [{
+               contestID: Number,
+               submissionID: Number
+           }]
+       }]
+    };
+    res.status(201).json({ user:1 });
+  }
+  
+});
 module.exports = router;

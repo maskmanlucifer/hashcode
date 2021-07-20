@@ -539,13 +539,7 @@ input::-webkit-inner-spin-button {
     text-align: center;
     font-size: 1.1rem;
   }
-  .card_list_contest .instructions:hover {
-    position: relative;
-    top: -5px;
-    left: -5px;
-    box-shadow: 10px 10px var(--bg-primary);
-    cursor: pointer;
-  }
+  
   
   .card_list_contest button {
     margin-top: 1rem;

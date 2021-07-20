@@ -82,7 +82,7 @@
                 <label for="duration">
                     Duration of contest in minutes :
                 </label>
-                <input type="text" id="duration" required>
+                <input type="number" id="duration" required>
             </div>
             
             <div class="row">
@@ -107,25 +107,58 @@
                 <label for="start_date">
                     Start time : 
                 </label>
-                <input type="date" id="start_date" required>
-                <input type="time" id="start_time" required>
+                <input type="datetime-local" id="start_date" required>
             </div>
             <div class="row">
                 <label for="visibility">
                     Type of contest : 
                 </label>
                 <select name="visibility" id="visibility" required>
-                   <option value="private">Private</option>
-                   <option value="public">Public</option>
+                   <option value="PRIVATE">Private</option>
+                   <option value="PUBLIC">Public</option>
                 </select>
             </div>
             <div class="row">
-                <button>Create</button>
+                <button id="submit">Create</button>
             </div>
+            <p class="contestError" style="font-size: 17px;"></p>
         </div>
+        
         <div class="link"></div>
         <div class="link_info"></div>
     </main>
-    <script src="/js/home.js"></script>
+    <script>
+        let perror=document.querySelector('.contestError');
+        
+        $('button').click(async (e) => {
+            e.preventDefault();
+            perror.textContent = '';
+            let duration=document.querySelector('#duration').value;
+            let min_level=document.querySelector('#min_level').value;
+            let max_level=document.querySelector('#max_level').value;
+            let starttime=document.querySelector('#start_date').value;
+            let no_of_problems=document.querySelector('#no_of_problems').value;
+            let visibility=$("select#visibility option").filter(":selected").val();
+            try { 
+            const res = await fetch('/mashup/create', { 
+                method: 'POST', 
+                body: JSON.stringify({ duration,min_level,max_level,starttime,no_of_problems,visibility}),
+                headers: {'Content-Type': 'application/json'}
+            });
+            const data = await res.json(); 
+            if (data.errors) 
+            { 
+                perror.textContent=data.errors;
+            }
+            if(data.user)
+            {
+                location.assign('/contest/mashup');
+            }
+            }
+            catch (err) {
+            console.log(err);
+            }
+        });
+    </script>
 </body>
 </html> 
