@@ -532,7 +532,6 @@ input::-webkit-inner-spin-button {
   .card_list_contest .instructions {
     color: var(--text-secondary);
     padding: 8px;
-    box-shadow: 10px 10px var(--bg-primary);
     margin-top: 1rem;
     margin-bottom: 1rem;
     border-radius: 10px;
@@ -540,7 +539,13 @@ input::-webkit-inner-spin-button {
     text-align: center;
     font-size: 1.1rem;
   }
-  
+  .card_list_contest .instructions:hover {
+    position: relative;
+    top: -5px;
+    left: -5px;
+    box-shadow: 10px 10px var(--bg-primary);
+    cursor: pointer;
+  }
   
   .card_list_contest button {
     margin-top: 1rem;
@@ -561,7 +566,6 @@ input::-webkit-inner-spin-button {
   }
   .card_list_contest button:hover {
     cursor: pointer;
-    box-shadow: 4px 4px var(--bg-primary);
   }
   /* closed < 113 contest page */
 
@@ -645,6 +649,7 @@ input::-webkit-inner-spin-button {
       padding-bottom: 3px;
       font-size: 1.2rem;
       color: var(--extra);
+      margin-top: 10px;
     }
   /* close < 114 mashup page */
 
@@ -743,12 +748,95 @@ input::-webkit-inner-spin-button {
     border-radius: 8px;
     text-align: center;
     background-color: var(--bg-secondary);
+    
   }
-  /* open > 115 form pages */
-
-   select#visibility {
-     width: 16rem;
-   }
-  /* close < 115 form pages */
+  select#visibility {
+    width: 16rem;
+  }
+  /* open > 116 main contest page */
+     .main_contest_box {
+      margin: auto;
+      margin-top: 2rem;
+      margin-bottom: 1rem;
+      background-color: var(--bg-secondary);
+      display: flex;
+      flex-direction: column;
+      width: 80%;
+      border-radius: 9px;
+      align-items: center;
+      justify-content: space-evenly;
+     }
+     .main_contest_box .buttons {
+       margin-top: 1rem;
+       display: flex;
+       flex-direction: row;
+       width: 90%;
+       height: 2rem;
+       justify-content: flex-start;
+       align-items: center;
+       border-bottom: 2px solid var(--text-primary);
+       padding-bottom: 3px;
+     }
+     .main_contest_box .buttons span {
+       margin-left: 1rem;
+       font-size: 1rem;
+     }
+     .main_contest_box .buttons span:hover {
+       cursor: pointer;
+     }
+     .main_contest_box .problem_box {
+       width: 88%;
+       background-color: var(--bg-primary);
+       padding: 10px;
+       margin-top: 2rem;
+       margin-bottom: 2rem;
+       border-radius: 10px;
+     }
+     .main_contest_box .problem_box table {
+       border: 1px solid var(--extra);
+       border-collapse: collapse;
+       width: 100%;
+       margin: auto;
+     }
+     .main_contest_box .problem_box table th,td{
+      border: 1px solid var(--extra);
+      text-align: center;
+      padding: 6px;
+    }
+    .main_contest_box .problem_box table th {
+      color: var(--text-secondary);
+    }
+    .active_buttons {
+      padding: 3px;
+      background-color: var(--bg-primary);
+      border-radius: 8px;
+      padding-left: 12px;
+      padding-right: 12px;
+    }
+    #timer {
+      width: 80%;
+      font-size: 1.2rem;
+      display: flex;
+      flex-direction: column;
+      text-align: center;
+      padding: 4px;
+      color: var(--text-primary);
+      background-color: var(--bg-secondary);
+      margin: auto;
+      align-items: center;
+      border-radius: 10px;
+    }
+    #timer p {
+      padding: 5px;
+      margin: 0;
+    }
+    #timer p:first-child {
+      border-bottom: 1px solid var(--text-secondary);
+      color: var(--text-secondary);
+    }
+    #timer p:last-child {
+      color: var(--extra);
+    }
+  /* close < 116 main contest page */
 
   

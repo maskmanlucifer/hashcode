@@ -47,7 +47,7 @@
             </li>
             <%if(user){%>
             <li>
-                <a href="/profile">
+                <a href="#">
                     <i class="material-icons">account_circle</i>
                 </a>
                 <span class="tooltip">PROFILE</span>
@@ -76,60 +76,53 @@
         </ul>
     </nav>
     <main class="main">
-        <div class="filter_bar_contest">
-            <span>MASHUP</span>
+        <div class="main_contest_box">
+            <div class="buttons">
+                <span class="active_buttons">PROBLEM</span>
+            </div>
+            <div class="problem_box" style=" overflow-x:auto;">
+                <table >
+                    <tr>
+                        <th>#</th>
+                        <th>NAME</th>
+                        <th>TIME REMAINING</th>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>PROBLEM-A</td>
+                        <td><p id="demo"></p></td>
+                    </tr>
+                </table>
+            </div>
         </div>
-        <div class="create_button"><a href="/contest/mashup/create"><i class="material-icons">add</i><span>CREATE</span></a></div>
-        <div class="card_list_mashup">
-            <span>ONGOING</span>
-            <%for(let i=0;i<data3.length;i++) {%>
-                <div class="contest_box">
-                    <span>Mashup # <%=data3[i].contestID%></span>
-                    <div class="info_contest">
-                    <p>Start time : <%=data3[i].starttimeSecond%></p>
-                    <p>Duration : <%=data3[i].durationtimeSecond%></p>
-                    </div> 
-                    <div class="info_contest">
-                        <p>Problem range : <%=data3[i].minRange%> - <%=data3[i].maxRange%></p>
-                        <p>Problem count : <%=data3[i].numberofProblems%></p>
-                    </div>
-                    <a href="/contest/mashup/<%=data3[i].contestID%>/problems">ENTER</a>
-                </div>
-            <%}%>
-        </div>
-        <div class="card_list_mashup">
-            <span>UPCOMING</span>
-            <%for(let i=0;i<data1.length;i++) {%>
-                <div class="contest_box">
-                    <span>Mashup # <%=data1[i].contestID%></span>
-                    <div class="info_contest">
-                       <p>Start time : <%=data1[i].starttimeSecond%></p>
-                       <p>Duration : <%=data1[i].durationtimeSecond%></p>
-                    </div> 
-                    <div class="info_contest">
-                        <p>Problem range : <%=data1[i].minRange%> - <%=data1[i].maxRange%></p>
-                        <p>Problem count : <%=data1[i].numberofProblems%></p>
-                     </div>
-                     <a href="">REGISTER</a>
-                </div>
-            <%}%>
-        </div>
-        <div class="card_list_mashup">
-            <span>PAST</span>
-            <%for(let i=0;i<data2.length;i++) {%>
-                <div class="contest_box">
-                    <span>Mashup # <%=data2[i].contestID%></span>
-                    <div class="info_contest">
-                       <p>Start time : <%=data2[i].starttimeSecond%></p>
-                       <p>Duration : <%=data2[i].durationtimeSecond%></p>
-                    </div> 
-                    <div class="info_contest">
-                        <p>Problem range : <%=data2[i].minRange%> - <%=data2[i].maxRange%></p>
-                        <p>Problem count : <%=data2[i].numberofProblems%></p>
-                     </div>
-                     <a href="/contest/mashup/<%=data2[i].contestID%>/problems">VIEW CONTEST</a>
-                </div>
-            <%}%>
+        <div class="main_contest_box">
+            <div class="buttons">
+                <span class="active_buttons">FASTEST FINGERS</span>
+            </div>
+            <div class="problem_box" style=" overflow-x:auto;">
+                <table >
+                    <tr>
+                        <th>#</th>
+                        <th>USERNAME</th>
+                        <th>TIME TAKEN (SEC)</th>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>maskmanlucifer</td>
+                        <td>120</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>jareehd</td>
+                        <td>100</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>meon</td>
+                        <td>Not solved</td>
+                    </tr>
+                </table>
+            </div>
         </div>
     </main>
     <script src="/js/home.js"></script>

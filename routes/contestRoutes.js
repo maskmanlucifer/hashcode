@@ -39,4 +39,27 @@ router.get('/contest/lockout/create',(req,res)=>{
 router.get('/contest/speedrun/create',(req,res)=>{
    res.render('formSpeedrun',{user:req.user});
 });
+
+router.get('/contest/mashup/:contestID/problems',(req,res)=>{
+   res.render('mashupContest',{user:req.user,type:"PROBLEMS"});
+});
+
+router.get('/contest/mashup/:contestID/standing',(req,res)=>{
+   res.render('mashupContest',{user:req.user,type:"STANDING"});
+});
+
+router.get('/contest/mashup/:contestID',(req,res)=>{
+   res.render('mashupContest',{user:req.user,type:"PROBLEMS"});
+});
+
+
+router.get('/contest/lockout/:contestId',(req,res)=>{
+   res.render('lockoutContest',{user:req.user});
+});
+
+router.get('/contest/speedrun/:contestId',(req,res)=>{
+   res.render('speedrunContest',{user:req.user});
+});
+
+
 module.exports = router;

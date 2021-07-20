@@ -1,31 +1,29 @@
 
+// Set the date we're counting down to
+var countDownDate = new Date("Jan 5, 2022 15:37:25").getTime();
 
-// handling level 
-// let labels = ['PUPIL', 'SPECIALIST', 'EXPERT', 'CM', 'MASTER','IM','GM','IGM','LGM'];
-// let rating = [1200,1400,1600,1900,2100,2300,2400,2600,3000];
-// let count = [0,0,0,0,0,0,0,0,0];
+// Update the count down every 1 second
+var x = setInterval(function() {
 
+  // Get today's date and time
+  var now = new Date().getTime();
 
-// fetch('https://codeforces.com/api/user.ratedList?activeOnly=true')
-//   .then(response => response.json())
-//   .then((json)=>{
-//     console.log("received");
-//     console.log(json.result.length);
-//     let sum =0;
-//     for(let i=0;i<1;i++) {
-//       for(let j=0;j<json.result.length;j++) {
-//         // if(Number(json.result[j].rating)>=rating[i] && Number(json.result[j].rating)<rating[i+1]) {
-//         //   count[i]++;
-//         //   sum++;
-//         // }
-//         if(json.result[j].rating >=3000)
-//         {
-//             sum++;
-//         }
-//       }
-//     }
-//     console.log(json.result.length);
-//     console.log(sum);
-//     count[8]=json.result.length - sum;
-//     console.log(count);
-//   })
+  // Find the distance between now and the count down date
+  var distance = countDownDate - now;
+
+  // Time calculations for days, hours, minutes and seconds
+  var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+  var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+  var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+  // Display the result in the element with id="demo"
+  document.getElementById("demo").innerHTML = days + "d " + hours + "h "
+  + minutes + "m " + seconds + "s ";
+
+  // If the count down is finished, write some text
+  if (distance < 0) {
+    clearInterval(x);
+    document.getElementById("demo").innerHTML = "EXPIRED";
+  }
+}, 1000);
