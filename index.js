@@ -33,14 +33,17 @@ let obj = {
   registered :[{ handle : "maskman_lucifer", email : "amanmarksingh@gmail.com" },{ handle : "maskman_lucifer", email : "amanmarksingh@gmail.com" }],
   numberofProblems : 10,
   problems: [{ contestID: 1550, index : "B1", points : 1800},{ contestID: 1550, index : "B2", points : 1900}],
-  rankList : []
+  rankList : [],
+  phase: "ONGOING"
 };
 
-new Mashup(obj).save().then(()=>{
-  console.log("saved");
-}).catch(()=>{
-  console.log("failed");
-})
+// new Mashup(obj).save().then(()=>{
+//   console.log("saved");
+// }).catch(()=>{
+//   console.log("failed");
+// })
+
+ 
 let url=process.env.url;
 
 mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex:true  },()=>{

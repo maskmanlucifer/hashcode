@@ -746,7 +746,9 @@ input::-webkit-inner-spin-button {
   }
   /* open > 115 form pages */
 
-   
+   select#visibility {
+     width: 16rem;
+   }
   /* close < 115 form pages */
 
   

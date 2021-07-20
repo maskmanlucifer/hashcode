@@ -1,13 +1,16 @@
 const mongoose = require('mongoose');
 
 const speedrunSchema = new mongoose.Schema({
+    contestID : {
+      type : Number
+    },
     starttimeSecond:{
       type: Number
     },
     problemtimeSecond: {
       type: Number
     },
-    status : {
+    phase : {
       type : String
     },
     author: {

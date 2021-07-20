@@ -1,6 +1,9 @@
 const mongoose = require('mongoose');
 
 const mashupSchema = new mongoose.Schema({
+    contestID : {
+      type : Number
+    },
     starttimeSecond:{
       type: Number
     },
@@ -19,7 +22,7 @@ const mashupSchema = new mongoose.Schema({
     maxRange : {
         type : Number
     },
-    status : {
+    phase : {
       type : String
     },
     registered :[{

@@ -1,6 +1,9 @@
 const mongoose = require('mongoose');
 
 const lockoutSchema = new mongoose.Schema({
+    contestID : {
+      type : Number
+    },
     starttimeSecond:{
       type: Number
     },
@@ -24,7 +27,7 @@ const lockoutSchema = new mongoose.Schema({
     minRange : {
       type:Number
     },
-    status : {
+    phase : {
       type : String
     },
     maxRange : {
