@@ -4,11 +4,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700&display=swap" rel="stylesheet"/>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="stylesheet" href="/css/index.css">
     <title>hashcode</title>
@@ -77,12 +75,11 @@
         </ul>
     </nav>
     <main class="main">
-       <div class="filter_bar">
-        <span id="fizz">FIZZ</span>
-        <span id="stl">STL</span>
-        <span id="buzz">BUZZ</span>
-       </div>
-       <!-- adding stl cards -->
+        <div class="fizz_buzz_filter_bar">
+            <a href="/fizz" >FIZZ</a>
+            <a href="#" class="active_fizz_buzz">STL</a>
+            <a href="/buzz">BUZZ</a>
+        </div>
 
        <div class="card_list_stl">
         <span class="heading">Ordered Map</span>
@@ -104,6 +101,7 @@
             </div>
         </div>
        </div>
+
        <div class="card_list_stl">
         <span class="heading">Ordered Set</span>
         <div class="card_list_stl_content">
@@ -140,7 +138,7 @@
             </div>
             
             <div class="stl_function">
-                <span class="highlight">erase(x)</span><span>Erases element at position x, if x is address</span>
+                <span class="highlight">erase(x)</span><span>Erases element at address x, if x is address</span>
             </div>
 
             <div class="stl_function">
@@ -152,6 +150,7 @@
             </div>
         </div>
        </div>
+
        <div class="card_list_stl">
         <span class="heading">Queue</span>
         <div class="card_list_stl_content">
@@ -181,6 +180,7 @@
 
         </div>
        </div>
+
        <div class="card_list_stl">
         <span class="heading">Stack</span>
         <div class="card_list_stl_content">
@@ -236,6 +236,7 @@
 
         </div>
        </div>
+
        <div class="card_list_stl">
         <span class="heading">Vector</span>
         <div class="card_list_stl_content">
@@ -277,6 +278,5 @@
         </div>
        </div>
     </main>
-    <script src="/js/fizzbuzz.js"></script>
 </body>
 </html> 

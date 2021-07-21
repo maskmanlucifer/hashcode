@@ -80,46 +80,43 @@
            <div class="filter_bar_visualizer">
             <span>VISUALIZER</span>
            </div>
-           
- 
-            <div class="card_list">
+            <div class="card_list_visualizer">
             <span>CONTEST</span>
             <input type="number" placeholder="ENTER CONTEST NO." id="contest_no">
-            <button class="contest_button">GO</button>
+            <a class="contest_button">GO</a>
             <div class="contestError"></div>
             <div class="info">
                 <p>Bar graph of how many users of level x solved particular problem</p>
                 <p>Seperate bar graph for each problem</p>
                 <p>Contest no. can be found in url of that contest</p>
+                <p>Due to quite large data fetching it might take 4-5 seconds to load the chart</p>
             </div>
             </div>
 
-            <div class="card_list">
+            <div class="card_list_visualizer">
                 <span>PROFILE</span>
                 <div class="info">
                     <p>(Bar , Doughnut etc.) Graphs for almost everything about your profile</p>
                     <p>Comparing two users profile</p>
                 </div>
-                <button><a href="https://cfviz.netlify.app/">CFVIZ</a></button>
+                <a href="https://cfviz.netlify.app/">CFVIZ</a>
            </div>
        </div>
     </main>
     <script>
         let contestError = document.querySelector('.contestError');
-        
         $('.contest_button').click((e)=>{
             e.preventDefault();
             contestError.textContent='';
             let contestNumber = document.getElementById('contest_no').value;
-            let uri = `https://codeforces.com/api/contest.standings?contestId=${contestNumber}&from=1&count=1`;
+            let uri = `https://codeforces.com/api/contest.ratingChanges?contestId=${contestNumber}`;
             fetch(uri)
             .then((res)=>{
                 return res.json();
             })
             .then((data)=>{
-                console.log(data);
-               if(data.status !== "OK") {
-                  contestError.textContent = "Contest does not exist";
+               if(data.status !== "OK" || data.result.length<=0) {
+                  contestError.textContent = "Can not show this contest";
                } else {
                    let uri1 = "/visualizer/contest/"+contestNumber;
                 $.ajax({
@@ -134,7 +131,6 @@
             .catch((err)=>{
                 contestError.textContent = err.message;
             })
-            console.log(contestNumber);
         });
     </script>
 </body>

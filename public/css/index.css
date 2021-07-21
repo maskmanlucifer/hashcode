@@ -1,3 +1,4 @@
+ /* common components among all pages */
  :root {
     font-size: 16px;
     font-family: 'Nunito', sans-serif;
@@ -7,7 +8,7 @@
     --bg-secondary: #141418;
     --extra: #fb923c;
  }
-
+  
   body {
     color: var(--text-primary);
     background-color: var(--bg-primary);
@@ -20,8 +21,12 @@
     margin-left: 5rem;
     padding: 1rem;
   }
+
+  /* common components among all pages */
   
-  /* open > 101 adding css to side scroll bar*/
+  /* --------------------------------------------------------- */
+
+  /* open > 101 adding css to side scroll bar and number input arrow*/
 
   body::-webkit-scrollbar {
     width: 0.50rem;
@@ -36,7 +41,15 @@
     background: var(--text-primary);
   }
 
-  /* close < 101 adding css to side scroll bar*/
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  /* close < 101 adding css to side scroll bar and number input arrow*/
+
+  /* --------------------------------------------------------- */
 
   /* open > 102 nav bar general styling */
 
@@ -66,7 +79,7 @@
       text-decoration: none;
       color: var(--text-secondary);
       padding: 12px;
-      padding-top: 17px;
+      padding-top: 21px;
       border-radius: 7px; 
   }
 
@@ -76,7 +89,10 @@
   }
   
   /* close < 102 nav bar general styling */
-  
+
+  /* --------------------------------------------------------- */
+
+
   /* open > 103 homepage styles */
   
   .banner {
@@ -91,7 +107,6 @@
     justify-content: center;
     align-items: center;
     color: var(--text-primary);
-    border: 2px solid var(--border);
   }
 
   .banner span {
@@ -105,7 +120,6 @@
     background-color: var(--text-primary);
     padding: 8px;
     border-radius: 1rem;
-    border: 2px solid var(--border);
   }
 
   .site_info {
@@ -122,15 +136,24 @@
     align-items: center;
     justify-content: center;
     margin-top: 1rem;
-    border: 2px solid var(--border);
   }
 
   .site_info p {
      margin: 1.5rem;
      padding: 1rem;
   }
+  @media screen and (max-width: 850px) {
+    .banner span {
+      font-size: 3rem;
+    }
+    .site_info {
+      font-size: 1.1rem;
+    }
+  }
   /* close < 103 homepage styles */
-    
+
+  /* --------------------------------------------------------- */
+
   /* open > 104 tooltip styling */
   .navbar ul li .tooltip {
       position: absolute;
@@ -145,7 +168,8 @@
       transition: 0s;
       opacity: 0;
       pointer-events: none;
-      font-size: 13px;
+      font-size: 12px;
+      font-weight: 600;
   }
 
   .navbar ul li .tooltip {
@@ -157,15 +181,16 @@
       opacity: 1;
       top: 50%;
       background-color: var(--bg-secondary);
-      color: var(--text-secondary);
+      color: var(--text-primary);
   }
 
   /* close < 104 tooltip styling */
   
-
-  /* open > 105  snippet filter_bar */
+  /* --------------------------------------------------------- */
+  
+  /* open > 105  fizz_buzz filter_bar */
    
-  .filter_bar {
+  .fizz_buzz_filter_bar {
     width: 70%;
     height: 60px;
     background-color: var(--bg-secondary);
@@ -175,25 +200,29 @@
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
-    color: var(--text-secondary);
     font-weight: 600;
-    
   }
 
-  .filter_bar span { 
-    padding : 4px;
-    padding-left: 6px;
-    padding-right: 6px;
-    border-radius: 10px;
-    background-color: var(--bg-primary);
-    color: var(--extra);
+  .fizz_buzz_filter_bar a { 
+    text-decoration: none;
+    color: var(--text-primary);
   }
-
-  .filter_bar span:hover { 
+  
+  .fizz_buzz_filter_bar a:hover { 
     cursor: pointer;
   }
+  
+  .active_fizz_buzz {
+    padding : 6px;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-radius: 10px;
+    background-color: var(--bg-primary);
+  }
 
-  /* closse < 105  snippet filter_bar */
+  /* closse < 105  fizz_buzz filter_bar */
+  
+  /* --------------------------------------------------------- */
 
   /* open > 106  snippet card_list_general */
   
@@ -210,16 +239,16 @@
     justify-content: space-evenly;
   }
   .card_list_fizz span {
-    width: 100%;
+    width: 98%;
     text-align: center;
-    font-size: 2rem;
+    font-size: 1.6rem;
+    padding: 4px;
     border-bottom: 2px solid var(--text-secondary);
     color: var(--text-secondary);
-    font-weight: 600;
   }
   
   .card_list_fizz a {
-    font-size: 1.4rem;
+    font-size: 1.2rem;
     text-decoration: none;
     color: var(--text-primary);
     margin: .75rem;
@@ -227,18 +256,20 @@
     padding-left: 5px;
     padding-right: 5px;
   }
+
   .card_list_fizz a:hover {
-    /* background-color: var(--text-secondary); */
     color: var(--extra);
   }
   .card_list_fizz a:last-child {
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
   }
   
   
   /* close < 106  snippet card_list_general */
   
-  /* open > 108  snippet card_list_buzz */
+  /* --------------------------------------------------------- */
+
+  /* open > 108  card_list_buzz */
   
   .card_list_buzz {
     margin: auto;
@@ -258,6 +289,8 @@
   }
 
   /* closed < 108  snippet card_list_buzz */
+  
+  /* --------------------------------------------------------- */
 
   /* open > 109  snippet card_list_stl */
 
@@ -272,17 +305,20 @@
   }
 
   .card_list_stl .heading{
-    font-size: 2rem;
+    font-size: 1.8rem;
+    padding: 3px;
     border-bottom: 2px solid var(--text-secondary);
     display: block;
     text-align: center;
     color: var(--text-secondary);
   }
+
   .card_list_stl_content {
     margin: auto;
     padding-bottom: 2rem;
     width: 90%;
   }
+
   .card_list_stl_content .stl_function {
     font-size: 1rem;
     width: 99%;
@@ -297,6 +333,7 @@
     padding:5px;
     color: var(--text-primary);
   }
+
   .card_list_stl_content .stl_function .highlight {
     background-color: var(--bg-secondary);
     padding: 4px;
@@ -306,18 +343,47 @@
     color: var(--text-primary);
 
   }
+
   .card_list_stl_content .stl_function .highlight:hover {
     color: var(--extra);
     cursor: pointer;
   }
+   
+  .card_list_stl_content span:last-child {
+    padding-right: 3px;
+  }
+
   /* closed < 109  snippet card_list_stl */
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
+
+  /* --------------------------------------------------------- */
+
+
   /* open > 110 visualizer page */
-  .card_list {
+
+  .filter_bar_visualizer {
+    width: 70%;
+    height: 55px;
+    background-color: var(--bg-secondary);
+    margin: auto;
+    border-radius: 9px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    font-size: 1.6rem;
+  }
+
+  .filter_bar_visualizer span {
+    padding-left: 8px;
+    padding-right: 8px;
+    background-color: var(--bg-primary);
+    margin-top: 5px;
+    margin-bottom: 5px;
+    border-radius: 8px;
+    color: var(--extra);
+  }
+
+  .card_list_visualizer {
     margin: auto;
     margin-top: 2rem;
     margin-bottom: 1rem;
@@ -329,7 +395,8 @@ input::-webkit-inner-spin-button {
     align-items: center;
     justify-content: space-evenly;
   }
-  .card_list span {
+  
+  .card_list_visualizer span {
     width: 100%;
     text-align: center;
     font-size: 1.7rem;
@@ -337,35 +404,24 @@ input::-webkit-inner-spin-button {
     color: var(--text-secondary);
 
   }
-  .card_list select{
-    margin: auto;
-    margin-top: 1rem;
-    width: 60%;
-    height: 2.6rem;
-    padding: 4px;
-    background-color: var(--bg-primary);
-    color: var(--text-primary);
-    font-size: .90rem;
-    border-radius: 4px;
-    border: 2px solid var(--text-primary);  
-  }
-  .card_list input{
+
+  .card_list_visualizer input {
     margin: auto;
     margin-top: 1rem;
     width: 60%;
     height: 2rem;  
     padding: 1px;
-    padding-left: 10px;
+    padding-left: 14px;
     background-color: var(--bg-primary);
     color: var(--text-secondary);
     font-size: .90rem;
     border-radius: 15px;
     border: 2px solid var(--text-primary);
   }
-  .card_list .info{
+
+  .card_list_visualizer .info {
     color: var(--text-secondary);
     padding: 8px;
-    
     margin-top: 1rem;
     margin-bottom: 1rem;
     border-radius: 10px;
@@ -373,54 +429,38 @@ input::-webkit-inner-spin-button {
     text-align: center;
     font-size: 1.1rem;
   }
-  .card_list button {
-    margin-top: 1rem;
-    height: 2.2rem;
+  
+  .card_list_visualizer a {
+    text-decoration: none;
+    text-align: center;
+    margin-top: 14px;
     margin-bottom: 1rem;
-    width: 7rem;
+    width: 6rem;
     padding: 2px;
     border-radius: 12px;
     background-color: var(--bg-secondary);
     color: var(--text-secondary);
-    font-size: 1.2rem;
-    
+    font-size: 1.1rem;
     border: 2px solid var(--extra);
   }
-  .card_list button a{
-    text-decoration: none;
-    color: var(--text-secondary);
-  }
-  .card_list button:hover {
+
+  .card_list_visualizer a:hover {
     cursor: pointer;
   }
+
   input:focus,select:focus {
     outline: none;
   }
-  .filter_bar_visualizer {
-    width: 70%;
-    height: 60px;
-    background-color: var(--bg-secondary);
-    margin: auto;
-    border-radius: 9px;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    align-items: center;
-    color: var(--text-secondary);
-    font-size: 2rem;
-    
-  }
 
-  .filter_bar span:hover { 
-    cursor: pointer;
-  }
-  /* close < 110 visualizer page */
-  
   .contestError {
     color: tomato;
   }
+  
+  /* close < 110 visualizer page */
+  
+  /* --------------------------------------------------------- */
 
-  /* open > 111 visualizer/level page */
+  /* open > 111 visualizer/level page chart box*/
    
   .chart_box {
     width: 80%;
@@ -439,7 +479,7 @@ input::-webkit-inner-spin-button {
   .chart_box a {
     text-decoration: none;
     color: var(--text-primary);
-    font-size: 1rem;
+    font-size: .90rem;
     padding: 4px;
     padding-left: 12px;
     padding-right: 12px;
@@ -453,9 +493,10 @@ input::-webkit-inner-spin-button {
     cursor: pointer;
   }
   
-  /* closed < 111 visualizer/level page */
+  /* closed < 111 visualizer/level page chart box*/
 
-   
+  /* --------------------------------------------------------- */
+
   /* open > 112 contest_visualizer page */
 
   .filter_bar_contest_visualizer {
@@ -469,18 +510,26 @@ input::-webkit-inner-spin-button {
     justify-content: center;
     align-items: center;
     color: var(--text-secondary);
-    font-size: 1.1rem;
+    font-size: 1.2rem;
     
   }
   .filter_bar_contest_visualizer a { 
     text-decoration: none;
     color: var(--text-primary);
+    background-color: var(--bg-primary);
+    padding: 4px;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-radius: 16px;
   }
   .filter_bar_contest_visualizer a:hover { 
     cursor: pointer;
+    color: var(--extra);
   }
 
   /* closed < 112 contest_visualizer page */
+  
+  /* --------------------------------------------------------- */
 
   /* open > 113 contest page */
 
