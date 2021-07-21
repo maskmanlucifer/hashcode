@@ -86,12 +86,22 @@
                 <div class="contest_box">
                     <span>Lockout # <%=data3[i].contestID%></span>
                     <div class="info_contest">
-                    <p>Start time : <%=data3[i].starttimeSecond%></p>
-                    <p>Duration : <%=data3[i].durationtimeSecond%></p>
+                        <%let myDate = new Date(data3[i].starttimeSecond *1000) %>
+                        <p><strong>Start time :</strong>  <%=myDate.toLocaleString()%></p>
+                        <% let duration =Math.floor(data3[i].durationtimeSecond/60.0)%>
+                        <% let hours = Math.floor(duration/60.0) %>
+                        <% let minutes = duration - (hours*60) %>
+                        <p> <strong>Duration :</strong>   <%=hours%> hr : <%=minutes%> min</p>
                     </div> 
                     <div class="info_contest">
-                        <p>Problem range : <%=data3[i].minRange%> - <%=data3[i].maxRange%></p>
-                        <p>Problem count : <%=data3[i].numberofProblems%></p>
+                        <p><strong>Problem range :</strong>  <%=data3[i].minRange%> - <%=data3[i].maxRange%></p>
+                        <p><strong>Problem count :</strong>  <%=data3[i].numberofProblems%></p>
+                    </div>
+                    <div class="info_contest">
+                        <p><strong>Participant-1 :</strong> <a href="https://codeforces.com/profile/<%=data3[i].creator.handle%>"><%=data3[i].creator.handle%></a> </p>
+                        <%if(data3[i].opponent.email != "undefined"){%>
+                        <p><strong>Participant-2 :</strong> <a href="https://codeforces.com/profile/<%=data3[i].opponent.handle%>"><%=data3[i].opponent.handle%></a> </p>
+                        <% } %>
                     </div>
                     <a href="/contest/lockout/<%=data3[i].contestID%>">ENTER</a>
                 </div>
@@ -103,14 +113,26 @@
                 <div class="contest_box">
                     <span>Lockout # <%=data1[i].contestID%></span>
                     <div class="info_contest">
-                       <p>Start time : <%=data1[i].starttimeSecond%></p>
-                       <p>Duration : <%=data1[i].durationtimeSecond%></p>
+                        <%let myDate = new Date(data1[i].starttimeSecond *1000) %>
+                        <p><strong>Start time :</strong>  <%=myDate.toLocaleString()%></p>
+                        <% let duration =Math.floor(data1[i].durationtimeSecond/60.0)%>
+                        <% let hours = Math.floor(duration/60.0) %>
+                        <% let minutes = duration - (hours*60) %>
+                        <p> <strong>Duration :</strong>   <%=hours%> hr : <%=minutes%> min</p>
                     </div> 
                     <div class="info_contest">
-                        <p>Problem range : <%=data1[i].minRange%> - <%=data1[i].maxRange%></p>
-                        <p>Problem count : <%=data1[i].numberofProblems%></p>
+                        <p><strong>Problem range :</strong>  <%=data1[i].minRange%> - <%=data1[i].maxRange%></p>
+                        <p><strong>Problem count :</strong>  <%=data1[i].numberofProblems%></p>
                      </div>
-                     <a href="">REGISTER</a>
+                     <div class="info_contest">
+                        <p><strong>Participant-1 :</strong> <a href="https://codeforces.com/profile/<%=data3[i].creator.handle%>"><%=data3[i].creator.handle%></a> </p>
+                        <%if(data1[i].opponent.email != "undefined"){%>
+                        <p><strong>Participant-2 :</strong> <a href="https://codeforces.com/profile/<%=data3[i].opponent.handle%>"><%=data3[i].opponent.handle%></a> </p>
+                        <% } %>   
+                    </div>
+                    <%if(data1[i].opponent.email == "undefined"){%>
+                    <a href="">REGISTER</a>
+                    <%}%>
                 </div>
             <%}%>
         </div>
@@ -120,13 +142,15 @@
                 <div class="contest_box">
                     <span>Lockout # <%=data2[i].contestID%></span>
                     <div class="info_contest">
-                       <p>Start time : <%=data2[i].starttimeSecond%></p>
-                       <p>Duration : <%=data2[i].durationtimeSecond%></p>
-                    </div> 
-                    <div class="info_contest">
-                        <p>Problem range : <%=data2[i].minRange%> - <%=data2[i].maxRange%></p>
-                        <p>Problem count : <%=data2[i].numberofProblems%></p>
+                        <p><strong>Problem range :</strong>  <%=data2[i].minRange%> - <%=data2[i].maxRange%></p>
+                        <p><strong>Problem count :</strong>  <%=data2[i].numberofProblems%></p>
                      </div>
+                     <div class="info_contest">
+                        <p><strong>Participant-1 :</strong> <a href="https://codeforces.com/profile/<%=data3[i].creator.handle%>"><%=data3[i].creator.handle%></a> </p>
+                        <%if(data2[i].opponent.email != "undefined"){%>
+                        <p><strong>Participant-2 :</strong> <a href="https://codeforces.com/profile/<%=data3[i].opponent.handle%>"><%=data3[i].opponent.handle%></a> </p>
+                        <% } %>
+                    </div>
                      <a href="/contest/lockout/<%=data2[i].contestID%>">VIEW CONTEST</a>
                 </div>
             <%}%>

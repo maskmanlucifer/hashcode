@@ -80,15 +80,16 @@
         </div>
         <div class="create_button"><a href="/contest/mashup/create"><i class="material-icons">add</i><span>CREATE</span></a></div>
         <div class="card_list_mashup">
-            <span>ONGOING</span>
+            <span>ONGOING</span> 
             <%for(let i=0;i<data3.length;i++) {%>
                 <div class="contest_box">
                     <span>Mashup # <%=data3[i].contestID%></span>
                     <div class="info_contest">
                     <%let myDate = new Date(data3[i].starttimeSecond *1000) %>
                     <p><strong>Start time :</strong>  <%=myDate.toLocaleString()%></p>
-                    <% let hours = Math.floor(data3[i].durationtimeSecond/60.0) %>
-                    <% let minutes = data3[i].durationtimeSecond - (hours*60) %>
+                    <% let duration =Math.floor(data3[i].durationtimeSecond/60.0)%>
+                    <% let hours = Math.floor(duration/60.0) %>
+                    <% let minutes = duration - (hours*60) %>
                     <p> <strong>Duration :</strong>   <%=hours%> hr : <%=minutes%> min</p>
                     </div> 
                     <div class="info_contest">
@@ -104,18 +105,32 @@
             <%for(let i=0;i<data1.length;i++) {%>
                 <div class="contest_box">
                     <span>Mashup # <%=data1[i].contestID%></span>
+                    <a href="/contest/mashup/<%=data1[i].contestID%>/registered">REGISTERED PARTICIPANTS</a>
                     <div class="info_contest">
                         <%let myDate = new Date(data1[i].starttimeSecond *1000) %>
                         <p><strong>Start time :</strong>  <%=myDate.toLocaleString()%></p>
-                        <% let hours = Math.floor(data1[i].durationtimeSecond/60.0) %>
-                        <% let minutes = data1[i].durationtimeSecond - (hours*60) %>
+                        <% let duration =Math.floor(data1[i].durationtimeSecond/60.0)%>
+                        <% let hours = Math.floor(duration/60.0) %>
+                        <% let minutes = duration - (hours*60) %>
                         <p> <strong>Duration :</strong>   <%=hours%> hr : <%=minutes%> min</p>
                     </div> 
                     <div class="info_contest">
                         <p><strong>Problem range :</strong>  <%=data1[i].minRange%> - <%=data1[i].maxRange%></p>
                         <p><strong>Problem count :</strong>  <%=data1[i].numberofProblems%></p>
                      </div>
-                     <a href="">REGISTER</a>
+                     <% let flag = 0 %>
+                     <% for (let j=0;j<data1[i].registered.length;j++) {%>
+                         <% if(user && user.ishandle && data1[i].registered[j].handle == user.cfusername) {%>
+                            <% flag =1 %>
+                         <% } %>  
+                     <%}%>    
+                     
+                     <%if(flag == 1) {%>
+                        <p>YOU ARE REGISTERED</p>
+                     <%} else {%>
+                        <a href="">REGISTER</a>
+                     <%}%>
+                     
                 </div>
             <%}%>
         </div>

@@ -785,6 +785,7 @@
   .card_list_form form button:hover {
     cursor: pointer;
   }
+  
   /* error info on mashup form page */
   .link {
     width: 70%;
@@ -800,6 +801,18 @@
     padding: 5px;
     border-radius: 8px;
   }
+  
+
+  .link_info p {
+    color: var(--text-secondary);
+    font-size: 1.3rem;
+    padding: 6px;
+    border-radius: 8px;
+    text-align: center;
+    background-color: var(--bg-secondary);
+    
+  }
+
   .link a{
     text-decoration: none;
     color: var(--extra);
@@ -812,18 +825,6 @@
   .link a:hover {
     cursor: pointer;
   }
-
-  .link_info p {
-    color: var(--text-secondary);
-    font-size: 1.3rem;
-    padding: 6px;
-    border-radius: 8px;
-    text-align: center;
-    background-color: var(--bg-secondary);
-    
-  }
-
-  
 
   /* close mashup form  */
 
@@ -862,7 +863,10 @@
      .main_contest_box .buttons span:hover {
        cursor: pointer;
      }
-
+     .main_contest_box .buttons span a {
+       text-decoration: none;
+       color: turquoise;
+     }
      .main_contest_box .problem_box {
        width: 88%;
        background-color: var(--bg-primary);
@@ -886,7 +890,7 @@
     }
 
     .main_contest_box .problem_box table th {
-      color: var(--text-secondary);
+      color: turquoise;
     }
 
     .active_buttons {
@@ -922,7 +926,7 @@
     }
 
     #timer p:last-child {
-      color: var(--extra);
+      color: turquoise;
     }
 
     /* close < 116 main contest page */

@@ -29,6 +29,7 @@ router.get('/contest/lockout/create',(req,res)=>{
    res.render('formLockout',{user:req.user});
 });
 
+
 router.get('/contest/mashup/:contestID/problems',(req,res)=>{
    res.render('mashupContest',{user:req.user,type:"PROBLEMS"});
 });
@@ -41,7 +42,9 @@ router.get('/contest/mashup/:contestID',(req,res)=>{
    res.render('mashupContest',{user:req.user,type:"PROBLEMS"});
 });
 
-
+router.get('/contest/mashup/:contestno/registrants',(req,res)=>{
+   res.render('registrants',{user:req.user});
+})
 router.post('/contest/mashup/create',async (req,res)=>{
   let {duration,min_level,max_level,starttime,no_of_problems,visibility} = req.body;
   let user=req.user;
@@ -56,23 +59,24 @@ router.post('/contest/mashup/create',async (req,res)=>{
      let ma= Math.max(min_level,max_level);
      min_level=mi;
      max_level=ma;
-    let obj = {
-       contestID : size+1,
-       starttimeSecond:starttime,
-       durationtimeSecond: duration,
-       author: user.cfusername,
-       visibility : visibility,
-       minRange : min_level,
-       maxRange : max_level,
-       phase : "UPCOMING",
-       registered :[{
-         handle : user.cfusername,
-         email : user.googleid
-       }],
-       numberofProblems : no_of_problems,
-       problems: [],
-       rankList : []
-    };
+     let obj = {
+      contestID : size+1,
+      starttimeSecond:starttime,
+      durationtimeSecond: duration,
+      author: user.cfusername,
+      visibility : visibility,
+      minRange : min_level,
+      maxRange : max_level,
+      phase : "UPCOMING",
+      registered :[{
+        handle : user.cfusername,
+        email : user.googleid
+      }],
+      numberofProblems : no_of_problems,
+      problems: [],
+      rankList : []
+   };
+    
 
     let response = await new Mashup(obj).save();
 
@@ -84,4 +88,49 @@ router.post('/contest/mashup/create',async (req,res)=>{
     }
   
 });
+
+router.post('/contest/lockout/create',async (req,res)=>{
+   let {duration,min_level,max_level,starttime,no_of_problems,visibility} = req.body;
+   let user=req.user;
+ 
+   if(user === undefined) {
+    res.status(400).json({ contestError : 'You are not logged in' });
+   } else if(!user.ishandle) {
+    res.status(400).json({ contestError : 'Please set your codeforces handle in profile page' });
+   }  else {
+      let size = await Lockout.estimatedDocumentCount();
+      let mi =Math.min(min_level,max_level);
+      let ma= Math.max(min_level,max_level);
+      min_level=mi;
+      max_level=ma;
+     
+      let obj = {
+         contestID : size+1,
+         starttimeSecond:starttime,
+         durationtimeSecond: duration,
+         author: user.cfusername,
+         visibility : visibility,
+         minRange : min_level,
+         maxRange : max_level,
+         phase : "UPCOMING",
+         creator : {handle : user.cfusername,
+           email : user.googleid},
+         opponent : {
+            handle:"",
+            email : "undefined"
+         },
+         numberofProblems : no_of_problems,
+         problems: [],
+         rankList : []
+      };
+     let response = await new Lockout(obj).save();
+ 
+     if(visibility === "PRIVATE") {
+       res.status(201).json({ contestError:'contest created scroll down to see your contest details',info : `Your private Lockout # ${size+1} is created, share above link to whom you want to invite` , link : 'https://codeforces.com/' });
+     } else {
+       res.status(201).json({ contestError:'contest created scroll down to see your contest details',info : `Your  Lockout # ${size+1} is created , Enjoy the contest`});
+     }
+     }
+   
+ });
 module.exports = router;

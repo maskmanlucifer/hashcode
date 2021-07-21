@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300&display=swap" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -78,54 +78,97 @@
     <main class="main">
         <div class="card_list_form">
             <span>Create Lockout</span>
-            <div class="row">
-                <label for="duration">
-                    Duration of contest in minutes :
-                </label>
-                <input type="text" id="duration" required>
-            </div>
-            
-            <div class="row">
-                <label for="min_level">
-                    Minimum rating level of problem :
-                </label>
-                <input type="number" id="min_level" required placeholder="800">
-            </div>
-            <div class="row">
-                <label for="max_level">
-                    Maximum rating level of problem :
-                </label>
-                <input type="number" id="max_level" required placeholder="3500">
-            </div>
-            <div class="row">
-                <label for="no_of_problems">
-                    Number of Problems : 
-                </label>
-                <input type="number" id="no_of_problems" required max="7">
-            </div>
-            <div class="row">
-                <label for="start_date">
-                    Start time : 
-                </label>
-                <input type="date" id="start_date" required>
-                <input type="time" id="start_time" required>
-            </div>
-            <div class="row">
-                <label for="visibility">
-                    Type of contest : 
-                </label>
-                <select name="visibility" id="visibility" required>
-                   <option value="private">Private</option>
-                   <option value="public">Public</option>
-                </select>
-            </div>
-            <div class="row">
-                <button>Create</button>
-            </div>
-        </div>
+            <form>
+                
+                <label for="duration">Duration of contest in minutes</label>
+                <input type="number" name="duration" required/>
+                
+                <label for="min_level">Minimum rating level of problem</label>
+                <input type="number" name="min_level" required min="800" max="3500"/>
+
+                <label for="min_level">Maximum rating level of problem</label>
+                <input type="number" name="max_level" required min="800" max="3500"/>
+                
+                <label for="no_of_problems">Number of Problems</label>
+                <input type="number" name="no_of_problems" required max="7"/>
+                
+                <label for="start_time">Start time</label>
+                <input type="datetime-local" name="start_time" required />
+
+                <label for="visibility">Type of contest</label>
+                <select name="visibility" required>
+                    <option value="PUBLIC">PUBLIC</option>
+                    <option value="PRIVATE">PRIVATE</option>
+                 </select>
+                <button>CREATE</button>
+                <p class="contestError"></p>
+            </form>
+        </div> 
         <div class="link"></div>
         <div class="link_info"></div>
     </main>
-    <script src="/js/home.js"></script>
+    <script>
+        const form = document.querySelector('form');
+        let link=document.querySelector('.link');
+        let link_info=document.querySelector('.link_info');
+        let contestError=document.querySelector('.contestError');
+        $('button').click(async (e) => {
+            e.preventDefault();
+            contestError.textContent='';
+            link.innerHTML = '';
+            link_info.innerHTML = '';
+            let duration = form.duration.value;
+            let min_level = form.min_level.value;
+            let max_level = form.max_level.value;
+            let starttime=form.start_time.valueAsNumber;
+            let no_of_problems=form.no_of_problems.value;
+            let visibility=form.visibility.value;
+            
+            if((!duration) || (!min_level) || (!max_level) || (!starttime) || (!no_of_problems)) {
+                contestError.textContent='Some values are not entered';
+            }
+            else if(no_of_problems>7){
+                contestError.textContent='Number of problems should be less than 7';
+            }
+            else if(min_level <800 || min_level>3500) {
+                contestError.textContent='Min level of problem should be in between 800 and 3500';
+            }
+            else if(max_level <800 || max_level>3500) {
+                contestError.textContent='Max level of problem should be in between 800 and 3500';
+            }
+            else {
+                const secondsSinceEpoch = Math.round(Date.now() / 1000.0);
+                let date = new Date();
+                let offset = date.getTimezoneOffset() * 60*1000;
+                starttime += offset;
+                
+                starttime = Math.round(starttime/1000.0);
+                duration*=60;
+                try { 
+                    const res = await fetch('/contest/lockout/create', { 
+                        method: 'POST', 
+                        body: JSON.stringify({ duration,min_level,max_level,starttime,no_of_problems,visibility}),
+                        headers: {'Content-Type': 'application/json'}
+                    });
+                    const data = await res.json(); 
+                    if (data.contestError) 
+                    { 
+                        contestError.textContent=data.contestError;
+                    }
+                    if(data.info)
+                    {
+                        link_info.innerHTML = `<p>${data.info}</p>`;
+                    }
+                    if(data.link)
+                    {
+                        link.innerHTML = `<a href="${data.link}">${data.link}</a>`;
+                    }
+                }
+                catch (err) {
+                    console.log(err);
+                    }
+                }
+        });
+    </script>
 </body>
 </html> 
