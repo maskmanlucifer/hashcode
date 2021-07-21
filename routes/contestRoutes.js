@@ -1,7 +1,6 @@
 const router = require('express').Router();
 const Mashup = require('../models/mashupModel');
 const Lockout = require('../models/lockoutModel');
-const Speedrun = require('../models/speedrunModel');
 
 router.get('/contest',(req,res)=>{
    res.render('contest',{user:req.user}); 
@@ -21,12 +20,6 @@ router.get('/contest/lockout',async (req,res)=>{
    res.render('lockout',{user:req.user,data1:data1,data2:data2,data3:data3}); 
 });
 
-router.get('/contest/speedrun',async (req,res)=>{
-   let data1 = await Speedrun.find({phase:"UPCOMING"});
-   let data2 = await Speedrun.find({phase:"FINISHED"});
-   let data3 = await Speedrun.find({phase:"ONGOING"});
-   res.render('speedrun',{user:req.user,data1:data1,data2:data2,data3:data3}); 
-});
 
 router.get('/contest/mashup/create',(req,res)=>{
    res.render('formMashup',{user:req.user});
@@ -34,10 +27,6 @@ router.get('/contest/mashup/create',(req,res)=>{
 
 router.get('/contest/lockout/create',(req,res)=>{
    res.render('formLockout',{user:req.user});
-});
-
-router.get('/contest/speedrun/create',(req,res)=>{
-   res.render('formSpeedrun',{user:req.user});
 });
 
 router.get('/contest/mashup/:contestID/problems',(req,res)=>{
@@ -53,24 +42,20 @@ router.get('/contest/mashup/:contestID',(req,res)=>{
 });
 
 
-router.get('/contest/lockout/:contestId',(req,res)=>{
-   res.render('lockoutContest',{user:req.user});
-});
-
-router.get('/contest/speedrun/:contestId',(req,res)=>{
-   res.render('speedrunContest',{user:req.user});
-});
-
-router.post('/mashup/create',async (req,res)=>{
+router.post('/contest/mashup/create',async (req,res)=>{
   let {duration,min_level,max_level,starttime,no_of_problems,visibility} = req.body;
   let user=req.user;
+
   if(user === undefined) {
-   res.status(400).json({ errors : 'You are not logged in' });
+   res.status(400).json({ contestError : 'You are not logged in' });
   } else if(!user.ishandle) {
-   res.status(400).json({ errors : 'Please set your codeforces handle in profile page' });
+   res.status(400).json({ contestError : 'Please set your codeforces handle in profile page' });
   }  else {
      let size = await Mashup.estimatedDocumentCount();
-     
+     let mi =Math.min(min_level,max_level);
+     let ma= Math.max(min_level,max_level);
+     min_level=mi;
+     max_level=ma;
     let obj = {
        contestID : size+1,
        starttimeSecond:starttime,
@@ -92,11 +77,11 @@ router.post('/mashup/create',async (req,res)=>{
     let response = await new Mashup(obj).save();
 
     if(visibility === "PRIVATE") {
-      res.status(201).json({ info : `Your private MASHUP # ${size+1} is created, share above link to whom you want to invite` , link : 'https://codeforces.com/' });
+      res.status(201).json({ contestError:'contest created scroll down to see your contest details',info : `Your private MASHUP # ${size+1} is created, share above link to whom you want to invite` , link : 'https://codeforces.com/' });
     } else {
-      res.status(201).json({ info : `Your  MASHUP # ${size+1} is created , Enjoy the contest`});
+      res.status(201).json({ contestError:'contest created scroll down to see your contest details',info : `Your  MASHUP # ${size+1} is created , Enjoy the contest`});
     }
-  }
+    }
   
 });
 module.exports = router;

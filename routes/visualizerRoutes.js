@@ -8,13 +8,16 @@ router.get('/visualizer',(req,res)=>{
 router.get('/visualizer/contest/:contestno',async (req,res)=>{
 
    let contestNo = Number(req.params.contestno);
-   let uri = "https://codeforces.com/api/contest.standings?contestId=" + contestNo + "&from=1&count=1";
+   let uri=`https://codeforces.com/api/contest.ratingChanges?contestId=${contestNo}`;
    let response =  await fetch(uri);
    let data = await response.json();
 
-   if(data.status != "OK") {
+   if(data.status != "OK" || data.result.length<=0) {
       res.redirect('/error');
    } else {
+      uri = "https://codeforces.com/api/contest.standings?contestId=" + contestNo + "&from=1&count=1";
+      response =  await fetch(uri);
+      data = await response.json();
       let contestID = data.result.contest.id;
       let contestName = data.result.contest.name;
       let tempName = "";

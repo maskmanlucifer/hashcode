@@ -453,7 +453,12 @@
   }
 
   .contestError {
-    color: tomato;
+    display: block;
+    text-align: center;
+    color: var(--extra);
+    margin: auto;
+    margin-top: 4px;
+    margin-bottom: 14px;
   }
   
   /* close < 110 visualizer page */
@@ -568,7 +573,6 @@
     border-radius: 9px;
     align-items: center;
     justify-content: space-evenly;
-  
   }
   .card_list_contest span {
     width: 100%;
@@ -588,8 +592,6 @@
     text-align: center;
     font-size: 1.1rem;
   }
-  
-  
   .card_list_contest button {
     margin-top: 1rem;
     height: 2.2rem;
@@ -600,7 +602,6 @@
     background-color: var(--bg-secondary);
     color: var(--text-secondary);
     font-size: 1.2rem;
-    
     border: 2px solid var(--extra);
   }
   .card_list_contest button a{
@@ -612,12 +613,13 @@
   }
   /* closed < 113 contest page */
 
+  /* --------------------------------------------------------- */
 
   /* open > 114 mashup page */
 
-     .create_button a{
+     .create_button a {
        margin: auto;
-       width: 17ch;
+       width: 15ch;
        display: flex;
        flex-direction: row;
        margin-top: 1rem;
@@ -629,15 +631,17 @@
        text-decoration: none;
        color: var(--text-primary);
      }
+
      .create_button i {
-       font-size: 2.2rem;
+       font-size: 2rem;
      }
      .create_button span {
-       font-size: 1.4rem;
+       font-size: 1.3rem;
      }
      .create_button:hover {
        cursor: pointer;
      } 
+
      .card_list_mashup {
       margin: auto;
       margin-top: 2rem;
@@ -649,15 +653,16 @@
       border-radius: 9px;
       align-items: center;
       justify-content: space-evenly;
-    
     }
+
     .card_list_mashup span {
       width: 100%;
       text-align: center;
-      font-size: 2rem;
+      font-size: 1.7rem;
       border-bottom: 2px solid var(--text-secondary);
       color: var(--text-primary);
     }
+
     .card_list_mashup .contest_box {
       display: flex;
       flex-direction: column;
@@ -668,7 +673,8 @@
       margin-top: 1rem;
     }
     .contest_box span {
-      font-size: 1.5rem;
+      font-size: 1.4rem;
+      color: var(--extra);
     }
     .contest_box:last-child {
       margin-bottom: 1rem;
@@ -681,7 +687,7 @@
       align-items: center;
     }
     .contest_box .info_contest p {
-      font-size: 1.3rem;
+      font-size: 1.1rem;
       color: var(--text-secondary);
       margin-top: 0;
       margin-bottom: 0;
@@ -690,12 +696,19 @@
     .contest_box a {
       text-decoration: none;
       padding-bottom: 3px;
-      font-size: 1.2rem;
-      color: var(--extra);
+      font-size: 1.1rem;
+      color: rgb(53, 226, 218);
       margin-top: 10px;
     }
+    .contest_box .info_contest p strong {
+      color: var(--extra);
+    }
   /* close < 114 mashup page */
-
+  
+  /* --------------------------------------------------------- */
+  
+  /* open mashup form  */
+  
   .card_list_form {
     margin: auto;
     margin-top: 2rem;
@@ -709,55 +722,70 @@
     justify-content: space-evenly;
   
   }
+
   .card_list_form span {
     width: 100%;
     text-align: center;
     font-size: 1.7rem;
     border-bottom: 2px solid var(--text-secondary);
-    color: var(--text-primary);
-  }
-  .card_list_form .row {
-    width: 90%;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    margin-top: 18px;
-    margin-bottom: 18px;
-    font-size: 1.2rem;
-    color: var(--text-secondary);
-  }
-  .card_list_form .row input {
-    background-color: var(--bg-primary);
-    color: var(--text-primary);
-    border-radius: 8px;
-    margin-left: 8px;
-    font-size: .90rem;
-  }
-
-  .card_list_form .row select {
-    width: 10rem;
-    padding: 6px;
-    padding-right: 8px;
-    background-color: var(--bg-primary);
-    color: var(--text-primary);
-    border-radius: 3px;
-    margin-left: 8px;
-    font-size: .90rem;
+    color: var(--extra);
   }
   
-
-  .card_list_form .row button {
-    width: 6rem;
-    background-color: var(--bg-secondary);
-    border: 2px solid var(--extra);
+  .card_list_form form label {
+    display: block;
+    text-align: center;
+    font-size: 1.3rem;
     color: var(--text-secondary);
-    font-size: 1.2rem;
-    border-radius: 10px;
-    padding: 8px;
   }
-  .card_list_form .row button:hover {
+  .card_list_form form label:first-child {
+    margin-top: 1rem;
+  }
+  .card_list_form form input {
+    min-width: 20ch;
+    font-size: .90rem;
+    display: block;
+    margin: auto;
+    margin-top: 6px;
+    margin-bottom: 6px;
+    background-color: var(--bg-secondary);
+    border: 1px solid turquoise;
+    color: var(--text-primary);
+    padding: 8px;
+    padding-left: 12px;
+    border-radius: 10px;
+  }
+  .card_list_form form select {
+    display: block;
+    margin: auto;
+    margin-top: 6px;
+    margin-bottom: 6px;
+    min-width: 30ch;
+    border: 1px solid turquoise;
+    background-color: var(--bg-secondary);
+    color: var(--text-primary);
+    font-size: .90rem;
+    padding: 8px;
+    border-radius: 10px;
+  }
+
+  .card_list_form form button {
+    display: block;
+    margin: auto;
+    margin-top: 16px;
+    margin-bottom: 16px;
+    padding: 8px;
+    font-size: .90rem;
+    border-radius: 10px;
+    background-color: var(--bg-secondary);
+    color: var(--text-primary);
+    border: 1px solid var(--extra);
+    min-width: 23ch;
+  }
+
+  .card_list_form form button:hover {
     cursor: pointer;
   }
+  /* error info on mashup form page */
   .link {
     width: 70%;
     margin: auto;
@@ -784,6 +812,7 @@
   .link a:hover {
     cursor: pointer;
   }
+
   .link_info p {
     color: var(--text-secondary);
     font-size: 1.3rem;
@@ -793,10 +822,15 @@
     background-color: var(--bg-secondary);
     
   }
-  select#visibility {
-    width: 16rem;
-  }
+
+  
+
+  /* close mashup form  */
+
+  /* --------------------------------------------------------- */
+
   /* open > 116 main contest page */
+
      .main_contest_box {
       margin: auto;
       margin-top: 2rem;
@@ -809,6 +843,7 @@
       align-items: center;
       justify-content: space-evenly;
      }
+
      .main_contest_box .buttons {
        margin-top: 1rem;
        display: flex;
@@ -827,6 +862,7 @@
      .main_contest_box .buttons span:hover {
        cursor: pointer;
      }
+
      .main_contest_box .problem_box {
        width: 88%;
        background-color: var(--bg-primary);
@@ -835,20 +871,24 @@
        margin-bottom: 2rem;
        border-radius: 10px;
      }
+
      .main_contest_box .problem_box table {
        border: 1px solid var(--extra);
        border-collapse: collapse;
        width: 100%;
        margin: auto;
      }
+
      .main_contest_box .problem_box table th,td{
       border: 1px solid var(--extra);
       text-align: center;
       padding: 6px;
     }
+
     .main_contest_box .problem_box table th {
       color: var(--text-secondary);
     }
+
     .active_buttons {
       padding: 3px;
       background-color: var(--bg-primary);
@@ -856,6 +896,7 @@
       padding-left: 12px;
       padding-right: 12px;
     }
+
     #timer {
       width: 80%;
       font-size: 1.2rem;
@@ -869,17 +910,23 @@
       align-items: center;
       border-radius: 10px;
     }
+
     #timer p {
       padding: 5px;
       margin: 0;
     }
+
     #timer p:first-child {
       border-bottom: 1px solid var(--text-secondary);
       color: var(--text-secondary);
     }
+
     #timer p:last-child {
       color: var(--extra);
     }
-  /* close < 116 main contest page */
+
+    /* close < 116 main contest page */
+
+  /* --------------------------------------------------------- */
 
   
