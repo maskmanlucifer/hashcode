@@ -1,6 +1,8 @@
 const router = require('express').Router();
 const Mashup = require('../models/mashupModel');
 const Lockout = require('../models/lockoutModel');
+const bcrypt = require('bcrypt');
+const jwt=require('jsonwebtoken');
 
 router.get('/contest',(req,res)=>{
    res.render('contest',{user:req.user}); 
@@ -29,6 +31,69 @@ router.get('/contest/lockout/create',(req,res)=>{
    res.render('formLockout',{user:req.user});
 });
 
+router.get('/contest/mashup/:contestno/register', async (req,res)=>{
+  let contest = req.params.contestno;
+  let contestno = Number(contest);
+  let user = req.user;
+  
+  if(user === undefined) {
+   res.redirect('/error');
+  } else if(!user.ishandle) {
+   res.redirect('/error');
+  }  else {
+     let obj ={
+        handle:user.cfusername,
+        email:user.googleid
+     };
+
+     console.log(contestno,typeof contestno);
+     await Mashup.findOneAndUpdate({ contestID: contestno},{ $push: { "registered" : obj }});
+     
+     res.redirect('/contest/mashup');
+  }
+  
+});
+
+router.get('/contest/lockout/:contestno/register', async (req,res)=>{
+   let contest = req.params.contestno;
+   let contestno = Number(contest);
+   let user = req.user;
+   
+   if(user === undefined) {
+    res.redirect('/error');
+   } else if(!user.ishandle) {
+    res.redirect('/error');
+   }  else {
+      let obj ={
+         handle:user.cfusername,
+         email:user.googleid
+      };
+ 
+      await Lockout.findOneAndUpdate({ contestID: contestno},{ $set: { "opponent" : obj }});
+      
+      res.redirect('/contest/lockout');
+   }
+   
+ });
+
+ router.get('/contest/private/register/:code',async(req,res)=>{
+   let code = req.params.code;
+   jwt.verify(code, process.env.JWT_KEY, (e, decoded) => {
+      if (e) {
+          console.log(e)
+          return res.sendStatus(403)
+      } else {
+          let contestno = Number(decoded.id);
+          let type = String(decoded.type);
+          if(type == "MASHUP") {
+              
+          }
+          else {
+
+          }
+      }
+  });
+ });
 
 router.get('/contest/mashup/:contestID/problems',(req,res)=>{
    res.render('mashupContest',{user:req.user,type:"PROBLEMS"});
@@ -81,7 +146,16 @@ router.post('/contest/mashup/create',async (req,res)=>{
     let response = await new Mashup(obj).save();
 
     if(visibility === "PRIVATE") {
-      res.status(201).json({ contestError:'contest created scroll down to see your contest details',info : `Your private MASHUP # ${size+1} is created, share above link to whom you want to invite` , link : 'https://codeforces.com/' });
+      let secret={
+         "id":String(size+1),
+         "type":"MASHUP"
+       }
+      const code=jwt.sign(secret,process.env.JWT_KEY,{
+         expiresIn:'30d'
+      });
+      let url = `http://localhost:3000/contest/private/register/`
+      url += code;
+      res.status(201).json({ contestError:'contest created scroll down to see your contest details',info : `Your private MASHUP # ${size+1} is created, share above link to whom you want to invite` , link : url });
     } else {
       res.status(201).json({ contestError:'contest created scroll down to see your contest details',info : `Your  MASHUP # ${size+1} is created , Enjoy the contest`});
     }
@@ -124,9 +198,13 @@ router.post('/contest/lockout/create',async (req,res)=>{
          rankList : []
       };
      let response = await new Lockout(obj).save();
- 
+     
      if(visibility === "PRIVATE") {
-       res.status(201).json({ contestError:'contest created scroll down to see your contest details',info : `Your private Lockout # ${size+1} is created, share above link to whom you want to invite` , link : 'https://codeforces.com/' });
+      const salt = await bcrypt.genSalt();
+      let code = await bcrypt.hash(String(size+1), salt);
+      let url = `http://localhost:3000/contest/lockout/${size+1}/register/`
+      url += code;
+       res.status(201).json({ contestError:'contest created scroll down to see your contest details',info : `Your private Lockout # ${size+1} is created, share above link to whom you want to invite` , link : url });
      } else {
        res.status(201).json({ contestError:'contest created scroll down to see your contest details',info : `Your  Lockout # ${size+1} is created , Enjoy the contest`});
      }

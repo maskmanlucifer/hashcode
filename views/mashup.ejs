@@ -161,9 +161,9 @@
                         <%if(flag == 1) {%>
                             <p>YOU ARE REGISTERED</p>
                         <%} else {%>
-                            <a href="">REGISTER</a>
+                            <a href="/contest/mashup/<%=data1[i].contestID%>/register">REGISTER</a>
                         <%}%>
-                        
+                        <p class="contestError"></p>
                     </div>
                 <%} else {%>
                     <% if(flag == 1) {%>

@@ -793,6 +793,7 @@
     text-align: center;
     padding: 5px;
     border-radius: 8px;
+    word-wrap: break-word; 
   }
   .link_info {
     width: 70%;
@@ -810,7 +811,6 @@
     border-radius: 8px;
     text-align: center;
     background-color: var(--bg-secondary);
-    
   }
 
   .link a{

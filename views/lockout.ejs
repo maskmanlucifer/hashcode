@@ -167,13 +167,13 @@
                             <p><strong>Problem count :</strong>  <%=data1[i].numberofProblems%></p>
                         </div>
                         <div class="info_contest">
-                            <p><strong>Participant-1 :</strong> <a href="https://codeforces.com/profile/<%=data3[i].creator.handle%>"><%=data3[i].creator.handle%></a> </p>
+                            <p><strong>Participant-1 :</strong> <a href="https://codeforces.com/profile/<%=data1[i].creator.handle%>"><%=data1[i].creator.handle%></a> </p>
                             <%if(data1[i].opponent.email != "undefined"){%>
-                            <p><strong>Participant-2 :</strong> <a href="https://codeforces.com/profile/<%=data3[i].opponent.handle%>"><%=data3[i].opponent.handle%></a> </p>
+                            <p><strong>Participant-2 :</strong> <a href="https://codeforces.com/profile/<%=data1[i].opponent.handle%>"><%=data1[i].opponent.handle%></a> </p>
                             <% } %>   
                         </div>
                         <%if(data1[i].opponent.email == "undefined"){%>
-                        <a href="">REGISTER</a>
+                        <a href="/contest/lockout/<%=data1[i].contestID%>/register">REGISTER</a>
                         <%}%>
                     </div>
                 <% } else {%>
@@ -193,8 +193,8 @@
                                 <p><strong>Problem count :</strong>  <%=data1[i].numberofProblems%></p>
                             </div>
                             <div class="info_contest">
-                                <p><strong>Participant-1 :</strong> <a href="https://codeforces.com/profile/<%=data3[i].creator.handle%>"><%=data3[i].creator.handle%></a> </p>    
-                                <p><strong>Participant-2 :</strong> <a href="https://codeforces.com/profile/<%=data3[i].opponent.handle%>"><%=data3[i].opponent.handle%></a> </p>  
+                                <p><strong>Participant-1 :</strong> <a href="https://codeforces.com/profile/<%=data1[i].creator.handle%>"><%=data1[i].creator.handle%></a> </p>    
+                                <p><strong>Participant-2 :</strong> <a href="https://codeforces.com/profile/<%=data1[i].opponent.handle%>"><%=data1[i].opponent.handle%></a> </p>  
                             </div>
                         </div>
                     <%}%>
@@ -219,9 +219,9 @@
                             <p><strong>Problem count :</strong>  <%=data2[i].numberofProblems%></p>
                         </div>
                         <div class="info_contest">
-                            <p><strong>Participant-1 :</strong> <a href="https://codeforces.com/profile/<%=data3[i].creator.handle%>"><%=data3[i].creator.handle%></a> </p>
+                            <p><strong>Participant-1 :</strong> <a href="https://codeforces.com/profile/<%=data2[i].creator.handle%>"><%=data2[i].creator.handle%></a> </p>
                             <%if(data2[i].opponent.email != "undefined"){%>
-                            <p><strong>Participant-2 :</strong> <a href="https://codeforces.com/profile/<%=data3[i].opponent.handle%>"><%=data3[i].opponent.handle%></a> </p>
+                            <p><strong>Participant-2 :</strong> <a href="https://codeforces.com/profile/<%=data2[i].opponent.handle%>"><%=data2[i].opponent.handle%></a> </p>
                             <% } %>
                         </div>
                         <a href="/contest/lockout/<%=data2[i].contestID%>">VIEW CONTEST</a>
@@ -234,9 +234,9 @@
                             <p><strong>Problem count :</strong>  <%=data2[i].numberofProblems%></p>
                         </div>
                         <div class="info_contest">
-                            <p><strong>Participant-1 :</strong> <a href="https://codeforces.com/profile/<%=data3[i].creator.handle%>"><%=data3[i].creator.handle%></a> </p>
+                            <p><strong>Participant-1 :</strong> <a href="https://codeforces.com/profile/<%=data2[i].creator.handle%>"><%=data2[i].creator.handle%></a> </p>
                             <%if(data2[i].opponent.email != "undefined"){%>
-                            <p><strong>Participant-2 :</strong> <a href="https://codeforces.com/profile/<%=data3[i].opponent.handle%>"><%=data3[i].opponent.handle%></a> </p>
+                            <p><strong>Participant-2 :</strong> <a href="https://codeforces.com/profile/<%=data2[i].opponent.handle%>"><%=data2[i].opponent.handle%></a> </p>
                             <% } %>
                         </div>
                         <a href="/contest/lockout/<%=data2[i].contestID%>">VIEW CONTEST</a>
