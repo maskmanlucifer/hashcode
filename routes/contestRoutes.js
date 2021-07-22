@@ -37,62 +37,200 @@ router.get('/contest/mashup/:contestno/register', async (req,res)=>{
   let user = req.user;
   
   if(user === undefined) {
-   res.redirect('/error');
+   let error = {
+      server_error : undefined,
+      login_error : 'You are not logged in',
+      cfhandle_error : undefined,
+      visualizer_error : undefined
+
+   };
+   res.render('error',{data:error,user:req.user});
   } else if(!user.ishandle) {
-   res.redirect('/error');
+   let error = {
+      server_error : undefined,
+      login_error : undefined,
+      cfhandle_error : 'Please verify your codeforces username in profile section',
+      visualizer_error : undefined
+
+   };
+   res.render('error',{data:error,user:req.user});
   }  else {
      let obj ={
         handle:user.cfusername,
         email:user.googleid
      };
-
-     console.log(contestno,typeof contestno);
-     await Mashup.findOneAndUpdate({ contestID: contestno},{ $push: { "registered" : obj }});
      
+     let data = await Mashup.find({contestID: contestno});
+     let flag =0;
+     for(let i=0;i<data[0].registered.length;i++) {
+        if(data[0].registered[i].email == user.googleid) {
+           flag =1;
+        }
+     }
+     if(flag == 0 ){
+     await Mashup.findOneAndUpdate({ contestID: contestno},{ $push: { "registered" : obj }});
      res.redirect('/contest/mashup');
+     } else {
+      let error = {
+         server_error : undefined,
+         login_error : 'You are already registered',
+         cfhandle_error : undefined,
+         visualizer_error : undefined
+   
+      };
+      res.render('error',{data:error,user:req.user});
+     }
+     
+     
   }
   
 });
 
+router.get('/contest/mashup/:contestno/registered',async (req,res)=>{
+   let contest = req.params.contestno;
+   let contestno = Number(contest);
+   let data = await Mashup.find({contestID:contestno});
+   res.render('registrants',{user:req.user,data:data[0]});
+})
 router.get('/contest/lockout/:contestno/register', async (req,res)=>{
    let contest = req.params.contestno;
    let contestno = Number(contest);
    let user = req.user;
    
    if(user === undefined) {
-    res.redirect('/error');
-   } else if(!user.ishandle) {
-    res.redirect('/error');
-   }  else {
+      let error = {
+         server_error : undefined,
+         login_error : 'You are not logged in',
+         cfhandle_error : undefined,
+         visualizer_error : undefined
+   
+      };
+      res.render('error',{data:error,user:req.user});
+     } else if(!user.ishandle) {
+      let error = {
+         server_error : undefined,
+         login_error : undefined,
+         cfhandle_error : 'Please verify your codeforces username in profile section',
+         visualizer_error : undefined
+   
+      };
+      res.render('error',{data:error,user:req.user});
+     }  else {
+
       let obj ={
          handle:user.cfusername,
          email:user.googleid
       };
- 
-      await Lockout.findOneAndUpdate({ contestID: contestno},{ $set: { "opponent" : obj }});
+      let data = await Lockout.find({contestID: contestno});
       
+      if((data[0].opponent.email== "undefined") && (data[0].creator.email != user.googleid)) {
+      await Lockout.findOneAndUpdate({ contestID: contestno},{ $set: { "opponent" : obj }});
       res.redirect('/contest/lockout');
+      } else {
+         let error = {
+            server_error : undefined,
+            login_error : 'You are already registered',
+            cfhandle_error : undefined,
+            visualizer_error : undefined
+      
+         };
+         res.render('error',{data:error,user:req.user});
+      }
+      
+      
    }
    
  });
 
  router.get('/contest/private/register/:code',async(req,res)=>{
+    let user = req.user;
+   if(user === undefined) {
+      let error = {
+         server_error : undefined,
+         login_error : 'You are not logged in',
+         cfhandle_error : undefined,
+         visualizer_error : undefined
+   
+      };
+      res.render('error',{data:error,user:req.user});
+     } else if(!user.ishandle) {
+      let error = {
+         server_error : undefined,
+         login_error : undefined,
+         cfhandle_error : 'Please verify your codeforces username in profile section',
+         visualizer_error : undefined
+   
+      };
+      res.render('error',{data:error,user:req.user});
+     } else {
    let code = req.params.code;
-   jwt.verify(code, process.env.JWT_KEY, (e, decoded) => {
+   jwt.verify(code, process.env.JWT_KEY, async (e, decoded) => {
       if (e) {
-          console.log(e)
-          return res.sendStatus(403)
+          let error = {
+            server_error : 'Server error occured',
+            login_error : undefined,
+            cfhandle_error : undefined,
+            visualizer_error : undefined
+      
+         };
+         res.render('error',{data:error,user:req.user});
       } else {
           let contestno = Number(decoded.id);
           let type = String(decoded.type);
           if(type == "MASHUP") {
-              
+            let obj ={
+               handle:user.cfusername,
+               email:user.googleid
+            };
+            
+            let data = await Mashup.find({contestID: contestno});
+            let flag =0;
+            for(let i=0;i<data[0].registered.length;i++) {
+               if(data[0].registered[i].email == user.googleid) {
+                  flag =1;
+               }
+            }
+            if(flag == 0 ){
+            await Mashup.findOneAndUpdate({ contestID: contestno},{ $push: { "registered" : obj }});
+            res.redirect('/contest/mashup');
+            } else {
+               let error = {
+                  server_error : undefined,
+                  login_error : 'You are already registered',
+                  cfhandle_error : undefined,
+                  visualizer_error : undefined
+            
+               };
+               res.render('error',{data:error,user:req.user});
+            }
+            
+            
           }
           else {
-
+            let obj ={
+               handle:user.cfusername,
+               email:user.googleid
+            };
+            let data = await Lockout.find({contestID: contestno});
+            if((data[0].opponent.email== "undefined") && (data[0].creator.email != user.googleid)) {
+            await Lockout.findOneAndUpdate({ contestID: contestno},{ $set: { "opponent" : obj }});
+            res.redirect('/contest/lockout');
+            } else {
+               let error = {
+                  server_error : undefined,
+                  login_error : 'You are already registered',
+                  cfhandle_error : undefined,
+                  visualizer_error : undefined
+            
+               };
+               res.render('error',{data:error,user:req.user});
+            }
+            
+            
           }
       }
   });
+  }
  });
 
 router.get('/contest/mashup/:contestID/problems',(req,res)=>{

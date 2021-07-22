@@ -11,9 +11,15 @@ router.get('/visualizer/contest/:contestno',async (req,res)=>{
    let uri=`https://codeforces.com/api/contest.ratingChanges?contestId=${contestNo}`;
    let response =  await fetch(uri);
    let data = await response.json();
+   let error = {
+      server_error : undefined,
+      login_error : undefined,
+      cfhandle_error : undefined,
+      visualizer_error : 'Can not show this contest'
 
+   };
    if(data.status != "OK" || data.result.length<=0) {
-      res.redirect('/error');
+      res.render('error',{data:error,user:req.user});
    } else {
       uri = "https://codeforces.com/api/contest.standings?contestId=" + contestNo + "&from=1&count=1";
       response =  await fetch(uri);

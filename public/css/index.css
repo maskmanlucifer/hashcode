@@ -892,7 +892,11 @@
     .main_contest_box .problem_box table th {
       color: turquoise;
     }
-
+    
+    .main_contest_box .problem_box table td a {
+      text-decoration: none;
+      color: var(--extra);
+    }
     .active_buttons {
       padding: 3px;
       background-color: var(--bg-primary);
@@ -930,6 +934,29 @@
     }
 
     /* close < 116 main contest page */
+
+  /* --------------------------------------------------------- */
+
+  /* error page open  */
+    .common_error {
+      width: 70%;
+      background-color: var(--bg-secondary);
+      margin: auto;
+      margin-top: 20%;
+      height: 20%;
+      align-items: center;
+      border: 2px solid turquoise;
+      border-radius: 10px;
+    }
+
+    .common_error p {
+      font-size: 2rem;
+      padding: 10px;
+      text-align: center;
+      color: var(--extra);
+    }
+  /* error page close */
+
 
   /* --------------------------------------------------------- */
 

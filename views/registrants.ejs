@@ -79,7 +79,7 @@
         
         <div class="main_contest_box">
             <div class="buttons">
-                <span class="active_buttons" style="width: 100%; font-size: 17px;text-align: center;">Registered Users of</span>
+                <span class="active_buttons" style="width: 100%; font-size: 17px;text-align: center;color: thistle;">Registered Users of Mashup # <%=data.contestID%></span>
             </div>
             <div class="problem_box" style=" overflow-x:auto;">
                 <table >
@@ -87,22 +87,12 @@
                         <th>#</th>
                         <th>USERNAME</th>
                     </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>jareehd</td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>jareehd</td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>jareehd</td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>jareehd</td>
-                    </tr>
+                    <%for(let i=0;i<data.registered.length;i++) { %>
+                        <tr>
+                            <td><%=i+1%></td>
+                            <td><a href="https://codeforces.com/profile/<%=data.registered[i].handle%>"><%=data.registered[i].handle%></a></td>
+                        </tr>
+                    <%}%>
                 </table>
             </div>
         </div>
