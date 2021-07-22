@@ -1,4 +1,8 @@
+// getting contest id from html page 
 let contest_id = Number(document.getElementById('contest_id').textContent);
+
+// mapping rating ranges with levels
+
 let findLevel = (rating) =>{
     if(rating < 1200) {
 
@@ -44,6 +48,7 @@ let findLevel = (rating) =>{
 
 };
 
+// getting standing data 
 let dataExtract =  async (contestID)=>{
   let url = "https://codeforces.com/api/contest.standings?contestId=";
   url += contestID;
@@ -58,8 +63,10 @@ let dataExtract =  async (contestID)=>{
     throw new Error('Contest is ongoing');
   }
   
+  // getting rating change data 
   let url1 = "https://codeforces.com/api/contest.ratingChanges?contestId=";
   url1 += contestID;
+  
 
   let ratingChange = await fetch(url1);
   
@@ -68,7 +75,7 @@ let dataExtract =  async (contestID)=>{
   
   let handleRating = {};
     
-    
+    // mapping handle with level 
     for(let i=data1.result.length-1;i>=0;i--) {
         
         let oldRating = data1.result[i].oldRating;
@@ -82,7 +89,8 @@ let dataExtract =  async (contestID)=>{
 
   
   let solvedProblems = {};
-  
+
+  // giving indexes to problems
   let levelIndex = {};
   levelIndex["NEWBIE"] = 0;
   levelIndex["PUPIL"] = 1;
@@ -100,6 +108,7 @@ let dataExtract =  async (contestID)=>{
       solvedProblems[i] = [0,0,0,0,0,0,0,0,0,0];
   }
   
+  // main algo for storing all problems done 
   for(let i=0;i<data.result.rows.length;i++) {
       for(let j=0;j<numberofProblems;j++) {
           if(data.result.rows[i].problemResults[j].points) {
@@ -112,8 +121,9 @@ let dataExtract =  async (contestID)=>{
 };
 
 
+// filling data in charts 
 dataExtract(contest_id)
-.then((data1)=>{
+.then((data1) => {
     for(let i=0;i<data1.numberofProblems;i++) {
         let arr = [0,0,0,0,0,0,0,0,0,0];
         for(let j=0;j<10;j++) {
@@ -122,63 +132,65 @@ dataExtract(contest_id)
         let id = 'myChart';
         id += i;
         var ctx = document.getElementById(id).getContext('2d');
-Chart.defaults.font.size = 16;
-Chart.defaults.color = '#F1C40F';
-var myChart = new Chart(ctx, {
-    type: 'bar',
-    data: {
-        labels: ['NEWBIE', 'PUPIL', 'SPECIALIST', 'EXPERT', 'CM', 'MASTER','IM','GM','IGM','LGM'],
-        datasets: [{
-            label: '# OF USERS SOLVED',
-            data: arr,
-            backgroundColor: [
-                'rgb(128 , 128 , 128 , 0.3)',
-                'rgba(58, 235, 52, 0.3)',
-                'rgba(31, 242, 235, 0.3)',
-                'rgba(14, 44, 240, 0.3)',
-                'rgba(245, 37, 221, 0.3)',
-                'rgba(245, 227, 37, 0.3)',
-                'rgba(245, 190, 37, 0.7)',
-                'rgba(232, 43, 26, 0.2)',
-                'rgba(232, 43, 26, 0.4)',
-                'rgba(191, 26, 11, 0.7)'
-            ],
-            borderColor: [
-            'rgb(128 , 128 , 128 , 0.6)',
-            'rgba(58, 235, 52, 0.6)',
-            'rgba(31, 242, 235, 0.6)',
-            'rgba(14, 44, 240, 0.6)',
-            'rgba(245, 37, 221, 0.6)',
-            'rgba(245, 227, 37, 0.6)',
-            'rgba(245, 190, 37, 1)',
-            'rgba(232, 43, 26, 0.5)',
-            'rgba(232, 43, 26, 0.7)',
-            'rgba(191, 26, 11, 1)'
-            ],
-            borderWidth: 1,
-            borderRadius: 4,
-            
-        }]
-    },
-    options: {
-        
-        plugins: {
-            title: {
-                display: true,
-                text: 'NUMBER OF USERS SOLVED THE PROBLEM',
-                color:'#F1C40F'
+        Chart.defaults.font.size = 15;
+        Chart.defaults.color = '#F1C40F';
+        var myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['NEWBIE', 'PUPIL', 'SPECIALIST', 'EXPERT', 'CM', 'MASTER','IM','GM','IGM','LGM'],
+                datasets: [{
+                    label: '# OF USERS SOLVED',
+                    data: arr,
+                    backgroundColor: [
+                        'rgb(128 , 128 , 128 , 0.3)',
+                        'rgba(58, 235, 52, 0.3)',
+                        'rgba(31, 242, 235, 0.3)',
+                        'rgba(14, 44, 240, 0.3)',
+                        'rgba(245, 37, 221, 0.3)',
+                        'rgba(245, 227, 37, 0.3)',
+                        'rgba(245, 190, 37, 0.7)',
+                        'rgba(232, 43, 26, 0.2)',
+                        'rgba(232, 43, 26, 0.4)',
+                        'rgba(191, 26, 11, 0.7)'
+                    ],
+                    borderColor: [
+                    'rgb(128 , 128 , 128 , 0.6)',
+                    'rgba(58, 235, 52, 0.6)',
+                    'rgba(31, 242, 235, 0.6)',
+                    'rgba(14, 44, 240, 0.6)',
+                    'rgba(245, 37, 221, 0.6)',
+                    'rgba(245, 227, 37, 0.6)',
+                    'rgba(245, 190, 37, 1)',
+                    'rgba(232, 43, 26, 0.5)',
+                    'rgba(232, 43, 26, 0.7)',
+                    'rgba(191, 26, 11, 1)'
+                    ],
+                    borderWidth: 1,
+                    borderRadius: 4,
+                    
+                }]
             },
-            legend: {
-                display: true,
-                labels: {
-                    color: '#F1C40F'
+            options: {
+                
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'NUMBER OF USERS SOLVED THE PROBLEM',
+                        color:'#F1C40F'
+                    },
+                    legend: {
+                        display: true,
+                        labels: {
+                            color: '#F1C40F'
+                        }
+                    }
                 }
             }
-        }
-    }
-});
-    }
-})
-.catch((err)=>{
- console.log(err.message);
-})
+        });
+            }
+        })
+        .catch((err)=>{
+
+        console.log(err.message);
+
+        })

@@ -114,9 +114,11 @@
         let contestError=document.querySelector('.contestError');
         $('button').click(async (e) => {
             e.preventDefault();
+
             contestError.textContent='';
             link.innerHTML = '';
             link_info.innerHTML = '';
+
             let duration = form.duration.value;
             let min_level = form.min_level.value;
             let max_level = form.max_level.value;
@@ -127,8 +129,8 @@
             if((!duration) || (!min_level) || (!max_level) || (!starttime) || (!no_of_problems)) {
                 contestError.textContent='Some values are not entered';
             }
-            else if(no_of_problems>7){
-                contestError.textContent='Number of problems should be less than 7';
+            else if(no_of_problems>10){
+                contestError.textContent='Number of problems should be less than equal to 10';
             }
             else if(min_level <800 || min_level>3500) {
                 contestError.textContent='Min level of problem should be in between 800 and 3500';
@@ -144,12 +146,15 @@
                 
                 starttime = Math.round(starttime/1000.0);
                 duration*=60;
+
                 try { 
+                    
                     const res = await fetch('/contest/mashup/create', { 
                         method: 'POST', 
                         body: JSON.stringify({ duration,min_level,max_level,starttime,no_of_problems,visibility}),
                         headers: {'Content-Type': 'application/json'}
                     });
+                    
                     const data = await res.json(); 
                     if (data.contestError) 
                     { 

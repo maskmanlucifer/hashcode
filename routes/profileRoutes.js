@@ -1,4 +1,8 @@
 const router = require('express').Router();
+
+const profileController = require('../controllers/profileController');
+
+// for authorized pages
 const authCheck = (req,res,next)=> {
     if(!req.user) {
         res.redirect('/');
@@ -6,8 +10,8 @@ const authCheck = (req,res,next)=> {
         next();
     }
 };
-router.get('/profile',authCheck,(req,res)=>{
-   res.render('profile',{user:req.user}); 
-});
+
+// getting profile main page 
+router.get('/profile',authCheck, profileController.profile_get);
 
 module.exports = router;

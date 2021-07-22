@@ -2,10 +2,12 @@ const passport = require('passport');
 const User = require('../models/userModel');
 const GoogleStrategy = require('passport-google-oauth20');
 require('dotenv').config();
+
 // Serializing user
 passport.serializeUser((user,done)=> {
     done(null,user._id);
 });
+
 
 //deserializing user
 passport.deserializeUser((id,done)=> {

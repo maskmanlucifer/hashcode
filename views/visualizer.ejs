@@ -90,6 +90,7 @@
                 <p>Seperate bar graph for each problem</p>
                 <p>Contest no. can be found in url of that contest</p>
                 <p>Due to quite large data fetching it might take 4-5 seconds to load the chart</p>
+                <p>Any contest can be visualized only after rating change of that contest</p>
             </div>
             </div>
 
@@ -105,6 +106,7 @@
     </main>
     <script>
         let contestError = document.querySelector('.contestError');
+
         $('.contest_button').click((e)=>{
             e.preventDefault();
             contestError.textContent='';
@@ -115,17 +117,19 @@
                 return res.json();
             })
             .then((data)=>{
-               if(data.status !== "OK" || data.result.length<=0) {
+               if(data.status !== "OK" || data.result.length==0) {
+
                   contestError.textContent = "Can not show this contest";
+
                } else {
-                   let uri1 = "/visualizer/contest/"+contestNumber;
-                $.ajax({
-                    type: 'GET',
-                    url: uri1,
-                    success: function(data){
-                        location.assign(uri1);
-                    }
-                });
+                   let uri1 = "/visualizer/contest/" + contestNumber;
+                    $.ajax({
+                        type: 'GET',
+                        url: uri1,
+                        success: function(data){
+                            location.assign(uri1);
+                        }
+                    });
                }
             })
             .catch((err)=>{

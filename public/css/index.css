@@ -112,12 +112,13 @@
   .banner span {
     font-size: 4rem;
     font-weight: bolder;
+    color: turquoise;
   }
 
   #site-name {
     font-family: 'Roboto Slab', serif;
-    color: var(--bg-secondary);
-    background-color: var(--text-primary);
+    color: var(--bg-primary);
+    background-color: turquoise;
     padding: 8px;
     border-radius: 1rem;
   }
@@ -125,7 +126,7 @@
   .site_info {
     margin: auto;
     background-color: var(--bg-secondary);
-    color: var(--text-primary);
+    color: var(--extra);
     width: 70%;
     height: 6rem;
     border-radius: 1rem;
@@ -181,7 +182,7 @@
       opacity: 1;
       top: 50%;
       background-color: var(--bg-secondary);
-      color: var(--text-primary);
+      color: turquoise;
   }
 
   /* close < 104 tooltip styling */
@@ -219,7 +220,9 @@
     border-radius: 10px;
     background-color: var(--bg-primary);
   }
-
+  .fizz_buzz_filter_bar a {
+    color: var(--extra);
+  }
   /* closse < 105  fizz_buzz filter_bar */
   
   /* --------------------------------------------------------- */
@@ -243,7 +246,7 @@
     text-align: center;
     font-size: 1.6rem;
     padding: 4px;
-    border-bottom: 2px solid var(--text-secondary);
+    border-bottom: 2px solid turquoise;
     color: var(--text-secondary);
   }
   
@@ -307,7 +310,7 @@
   .card_list_stl .heading{
     font-size: 1.8rem;
     padding: 3px;
-    border-bottom: 2px solid var(--text-secondary);
+    border-bottom: 2px solid turquoise;
     display: block;
     text-align: center;
     color: var(--text-secondary);
@@ -331,7 +334,7 @@
     border-radius: 8px;
     margin-top: 8px;
     padding:5px;
-    color: var(--text-primary);
+    color: var(--text-secondary);
   }
 
   .card_list_stl_content .stl_function .highlight {
@@ -400,7 +403,7 @@
     width: 100%;
     text-align: center;
     font-size: 1.7rem;
-    border-bottom: 2px solid var(--text-secondary);
+    border-bottom: 2px solid turquoise;
     color: var(--text-secondary);
 
   }
@@ -441,7 +444,7 @@
     background-color: var(--bg-secondary);
     color: var(--text-secondary);
     font-size: 1.1rem;
-    border: 2px solid var(--extra);
+    border: 2px solid turquoise;
   }
 
   .card_list_visualizer a:hover {
@@ -483,7 +486,7 @@
   
   .chart_box a {
     text-decoration: none;
-    color: var(--text-primary);
+    color: turquoise;
     font-size: .90rem;
     padding: 4px;
     padding-left: 12px;
@@ -520,7 +523,7 @@
   }
   .filter_bar_contest_visualizer a { 
     text-decoration: none;
-    color: var(--text-primary);
+    color: turquoise;
     background-color: var(--bg-primary);
     padding: 4px;
     padding-left: 10px;
@@ -578,7 +581,7 @@
     width: 100%;
     text-align: center;
     font-size: 2rem;
-    border-bottom: 2px solid var(--text-secondary);
+    border-bottom: 2px solid turquoise;
     color: var(--text-secondary);
   }
   
@@ -602,7 +605,7 @@
     background-color: var(--bg-secondary);
     color: var(--text-secondary);
     font-size: 1.2rem;
-    border: 2px solid var(--extra);
+    border: 2px solid turquoise;
   }
   .card_list_contest button a{
     text-decoration: none;
@@ -629,7 +632,7 @@
        justify-content: space-evenly;
        border-radius: 38px;
        text-decoration: none;
-       color: var(--text-primary);
+       color: turquoise;
      }
 
      .create_button i {
@@ -659,7 +662,7 @@
       width: 100%;
       text-align: center;
       font-size: 1.7rem;
-      border-bottom: 2px solid var(--text-secondary);
+      border-bottom: 2px solid turquoise;
       color: var(--text-primary);
     }
 
@@ -727,7 +730,7 @@
     width: 100%;
     text-align: center;
     font-size: 1.7rem;
-    border-bottom: 2px solid var(--text-secondary);
+    border-bottom: 2px solid turquoise;
     color: var(--extra);
   }
   
@@ -777,7 +780,7 @@
     font-size: .90rem;
     border-radius: 10px;
     background-color: var(--bg-secondary);
-    color: var(--text-primary);
+    color: turquoise;
     border: 1px solid var(--extra);
     min-width: 23ch;
   }

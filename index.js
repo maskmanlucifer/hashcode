@@ -56,9 +56,6 @@ app.get('/',(req,res)=>{
    res.render('home',{user:req.user});
 });
 
-app.get('/error',(req,res)=>{
-  res.render('error',{user:req.user});
-})
 
 app.listen(3000,()=>{
   console.log("You are listening to 3000 port");
