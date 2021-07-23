@@ -127,8 +127,8 @@
             if((!duration) || (!min_level) || (!max_level) || (!starttime) || (!no_of_problems)) {
                 contestError.textContent='Some values are not entered';
             }
-            else if(no_of_problems>7){
-                contestError.textContent='Number of problems should be less than 7';
+            else if(no_of_problems>10){
+                contestError.textContent='Number of problems should be less than 11';
             }
             else if(min_level <800 || min_level>3500) {
                 contestError.textContent='Min level of problem should be in between 800 and 3500';

@@ -84,10 +84,10 @@
             <span>ONGOING</span>
             <%for(let i=0;i<data3.length;i++) {%>
                 <% let flag =0 ;%>
-                <% if(user && user.ishandle && data3[i].creator.handle == user.handle) {%>
+                <% if(user && user.ishandle && data3[i].creator.handle == user.cfusername) {%>
                     <%flag =1 %>
                 <%}%>
-                <% if(user && user.ishandle && data3[i].opponent.email != "undefined" && data3[i].opponent.handle == user.handle) {%>
+                <% if(user && user.ishandle && (data3[i].opponent.email != "undefined") && (data3[i].opponent.handle == user.cfusername)) {%>
                     <%flag =1 %>
                 <%}%>
                 <% if (data3[i].visibility == "PUBLIC") {%>
@@ -145,10 +145,10 @@
             <span>UPCOMING</span>
             <%for(let i=0;i<data1.length;i++) {%>
                 <% let flag =0 ;%>
-                <% if(user && user.ishandle && data1[i].creator.handle == user.handle) {%>
+                <% if(user && user.ishandle && data1[i].creator.handle == user.cfusername) {%>
                     <%flag =1 %>
                 <%}%>
-                <% if(user && user.ishandle && data1[i].opponent.email != "undefined" && data1[i].opponent.handle == user.handle) {%>
+                <% if(user && user.ishandle && (data1[i].opponent.email != "undefined") && (data1[i].opponent.handle == user.cfusername)) {%>
                     <%flag =1 %>
                 <%}%>
                 <% if(data1[i].visibility == "PUBLIC") {%>
@@ -205,10 +205,10 @@
             <span>PAST</span>
             <%for(let i=0;i<data2.length;i++) {%>
                 <% let flag =0 ;%>
-                <% if(user && user.ishandle && data2[i].creator.handle == user.handle) {%>
+                <% if(user && user.ishandle && data2[i].creator.handle == user.cfusername) {%>
                     <%flag =1 %>
                 <%}%>
-                <% if(user && user.ishandle && data2[i].opponent.email != "undefined" && data2[i].opponent.handle == user.handle) {%>
+                <% if(user && user.ishandle && data2[i].opponent.email != "undefined" && data2[i].opponent.handle == user.cfusername) {%>
                     <%flag =1 %>
                 <%}%>
                 <% if(data2[i].visibility == "PUBLIC") {%>
@@ -227,6 +227,7 @@
                         <a href="/contest/lockout/<%=data2[i].contestID%>">VIEW CONTEST</a>
                     </div>
                 <%} else {%>
+                    <%if(flag == 1) {%>
                     <div class="contest_box">
                         <span>Lockout # <%=data2[i].contestID%></span>
                         <div class="info_contest">
@@ -241,10 +242,10 @@
                         </div>
                         <a href="/contest/lockout/<%=data2[i].contestID%>">VIEW CONTEST</a>
                     </div>
+                    <%}%>
                 <%}%>
             <%}%>
         </div>
     </main>
-    <script src="/js/home.js"></script>
 </body>
 </html> 

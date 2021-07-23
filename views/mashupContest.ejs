@@ -79,42 +79,34 @@
         <%if(type=="PROBLEMS") {%>
         <div class="main_contest_box">
             <div class="buttons">
-                <span class="active_buttons"><a href="#">PROBLEMS</a></span><span ><a href="/contest/mashup/1/standing">STANDING</a></span>
+                <span class="active_buttons"><a href="#">PROBLEMS</a></span><span ><a href="/contest/mashup/<%=data.contestID%>/standing">STANDING</a></span>
             </div>
             <div class="problem_box" style=" overflow-x:auto;">
                 <table >
                     <tr>
                         <th>#</th>
                         <th>NAME</th>
-                        <th>COUNT</th>
+                        <th>POINTS</th>
+                        <th>AC</th>
                     </tr>
+                    <% let c = ['A','B','C','D','E','F','G','H','I','J']; %>
+                    <% let j=0; %>
+                    <%for(let i=0;i<data.problems.length;i++) {%>
                     <tr>
-                        <td>1</td>
-                        <td>PROBLEM-A</td>
-                        <td>20</td>
+                        <td><%=i+1%></td>
+                        <td><a href="https://codeforces.com/contest/<%=data.problems[i].contestID%>/problem/<%=data.problems[i].index%>">PROBLEM-<%=c[j]%></a></td>
+                        <td><%=data.problems[i].points%></td>
+                        <td><%=data.problems[i].count%></td>
                     </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>PROBLEM-A</td>
-                        <td>20</td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>PROBLEM-A</td>
-                        <td>20</td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>PROBLEM-A</td>
-                        <td>20</td>
-                    </tr>
+                    <% j=j+1 %>
+                    <%}%>
                 </table>
             </div>
         </div>
         <% } else { %>
         <div class="main_contest_box">
             <div class="buttons">
-                <span ><a href="/contest/mashup/1/problems">PROBLEMS</a></span><span class="active_buttons"><a href="#">STANDING</a></span>
+                <span ><a href="/contest/mashup/<%=data.contestID%>/problems">PROBLEMS</a></span><span class="active_buttons"><a href="#">STANDING</a></span>
             </div>
             <div class="problem_box" style=" overflow-x:auto;">
                 <table >
@@ -122,61 +114,29 @@
                         <th>RANK</th>
                         <th>USERNAME</th>
                         <th>TOTAL POINTS</th>
-                        <th>A</th>
-                        <th>B</th>
-                        <th>C</th>
-                        <th>D</th>
-                        <th>E</th>
-                        <th>F</th>
-                        <th>G</th>
+                        <% let c = ['A','B','C','D','E','F','G','H','I','J']; %>
+                        <% let j=0; %>
+                        <%for(let i=0;i<data.problems.length;i++) {%>
+                        <th><a href="https://codeforces.com/contest/<%=data.problems[i].contestID%>/problem/<%=data.problems[i].index%>"><%=c[j]%></a></th>
+                        <% j=j+1 %>
+                        <%}%>
                     </tr>
                     <tr>
-                        <td>1</td>
-                        <td>maskman_lucifer</td>
-                        <td>500</td>
-                        <td>VIEW</td>
-                        <td>VIEW</td>
-                        <td>VIEW</td>
-                        <td>VIEW</td>
-                        <td>VIEW</td>
-                        <td>VIEW</td>
-                        <td>VIEW</td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>maskman_lucifer</td>
-                        <td>500</td>
-                        <td>VIEW</td>
-                        <td>VIEW</td>
-                        <td>VIEW</td>
-                        <td>VIEW</td>
-                        <td>VIEW</td>
-                        <td>VIEW</td>
-                        <td>VIEW</td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>maskman_lucifer</td>
-                        <td>500</td>
-                        <td>VIEW</td>
-                        <td>VIEW</td>
-                        <td>VIEW</td>
-                        <td>VIEW</td>
-                        <td>VIEW</td>
-                        <td>VIEW</td>
-                        <td>VIEW</td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>maskman_lucifer</td>
-                        <td>500</td>
-                        <td>VIEW</td>
-                        <td>VIEW</td>
-                        <td>VIEW</td>
-                        <td>VIEW</td>
-                        <td>VIEW</td>
-                        <td>VIEW</td>
-                        <td>VIEW</td>
+                        <%for(let i=0;i<data.rankList.length;i++) {%>
+                            <tr>
+                                <td><%=i+1%></td>
+                                <td><%=data.rankList[i].handle%></td>
+                                <td><%=data.rankList[i].points%></td>
+                                
+                                <%for(let j=0;j<data.rankList[i].problemResults.length;j++) {%>
+                                <% if(data.rankList[i].problemResults[j].solved) {%>
+                                <td><a href="https://codeforces.com/contest/<%=data.rankList[i].problemResults[j].contestID%>/submission/<%=data.rankList[i].problemResults[j].submissionID%>">VIEW</a></td>
+                                <%} else {%>
+                                -
+                                <%}%>
+                                <%}%>
+                            </tr>
+                        <%}%>
                     </tr>
                 </table>
             </div>

@@ -35,12 +35,14 @@ const mashupSchema = new mongoose.Schema({
     problems: [{
         contestID: Number,
         index : String,
-        points : Number
+        points : Number,
+        count: Number
     }],
     rankList : [{
         handle: String,
         points : Number,
         problemResults : [{
+            solved : Boolean,
             contestID: Number,
             submissionID: Number
         }]

@@ -40,12 +40,23 @@ module.exports.mashup_registered_users = async (req,res) => {
     let contest = req.params.contestno;
     let contestno = Number(contest);
     let data = await Mashup.find({contestID:contestno});
+    if(data.length==0) {
+      let error = {
+         server_error : 'This contest does not exist',
+         login_error : undefined,
+         cfhandle_error : undefined,
+         visualizer_error : undefined
+   
+      };
+      res.render('error',{data:error,user:req.user});
+    } else {
     res.render('registrants',{user:req.user,data:data[0]});
+    }
 };
 
 module.exports.mashup_register_public = async (req,res) => {
 
-    // extract contesID from url
+    // extract contestID from url
     let contest = req.params.contestno;
     let contestno = Number(contest);
     let user = req.user;
@@ -80,6 +91,8 @@ module.exports.mashup_register_public = async (req,res) => {
     
        
        let data = await Mashup.find({contestID: contestno});
+
+       if(data.length > 0) {
        let flag =0;
        for(let i=0;i<data[0].registered.length;i++) {
           if(data[0].registered[i].email == user.googleid) {
@@ -104,7 +117,17 @@ module.exports.mashup_register_public = async (req,res) => {
         res.render('error',{data:error,user:req.user});
 
        }
-    }
+   } else {
+      let error = {
+         server_error : 'Contest does not exist',
+         login_error : undefined,
+         cfhandle_error : undefined,
+         visualizer_error : undefined
+   
+      };
+      res.render('error',{data:error,user:req.user});
+   }
+}
     
 };
 
@@ -145,6 +168,7 @@ module.exports.lockout_register_public = async (req,res)=>{
        };
        let data = await Lockout.find({contestID: contestno});
        
+       if(data.length > 0) {
        if((data[0].opponent.email== "undefined") && (data[0].creator.email != user.googleid)) {
 
        await Lockout.findOneAndUpdate({ contestID: contestno},{ $set: { "opponent" : obj }});
@@ -153,7 +177,7 @@ module.exports.lockout_register_public = async (req,res)=>{
        
        // if user is already registered
        } else {
-            if(data[0].creator.email != user.googleid)
+            if(data[0].creator.email == user.googleid)
             {
                let error = {
                   server_error : undefined,
@@ -176,7 +200,17 @@ module.exports.lockout_register_public = async (req,res)=>{
                res.render('error',{data:error,user:req.user});
             }
        }
+    } else {
+      let error = {
+         server_error : 'Contest does not exist',
+         login_error : undefined,
+         cfhandle_error : undefined,
+         visualizer_error : undefined
+   
+      };
+      res.render('error',{data:error,user:req.user});
     }
+   } 
 };
 
 module.exports.lockout_mashup_register_private = async(req,res)=>{
@@ -269,7 +303,7 @@ module.exports.lockout_mashup_register_private = async(req,res)=>{
             res.redirect('/contest/lockout');
 
             } else {
-               if(data[0].creator.email != user.googleid)
+               if(data[0].creator.email == user.googleid)
                {
                   let error = {
                      server_error : undefined,
@@ -418,3 +452,211 @@ module.exports.lockout_create = async (req,res)=>{
 };
 
  
+module.exports.mashup_contest_landing_page_problems = async (req,res) => {
+
+   let contest = req.params.contestID;
+   let contestno = Number(contest);
+   let data1 = await Mashup.find({contestID:contestno});
+   if(data1.length == 0) {
+      let error = {
+         server_error : 'Contest does not exist',
+         login_error : undefined,
+         cfhandle_error : undefined,
+         visualizer_error : undefined
+   
+      };
+      res.render('error',{data:error,user:req.user});
+   } else {
+   let data = data1[0];
+   if(data.visibility == "PRIVATE") {
+      let flag = 0;
+      if(user && user.ishandle) {
+         for(let i=0;i<data.registered.length;i++) {
+            if(data.registered[i].handle == user.cfusername) {
+               flag =1 
+               break;
+            }
+         }
+      }
+
+      if(flag == 0) {
+            let error = {
+               server_error : 'You can not access this page',
+               login_error : undefined,
+               cfhandle_error : undefined,
+               visualizer_error : undefined
+         
+            };
+            res.render('error',{data:error,user:req.user});
+      } else {
+         if(data.phase == "UPCOMING") {
+            let error = {
+               server_error : 'Contest is still in upcoming phase',
+               login_error : undefined,
+               cfhandle_error : undefined,
+               visualizer_error : undefined
+         
+            };
+            res.render('error',{data:error,user:req.user});
+         } else {
+         res.render('mashupContest',{user:req.user,data:data,type:"PROBLEMS"}); 
+         }
+      }
+   } else {
+      if(data.phase == "UPCOMING") {
+         let error = {
+            server_error : 'Contest is still in upcoming phase',
+            login_error : undefined,
+            cfhandle_error : undefined,
+            visualizer_error : undefined
+      
+         };
+         res.render('error',{data:error,user:req.user});
+      } else {
+      res.render('mashupContest',{user:req.user,data:data,type:"PROBLEMS"}); 
+      }
+   }
+   
+   }
+};
+
+module.exports.mashup_contest_landing_page_standing = async (req,res) => {
+
+   let contest = req.params.contestID;
+   let contestno = Number(contest);
+   let data1 = await Mashup.find({contestID:contestno});
+
+   if(data1.length == 0) {
+      let error = {
+         server_error : 'Contest does not exist',
+         login_error : undefined,
+         cfhandle_error : undefined,
+         visualizer_error : undefined
+   
+      };
+      res.render('error',{data:error,user:req.user});
+   } else {
+   let data = data1[0];
+   if(data.visibility == "PRIVATE") {
+      let flag = 0;
+      if(user && user.ishandle) {
+         for(let i=0;i<data.registered.length;i++) {
+            if(data.registered[i].handle == user.cfusername) {
+               flag =1 
+               break;
+            }
+         }
+      }
+
+      if(flag == 0) {
+            let error = {
+               server_error : 'You can not access this page',
+               login_error : undefined,
+               cfhandle_error : undefined,
+               visualizer_error : undefined
+         
+            };
+            res.render('error',{data:error,user:req.user});
+      } else {
+         if(data.phase == "UPCOMING") {
+            let error = {
+               server_error : 'Contest is still in upcoming phase',
+               login_error : undefined,
+               cfhandle_error : undefined,
+               visualizer_error : undefined
+         
+            };
+            res.render('error',{data:error,user:req.user});
+         } else {
+         res.render('mashupContest',{user:req.user,data:data,type:"STANDING"}); 
+         }
+      }
+   } else {
+      if(data.phase == "UPCOMING") {
+         let error = {
+            server_error : 'Contest is still in upcoming phase',
+            login_error : undefined,
+            cfhandle_error : undefined,
+            visualizer_error : undefined
+      
+         };
+         res.render('error',{data:error,user:req.user});
+      } else {
+      res.render('mashupContest',{user:req.user,data:data,type:"STANDING"}); 
+      }
+   }
+   
+   }
+
+};
+
+// lockout 
+
+module.exports.lockout_contest_landing_page = async (req,res) => {
+
+   let contest = req.params.contestID;
+   let contestno = Number(contest);
+   let data1 = await Lockout.find({contestID:contestno});
+   if(data1.length == 0) {
+      let error = {
+         server_error : 'Contest does not exist',
+         login_error : undefined,
+         cfhandle_error : undefined,
+         visualizer_error : undefined
+   
+      };
+      res.render('error',{data:error,user:req.user});
+   } else {
+   let data = data1[0];
+   if(data.visibility == "PRIVATE") {
+      let flag = 0;
+      if(user && user.ishandle) {
+         if(user.cfusername == creator.handle) {
+            flag =1;
+         }
+         if(data.opponent.email != "undefined"  && data.opponent.handle == user.cfusername) {
+            flag = 1;
+         }
+      }
+
+      if(flag == 0) {
+            let error = {
+               server_error : 'You can not access this page',
+               login_error : undefined,
+               cfhandle_error : undefined,
+               visualizer_error : undefined
+         
+            };
+            res.render('error',{data:error,user:req.user});
+      } else {
+         if(data.phase == "UPCOMING") {
+            let error = {
+               server_error : 'Contest is still in upcoming phase',
+               login_error : undefined,
+               cfhandle_error : undefined,
+               visualizer_error : undefined
+         
+            };
+            res.render('error',{data:error,user:req.user});
+         } else {
+         res.render('lockoutContest',{user:req.user,data:data,type:"PROBLEMS"}); 
+         }
+      }
+   } else {
+      if(data.phase == "UPCOMING") {
+         let error = {
+            server_error : 'Contest is still in upcoming phase',
+            login_error : undefined,
+            cfhandle_error : undefined,
+            visualizer_error : undefined
+      
+         };
+         res.render('error',{data:error,user:req.user});
+      } else {
+      res.render('lockoutContest',{user:req.user,data:data}); 
+      }
+   }
+   
+   }
+};
+

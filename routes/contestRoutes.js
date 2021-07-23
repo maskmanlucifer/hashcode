@@ -24,17 +24,12 @@ router.post('/contest/mashup/create', contestController.mashup_create);
 
 router.post('/contest/lockout/create', contestController.lockout_create);
 
-// router.get('/contest/mashup/:contestID/problems',(req,res)=>{
-//    res.render('mashupContest',{user:req.user,type:"PROBLEMS"});
-// });
+router.get('/contest/mashup/:contestID/problems',contestController.mashup_contest_landing_page_problems);
 
-// router.get('/contest/mashup/:contestID/standing',(req,res)=>{
-//    res.render('mashupContest',{user:req.user,type:"STANDING"});
-// });
+router.get('/contest/mashup/:contestID',contestController.mashup_contest_landing_page_problems);
 
-// router.get('/contest/mashup/:contestID',(req,res)=>{
-//    res.render('mashupContest',{user:req.user,type:"PROBLEMS"});
-// });
+router.get('/contest/mashup/:contestID/standing', contestController.mashup_contest_landing_page_standing);
 
+router.get('/contest/lockout/:contestID',contestController.lockout_contest_landing_page);
 
 module.exports = router;
