@@ -3,63 +3,83 @@ let contest_id = Number(document.getElementById('contest_id').textContent);
 
 // mapping rating ranges with levels
 
-let findLevel = (rating) =>{
-    if(rating < 1200) {
+let findLevel = (rating) => {
+    if(rating < 1200) 
+    {
 
         return "NEWBIE";
 
-    } else if(rating < 1400) {
+    } 
+    else if(rating < 1400) 
+    {
 
         return "PUPIL";
 
-    }  else if(rating < 1600) {
+    }  
+    else if(rating < 1600) 
+    {
 
         return "SPECIALIST";
 
-    } else if(rating < 1900) {
+    } 
+    else if(rating < 1900) 
+    {
 
         return "EXPERT";
 
-    } else if(rating < 2100) {
+    } 
+    else if(rating < 2100) 
+    {
 
         return "CM";
 
-    } else if(rating < 2300) {
+    } 
+    else if(rating < 2300) 
+    {
 
         return "MASTER";
 
-    } else if(rating < 2400) {
+    } 
+    else if(rating < 2400) 
+    {
 
         return "IM";
 
-    } else if(rating < 2600) {
+    } 
+    else if(rating < 2600) 
+    {
 
         return "GM";
 
-    } else if(rating < 3000) {
+    } 
+    else if(rating < 3000) 
+    {
 
         return "IGM";
 
-    } else {
+    } 
+    else 
+    {
 
         return "LGM";
 
     }
-
 };
 
 // getting standing data 
-let dataExtract =  async (contestID)=>{
+let dataExtract =  async (contestID) => {
   let url = "https://codeforces.com/api/contest.standings?contestId=";
   url += contestID;
   
   let standing = await fetch(url);
-  if(standing.status !== 200) {
+  if(standing.status !== 200) 
+  {
       throw new Error('Contest not exist');
   }
   let data = await standing.json();
   
-  if(data.result.contest.phase !== "FINISHED") {
+  if(data.result.contest.phase !== "FINISHED") 
+  {
     throw new Error('Contest is ongoing');
   }
   
@@ -76,12 +96,16 @@ let dataExtract =  async (contestID)=>{
   let handleRating = {};
     
     // mapping handle with level 
-    for(let i=data1.result.length-1;i>=0;i--) {
+    for(let i = data1.result.length - 1;i>=0;i--) 
+    {
         
         let oldRating = data1.result[i].oldRating;
-        if(oldRating >=0 ) {
+        if(oldRating >=0 ) 
+        {
 
-        } else {
+        } 
+        else 
+        {
             oldRating = 0;
         }
         handleRating[data1.result[i].handle]= findLevel(oldRating);
@@ -104,14 +128,18 @@ let dataExtract =  async (contestID)=>{
   levelIndex["LGM"] = 9;
 
   let numberofProblems = data.result.problems.length;
-  for(let i=0;i<numberofProblems;i++) {
+  for(let i=0;i<numberofProblems;i++) 
+  {
       solvedProblems[i] = [0,0,0,0,0,0,0,0,0,0];
   }
   
   // main algo for storing all problems done 
-  for(let i=0;i<data.result.rows.length;i++) {
-      for(let j=0;j<numberofProblems;j++) {
-          if(data.result.rows[i].problemResults[j].points) {
+  for(let i=0;i<data.result.rows.length;i++) 
+  {
+      for(let j=0;j<numberofProblems;j++) 
+      {
+          if(data.result.rows[i].problemResults[j].points) 
+          {
               solvedProblems[j][levelIndex[handleRating[data.result.rows[i].party.members[0].handle]]]++;
           }
       }
@@ -124,9 +152,11 @@ let dataExtract =  async (contestID)=>{
 // filling data in charts 
 dataExtract(contest_id)
 .then((data1) => {
-    for(let i=0;i<data1.numberofProblems;i++) {
+    for(let i=0;i<data1.numberofProblems;i++) 
+    {
         let arr = [0,0,0,0,0,0,0,0,0,0];
-        for(let j=0;j<10;j++) {
+        for(let j=0;j<10;j++) 
+        {
             arr[j]=data1.solvedProblems[i][j];
         }
         let id = 'myChart';
@@ -187,10 +217,10 @@ dataExtract(contest_id)
                 }
             }
         });
-            }
-        })
-        .catch((err)=>{
+        }
+    })
+.catch((err)=>{
 
-        console.log(err.message);
+console.log(err.message);
 
-        })
+})

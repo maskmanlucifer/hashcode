@@ -89,7 +89,7 @@
                 <p>Bar graph of how many users of level x solved particular problem</p>
                 <p>Seperate bar graph for each problem</p>
                 <p>Contest no. can be found in url of that contest</p>
-                <p>Due to quite large data fetching it might take 4-5 seconds to load the chart</p>
+                <p>Due to quite large data fetching it might take 6-7 seconds to load the chart</p>
                 <p>Any contest can be visualized only after rating change of that contest</p>
             </div>
             </div>
@@ -109,30 +109,35 @@
 
         $('.contest_button').click((e)=>{
             e.preventDefault();
+
             contestError.textContent='';
+
             let contestNumber = document.getElementById('contest_no').value;
             let uri = `https://codeforces.com/api/contest.ratingChanges?contestId=${contestNumber}`;
+
             fetch(uri)
-            .then((res)=>{
+            .then( (res) => {
                 return res.json();
             })
-            .then((data)=>{
-               if(data.status !== "OK" || data.result.length==0) {
-
+            .then((data) => {
+               if(data.status !== "OK" || data.result.length==0) 
+               {
                   contestError.textContent = "Can not show this contest";
-
-               } else {
+               } 
+               else 
+               {
                    let uri1 = "/visualizer/contest/" + contestNumber;
                     $.ajax({
                         type: 'GET',
                         url: uri1,
-                        success: function(data){
+                        success: function(data) 
+                        {
                             location.assign(uri1);
                         }
                     });
                }
             })
-            .catch((err)=>{
+            .catch((err) => {
                 contestError.textContent = err.message;
             })
         });
