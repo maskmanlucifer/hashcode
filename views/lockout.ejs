@@ -115,9 +115,10 @@
                             <%if(flag == 1){%>
                                 You are registered
                                 <a href="/contest/lockout/<%=data[i].contestId%>">ENTER</a>
-                               <%} else {%>
-                                Contest is full
-                               <%}%>
+                            <%} else {%>
+                                Lockout is full
+                                <a href="/contest/lockout/<%=data[i].contestId%>">VIEW CONTEST</a>
+                            <%}%>
                             
                         <% } else { %>
                             <%if(flag == 1){%>
@@ -125,6 +126,7 @@
                                 <a href="/contest/lockout/<%=data[i].contestId%>">ENTER</a>
                             <%} else {%>
                                 <a href="/contest/lockout/<%=data[i].contestId%>/register">REGISTER</a>
+                                <a href="/contest/lockout/<%=data[i].contestId%>">ENTER</a>
                             <%}%>
                         <%}%>   
                     </div>
