@@ -31,11 +31,9 @@ passport.use(
         done(null,currentUser);
         } else {
             new User({ 
-                cfusername: "",
-                ishandle:false,
-                googleid:profile.id,
+                isHandle:false,
+                googleId:profile.id,
                 name:profile.displayName,
-                contestlist:[]
             }).save().then((newUser)=>{
             done(null,newUser);
             })

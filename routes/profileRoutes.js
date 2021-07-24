@@ -14,4 +14,8 @@ const authCheck = (req,res,next)=> {
 // getting profile main page 
 router.get('/profile',authCheck, profileController.profile_get);
 
+router.post('/profile/handle/save',profileController.verify);
+
+router.post('/profile/handle/verify',profileController.change_isHandle);
+
 module.exports = router;

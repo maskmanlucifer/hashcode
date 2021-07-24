@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const mashupSchema = new mongoose.Schema({
-    contestID : {
+    contestId : {
       type : Number
     },
     starttimeSecond:{
@@ -9,9 +9,6 @@ const mashupSchema = new mongoose.Schema({
     },
     durationtimeSecond: {
       type: Number
-    },
-    author:{
-      type: String
     },
     visibility : {
       type: String
@@ -24,16 +21,25 @@ const mashupSchema = new mongoose.Schema({
     },
     registered :[{
       handle : String,
-      email : String
+      googleId : String
     }],
     numberofProblems : {
         type : Number
     },
     problems: [{
-        contestID: Number,
+        contestId: Number,
         index : String,
         points : Number,
-    }]
+        numberofAc : Number
+    }],
+    rankList : [{
+      handle: String,
+      totalPoints : Number,
+      problemResults : [{
+          contestId: Number,
+          submissionId: Number
+      }]
+  }]
 });
 
 const Mashup = mongoose.model('mashup', mashupSchema);

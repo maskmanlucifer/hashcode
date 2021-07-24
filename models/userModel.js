@@ -1,22 +1,21 @@
 const mongoose = require('mongoose');
 
 const userSchema = new mongoose.Schema({
-    cfusername:{
+    cfHandle:{
       type: String
     },
-    googleid: {
+    googleId: {
       type: String
     },
     name:{
       type: String
     },
-    ishandle :{
+    isHandle :{
       type : Boolean
     },
-    contestlist : [{
-      type: String,
-      contestID : Number
-    }]
+    contestList : {
+      type : Array
+    }
 });
 
 const User = mongoose.model('user', userSchema);

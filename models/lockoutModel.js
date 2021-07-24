@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const lockoutSchema = new mongoose.Schema({
-    contestID : {
+    contestId : {
       type : Number
     },
     starttimeSecond:{
@@ -10,25 +10,19 @@ const lockoutSchema = new mongoose.Schema({
     durationtimeSecond: {
       type: Number
     },
-    author: {
-      type: String
-    },
     creator : {
         handle : String,
-        email : String
+        googleId : String
     },
     opponent :{
         handle : String,
-        email : String
+        googleId : String
     },
     visibility : {
       type: String
     },
     minRange : {
       type:Number
-    },
-    phase : {
-      type : String
     },
     maxRange : {
         type : Number
@@ -37,10 +31,18 @@ const lockoutSchema = new mongoose.Schema({
         type : Number
     },
     problems: [{
-        contestID: Number,
+        contestId: Number,
         index : String,
         points : Number
     }],
+    rankList : [{
+      handle: String,
+      totalPoints : Number,
+      problemResults : [{
+          contestId: Number,
+          submissionId: Number
+      }]
+  }]
 });
 
 const Lockout = mongoose.model('lockout', lockoutSchema);

@@ -56,7 +56,11 @@ app.get('/',(req,res)=>{
    res.render('home',{user:req.user});
 });
 
-
+app.get('/save',async (req,res)=>{
+  let arr = [{type:"mashup",contestId:1}];
+  await User.findOneAndUpdate({googleId:"116059839165577630911"},{ $set: { "contestList" : arr }});
+  res.redirect('/profile');
+})
 app.listen(3000,()=>{
   console.log("You are listening to 3000 port");
 });

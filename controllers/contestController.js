@@ -4,17 +4,22 @@ const jwt=require('jsonwebtoken');
 
 
 // contest landing page 
-module.exports.contest_landing_page = (req,res)=>{
+module.exports.contest_landing_page = (req,res)=> {
     res.render('contest',{user:req.user}); 
 };
 
 // mashup contest landing page 
 module.exports.mashup_landing_page = async (req,res)=>{
-
     let data = await Mashup.find();
     res.render('mashup',{user:req.user,data:data}); 
 };
 
+module.exports.get_registered_list = async(req,res)=>{
+   let contest = req.params.contestID;
+   let contestID = Number(contest);
+   let data1 = await Mashup.find({contestID:contestID});
+   res.send(data1);
+}
 
 // lockout contest landing page 
 module.exports.lockout_landing_page = async (req,res)=>{
@@ -264,6 +269,16 @@ module.exports.lockout_mashup_register_private = async(req,res)=>{
             };
             
             let data = await Mashup.find({contestID: contestno});
+            if(data.registered.length==10) {
+               let error = {
+                  server_error : 'No place left mashup is full',
+                  login_error : undefined,
+                  cfhandle_error : undefined,
+                  visualizer_error : undefined
+            
+               };
+               res.render('error',{data:error,user:req.user});
+            } else {
             let flag =0;
             for(let i=0;i<data[0].registered.length;i++) {
                if(data[0].registered[i].email == user.googleid) {
@@ -284,6 +299,7 @@ module.exports.lockout_mashup_register_private = async(req,res)=>{
                };
                res.render('error',{data:error,user:req.user});
             }
+          }
           }
           else {
             let obj ={
@@ -460,14 +476,6 @@ module.exports.mashup_contest_landing_page_problems = async (req,res) => {
       res.render('error',{data:error,user:req.user});
    } else {
       let data = data1[0];
-      let secondsSinceEpoch = Date.now();
-      let date = new Date();
-      let offset = date.getTimezoneOffset() * 60*1000;
-      secondsSinceEpoch = Math.round(secondsSinceEpoch/1000.0);
-   if(secondsSinceEpoch<data.starttimeSecond) {
-      res.render('mashupContest',{user:req.user,server_error:1,data:data,type:"PROBLEMS"}); 
-   }
-   else {
    if(data.visibility == "PRIVATE") {
       let flag = 0;
       if(user && user.ishandle) {
@@ -499,7 +507,7 @@ module.exports.mashup_contest_landing_page_problems = async (req,res) => {
             };
             res.render('error',{data:error,user:req.user});
          } else {
-         res.render('mashupContest',{user:req.user,data:data,type:"PROBLEMS",server_error:undefined}); 
+         res.render('mashupContest',{user:req.user,data:data,type:"PROBLEMS"}); 
          }
       }
    } else {
@@ -513,9 +521,8 @@ module.exports.mashup_contest_landing_page_problems = async (req,res) => {
          };
          res.render('error',{data:error,user:req.user});
       } else {
-      res.render('mashupContest',{user:req.user,data:data,type:"PROBLEMS",server_error:undefined}); 
+      res.render('mashupContest',{user:req.user,data:data,type:"PROBLEMS"}); 
       }
-   }
    }
    }
 };
@@ -537,13 +544,6 @@ module.exports.mashup_contest_landing_page_standing = async (req,res) => {
       res.render('error',{data:error,user:req.user});
    } else {
       let data = data1[0];
-      let secondsSinceEpoch = Date.now();
-      let date = new Date();
-      let offset = date.getTimezoneOffset() * 60*1000;
-      secondsSinceEpoch = Math.round(secondsSinceEpoch/1000.0);
-   if(secondsSinceEpoch<data.starttimeSecond) {
-      res.render('mashupContest',{user:req.user,server_error:1,data:data,type:"STANDING"}); 
-   } else {
    if(data.visibility == "PRIVATE") {
       let flag = 0;
       if(user && user.ishandle) {
@@ -575,7 +575,7 @@ module.exports.mashup_contest_landing_page_standing = async (req,res) => {
             };
             res.render('error',{data:error,user:req.user});
          } else {
-         res.render('mashupContest',{user:req.user,data:data,type:"STANDING",server_error:undefined}); 
+         res.render('mashupContest',{user:req.user,data:data,type:"STANDING"}); 
          }
       }
    } else {
@@ -589,10 +589,8 @@ module.exports.mashup_contest_landing_page_standing = async (req,res) => {
          };
          res.render('error',{data:error,user:req.user});
       } else {
-      res.render('mashupContest',{user:req.user,data:data,type:"STANDING",server_error:undefined}); 
+      res.render('mashupContest',{user:req.user,data:data,type:"STANDING"}); 
       }
-   }
-   
    }
 }
 

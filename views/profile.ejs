@@ -76,8 +76,115 @@
         </ul>
     </nav>
     <main class="main">
-       
+        <div class="welcome">
+            <p>WELCOME <%=user.name%></p>
+        </div>
+       <% if(user.isHandle) {%>
+            <div class="card_list_mashup">
+                <span>YOUR CONTESTS</span> 
+                <%for(let i=user.contestList.length-1;i>=0;i--) {%>
+                    <div class="contest_box">
+                        <span><%=user.contestList[i].type.toUpperCase()%> # <%=user.contestList[i].contestId%></span>
+                        <a href="/contest/<%=user.contestList[i].type%>/<%=user.contestList[i].contestId%>">GOTO CONTEST</a>
+                    </div>
+                <%}%>
+            </div>
+       <%} else {%>
+            <div class="profile_box">
+                <p>Last one verification for reducing fake ID's and tracking your submissions in mashups and lockouts</p>
+                <form>
+                    <label for="cfHandle">Enter your codeforces handle</label>
+                    <input type="text" name="cfHandle"/>
+                    <button>ADD HANDLE</button>
+                    <p class="contestError"></p>
+                    <div class="info"></div>
+                </form>
+                <div id="timer">
+                    <p id="demo1"></p>
+                    <p id="demo"></p>
+                </div>
+            </div>
+       <%}%>
     </main>
-    <script src="/js/home.js"></script>
+    <script>
+        const form = document.querySelector('form');
+        let contestError=document.querySelector('.contestError');
+        let info=document.querySelector('.info');
+        $('button').click(async (e) => {
+            e.preventDefault();
+
+            contestError.textContent='';
+            info.innerHTML = '';
+            let cfHandle = form.cfHandle.value;
+            
+            try { 
+                const res = await fetch('/profile/handle/save', { 
+                    method: 'POST', 
+                    body: JSON.stringify({cfHandle:cfHandle}),
+                    headers: {'Content-Type': 'application/json'}
+                });
+                
+                const data = await res.json(); 
+
+                if (data.contestError) 
+                { 
+                    contestError.textContent=data.contestError;
+                }
+                if(data.info)
+                {
+                    async function check() {
+                        try 
+                        {
+                            const res2 = await fetch('/profile/handle/verify', { 
+                                method: 'POST', 
+                                body: JSON.stringify({cfHandle:cfHandle}),
+                                headers: {'Content-Type': 'application/json'}
+                            });
+                            
+                            const data2 = await res2.json(); 
+
+                            console.log(data2);
+                            if (data2.contestError) 
+                            { 
+                                contestError.textContent=data2.contestError;
+                            }
+                             
+                            if(data2.info)
+                            {
+                                info.innerHTML = "Your Codeforces Handle is verified";
+                            }
+                        }
+                        catch(err)
+                        {
+                            console.log(err);
+                        }
+                       
+                    }
+                    info.innerHTML = `Submit <a href="https://gist.github.com/maskmanlucifer/a3cf6a401e67e74176f99cd1765a6a75">Code</a> to <a href="https://codeforces.com/contest/1331/problem/A">Problem</a> within 50 second`;
+                    let now = new Date().getTime();
+                    let target = now + (2*1000);
+                    let x = setInterval(()=>{
+                        now = new Date().getTime();
+                        let distance = target - now;
+                        let seconds = Math.floor((distance % (1000 * 60)) / 1000);
+                        document.getElementById("demo1").textContent = "Verification will be done in 50s don't refresh the page";
+                        let finaltime = seconds + "s ";
+                        document.getElementById("demo").innerHTML = finaltime;
+                        if (distance <= 1) {
+                            check();
+                            clearInterval(x);
+                            document.getElementById("demo1").innerHTML='';
+                            document.getElementById("demo").innerHTML='';
+                            info.innerHTML='';
+                        }
+
+                    },1000);
+                }
+            }
+            catch (err) {
+                console.log(err);
+            }
+        });
+    </script>
 </body>
 </html> 

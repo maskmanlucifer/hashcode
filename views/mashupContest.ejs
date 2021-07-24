@@ -78,38 +78,46 @@
     <main class="main">
         <p id="starttime" style="display: none;"><%=data.starttimeSecond%></p>
         <p id="duration" style="display:none;"><%=data.durationtimeSecond%></p>
+        <p id="problems" style="display: none;"><%=data.problems.length%></p>
+        <p id="type" style="display: none;"><%=type%></p>
+        <p id="contestID" style="display: none;"><%=data.contestID%></p>
+        <% let secondsSinceEpoch = Date.now(); %>
+        <% let start = (data.starttimeSecond + data.durationtimeSecond)* 1000 %>
         <%if(type=="PROBLEMS") {%>
         <div class="main_contest_box">
             <div class="buttons">
                 <span class="active_buttons"><a href="#">PROBLEMS</a></span><span ><a href="/contest/mashup/<%=data.contestID%>/standing">STANDING</a></span><span ><a href="/contest/mashup/<%=data.contestID%>/registered">REGISTERED</a></span>
             </div>
-            <div class="problem_box" style=" overflow-x:auto;">
-                <% if(server_error!=undefined) {%>
-                    <div class="contestError">
-                    <p>CONTEST IS NOT STARTED</p>
-                    </div>
-                <%} else {%>
-                <table >
-                    <tr>
-                        <th>#</th>
-                        <th>NAME</th>
-                        <th>POINTS</th>
-                        <th>AC</th>
-                    </tr>
-                    <% let c = ['A','B','C','D','E','F','G','H','I','J']; %>
-                    <% let j=0; %>
-                    <%for(let i=0;i<data.problems.length;i++) {%>
-                    <tr>
-                        <td><%=i+1%></td>
-                        <td><a href="https://codeforces.com/contest/<%=data.problems[i].contestID%>/problem/<%=data.problems[i].index%>">PROBLEM-<%=c[j]%></a></td>
-                        <td><%=data.problems[i].points%></td>
-                        <td><%=data.problems[i].count%></td>
-                    </tr>
-                    <% j=j+1 %>
-                    <%}%>
-                </table>
-                <%}%>
-            </div>
+            <%if(secondsSinceEpoch > start) {%>
+                <div class="problem_box" style=" overflow-x:auto;"> 
+                    <% if(data.problems.length == 0) {%>
+                        <p class="contestError">NO ONE ATTEMPTED CONTEST</p>
+                    <% } else {%>
+                        <table >
+                            <tr>
+                                <th>#</th>
+                                <th>NAME</th>
+                                <th>POINTS</th>
+                            </tr>
+                            <% let c = ['A','B','C','D','E','F','G','H','I','J']; %>
+                            <% let j=0; %>
+                            <%for(let i=0;i<data.problems.length;i++) {%>
+                            <tr>
+                                <td><%=i+1%></td>
+                                <td><a href="https://codeforces.com/contest/<%=data.problems[i].contestID%>/problem/<%=data.problems[i].index%>">PROBLEM-<%=c[j]%></a></td>
+                                <td><%=data.problems[i].points%></td>
+                            </tr>
+                            <% j=j+1 %>
+                            <%}%>
+                        </table>
+                    <%}%>    
+                </div>
+            <%} else {%>
+                <div class="problem_box" style=" overflow-x:auto;">
+                    <p class="contestError"></p>
+                    
+                </div>
+            <%}%>
         </div>
         <% } else if(type=="STANDING") { %>
         <div class="main_contest_box">
@@ -117,42 +125,7 @@
                 <span ><a href="/contest/mashup/<%=data.contestID%>/problems">PROBLEMS</a></span><span class="active_buttons"><a href="#">STANDING</a></span><span ><a href="/contest/mashup/<%=data.contestID%>/registered">REGISTERED</a></span>
             </div>
             <div class="problem_box" style=" overflow-x:auto;">
-                <% if(server_error!=undefined) {%>
-                    <div class="contestError">
-                    <p>CONTEST IS NOT STARTED</p>
-                    </div>
-                <%} else {%>
-                <table >
-                    <tr>
-                        <th>RANK</th>
-                        <th>USERNAME</th>
-                        <th>TOTAL POINTS</th>
-                        <% let c = ['A','B','C','D','E','F','G','H','I','J']; %>
-                        <% let j=0; %>
-                        <%for(let i=0;i<data.problems.length;i++) {%>
-                        <th><a href="https://codeforces.com/contest/<%=data.problems[i].contestID%>/problem/<%=data.problems[i].index%>"><%=c[j]%></a></th>
-                        <% j=j+1 %>
-                        <%}%>
-                    </tr>
-                    <tr>
-                        <%for(let i=0;i<data.rankList.length;i++) {%>
-                            <tr>
-                                <td><%=i+1%></td>
-                                <td><%=data.rankList[i].handle%></td>
-                                <td><%=data.rankList[i].points%></td>
-                                
-                                <%for(let j=0;j<data.rankList[i].problemResults.length;j++) {%>
-                                <% if(data.rankList[i].problemResults[j].solved) {%>
-                                <td><a href="https://codeforces.com/contest/<%=data.rankList[i].problemResults[j].contestID%>/submission/<%=data.rankList[i].problemResults[j].submissionID%>">VIEW</a></td>
-                                <%} else {%>
-                                -
-                                <%}%>
-                                <%}%>
-                            </tr>
-                        <%}%>
-                    </tr>
-                </table>
-                <%}%>
+                <p class="contestError"></p>
             </div>
         </div>
         <%} else {%>
@@ -181,6 +154,6 @@
             <p id="demo"></p>
         </div>
     </main>
-    <script src="/js/home.js"></script>
+    <script src="/js/mashup.js"></script>
 </body>
 </html> 

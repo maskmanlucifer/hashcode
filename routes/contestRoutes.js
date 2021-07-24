@@ -32,4 +32,5 @@ router.get('/contest/mashup/:contestID/standing', contestController.mashup_conte
 
 router.get('/contest/lockout/:contestID',contestController.lockout_contest_landing_page);
 
+router.get('/api/registered/:contestID',contestController.get_registered_list);
 module.exports = router;
