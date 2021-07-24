@@ -81,20 +81,7 @@
             <div class="buttons">
                 <span class="active_buttons" style="width: 100%; font-size: 17px;text-align: center;color: thistle;">Registered Users of Mashup # <%=data.contestID%></span>
             </div>
-            <div class="problem_box" style=" overflow-x:auto;">
-                <table >
-                    <tr>
-                        <th>#</th>
-                        <th>USERNAME</th>
-                    </tr>
-                    <%for(let i=0;i<data.registered.length;i++) { %>
-                        <tr>
-                            <td><%=i+1%></td>
-                            <td><a href="https://codeforces.com/profile/<%=data.registered[i].handle%>"><%=data.registered[i].handle%></a></td>
-                        </tr>
-                    <%}%>
-                </table>
-            </div>
+            
         </div>
     </main>
 </body>

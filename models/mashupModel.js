@@ -22,9 +22,6 @@ const mashupSchema = new mongoose.Schema({
     maxRange : {
         type : Number
     },
-    phase : {
-      type : String
-    },
     registered :[{
       handle : String,
       email : String
@@ -36,16 +33,6 @@ const mashupSchema = new mongoose.Schema({
         contestID: Number,
         index : String,
         points : Number,
-        count: Number
-    }],
-    rankList : [{
-        handle: String,
-        points : Number,
-        problemResults : [{
-            solved : Boolean,
-            contestID: Number,
-            submissionID: Number
-        }]
     }]
 });
 

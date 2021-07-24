@@ -15,8 +15,6 @@ const User = require('./models/userModel');
 const Mashup = require('./models/mashupModel');
 const Lockout = require('./models/lockoutModel');
 
-
-
 const fizzbuzzRoutes = require('./routes/fizzbuzzRoutes');
 const visualizerRoutes = require('./routes/visualizerRoutes');
 const contestRoutes = require('./routes/contestRoutes');
@@ -28,6 +26,8 @@ let url=process.env.url;
 mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex:true  },()=>{
   console.log("Database is connected");
 });
+
+
 
 const app=express();
 

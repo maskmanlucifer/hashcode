@@ -80,145 +80,57 @@
         </div>
         <div class="create_button"><a href="/contest/mashup/create"><i class="material-icons">add</i><span>CREATE</span></a></div>
         <div class="card_list_mashup">
-            <span>ONGOING</span> 
-            <%for(let i=0;i<data3.length;i++) {%>
+            <span>ALL</span> 
+            <%for(let i=data.length-1;i>=0;i--) {%>
                 <% let flag = 0 %>
-                     <% for (let j=0;j<data3[i].registered.length;j++) {%>
-                         <% if(user && user.ishandle && data3[i].registered[j].handle == user.cfusername) {%>
+                     <% for (let j=0;j<data[i].registered.length;j++) {%>
+                         <% if(user && user.ishandle && data[i].registered[j].handle == user.cfusername) {%>
                             <% flag =1 %>
                          <% } %>  
                      <%}%>
-                <% if(data3[i].visibility == "PUBLIC") {%>
+                <% if(data[i].visibility == "PUBLIC") {%>
                     <div class="contest_box">
-                        <span>Mashup # <%=data3[i].contestID%></span>
+                        <span>Mashup # <%=data[i].contestID%></span>
                         <div class="info_contest">
-                        <%let myDate = new Date(data3[i].starttimeSecond *1000) %>
+                        <%let myDate = new Date(data[i].starttimeSecond *1000) %>
                         <p><strong>Start time :</strong>  <%=myDate.toLocaleString()%></p>
-                        <% let duration =Math.floor(data3[i].durationtimeSecond/60.0)%>
+                        <% let duration =Math.floor(data[i].durationtimeSecond/60.0)%>
                         <% let hours = Math.floor(duration/60.0) %>
                         <% let minutes = duration - (hours*60) %>
                         <p> <strong>Duration :</strong>   <%=hours%> hr : <%=minutes%> min</p>
                         </div> 
                         <div class="info_contest">
-                            <p><strong>Problem range :</strong>  <%=data3[i].minRange%> - <%=data3[i].maxRange%></p>
-                            <p><strong>Problem count :</strong>  <%=data3[i].numberofProblems%></p>
+                            <p><strong>Problem range :</strong>  <%=data[i].minRange%> - <%=data[i].maxRange%></p>
+                            <p><strong>Problem count :</strong>  <%=data[i].numberofProblems%></p>
                         </div>
-                        <a href="/contest/mashup/<%=data3[i].contestID%>/problems">ENTER</a>
+                        <%if(flag ==1 ){%>
+                            You are registered
+                            <a href="/contest/mashup/<%=data[i].contestID%>/problems">ENTER</a>
+                        <%} else {%>
+                            <a href="/contest/mashup/<%=data[i].contestID%>/register">REGISTER</a>
+                            <a href="/contest/mashup/<%=data[i].contestID%>/problems">VIEW CONTEST</a>
+                        <%}%>
                     </div>
                 <%} else {%>
                     <%if (flag==1) {%>
-                        
                         <div class="contest_box">
-                            <span>Mashup # <%=data3[i].contestID%></span>
+                            <span>Mashup # <%=data[i].contestID%></span>
                             <div class="info_contest">
-                            <%let myDate = new Date(data3[i].starttimeSecond *1000) %>
+                            <%let myDate = new Date(data[i].starttimeSecond *1000) %>
                             <p><strong>Start time :</strong>  <%=myDate.toLocaleString()%></p>
-                            <% let duration =Math.floor(data3[i].durationtimeSecond/60.0)%>
+                            <% let duration =Math.floor(data[i].durationtimeSecond/60.0)%>
                             <% let hours = Math.floor(duration/60.0) %>
                             <% let minutes = duration - (hours*60) %>
                             <p> <strong>Duration :</strong>   <%=hours%> hr : <%=minutes%> min</p>
                             </div> 
                             <div class="info_contest">
-                                <p><strong>Problem range :</strong>  <%=data3[i].minRange%> - <%=data3[i].maxRange%></p>
-                                <p><strong>Problem count :</strong>  <%=data3[i].numberofProblems%></p>
+                                <p><strong>Problem range :</strong>  <%=data[i].minRange%> - <%=data[i].maxRange%></p>
+                                <p><strong>Problem count :</strong>  <%=data[i].numberofProblems%></p>
                             </div>
-                            <a href="/contest/mashup/<%=data3[i].contestID%>/problems">ENTER</a>
+                            You are registered
+                            <a href="/contest/mashup/<%=data[i].contestID%>/problems">ENTER</a>
                         </div>
                     <%}%> 
-                <%}%>
-            <%}%>
-        </div>
-        <div class="card_list_mashup">
-            <span>UPCOMING</span>
-            
-            <%for(let i=0;i<data1.length;i++) {%>
-                <% let flag = 0 %>
-                     <% for (let j=0;j<data1[i].registered.length;j++) {%>
-                         
-                         <% if(user && user.ishandle && (data1[i].registered[j].handle == user.cfusername)) {%>
-                            <% flag=1 %>
-                            
-                         <% } %>  
-                     <%}%>
-                     
-                <% if(data1[i].visibility == "PUBLIC") {%>
-                    <div class="contest_box">
-                        <span>Mashup # <%=data1[i].contestID%></span>
-                        <a href="/contest/mashup/<%=data1[i].contestID%>/registered">REGISTERED PARTICIPANTS</a>
-                        <div class="info_contest">
-                            <%let myDate = new Date(data1[i].starttimeSecond *1000) %>
-                            <p><strong>Start time :</strong>  <%=myDate.toLocaleString()%></p>
-                            <% let duration =Math.floor(data1[i].durationtimeSecond/60.0)%>
-                            <% let hours = Math.floor(duration/60.0) %>
-                            <% let minutes = duration - (hours*60) %>
-                            <p> <strong>Duration :</strong>   <%=hours%> hr : <%=minutes%> min</p>
-                        </div> 
-                        <div class="info_contest">
-                            <p><strong>Problem range :</strong>  <%=data1[i].minRange%> - <%=data1[i].maxRange%></p>
-                            <p><strong>Problem count :</strong>  <%=data1[i].numberofProblems%></p>
-                        </div>     
-                        
-                        <%if(flag == 1) {%>
-                            <p>YOU ARE REGISTERED</p>
-                        <%} else {%>
-                            <a href="/contest/mashup/<%=data1[i].contestID%>/register">REGISTER</a>
-                        <%}%>
-                        <p class="contestError"></p>
-                    </div>
-                <%} else {%>
-                    <% if(flag == 1) {%>
-                        <div class="contest_box">
-                            <span>Mashup # <%=data1[i].contestID%></span>
-                            <a href="/contest/mashup/<%=data1[i].contestID%>/registered">REGISTERED PARTICIPANTS</a>
-                            <div class="info_contest">
-                                <%let myDate = new Date(data1[i].starttimeSecond *1000) %>
-                                <p><strong>Start time :</strong>  <%=myDate.toLocaleString()%></p>
-                                <% let duration =Math.floor(data1[i].durationtimeSecond/60.0)%>
-                                <% let hours = Math.floor(duration/60.0) %>
-                                <% let minutes = duration - (hours*60) %>
-                                <p> <strong>Duration :</strong>   <%=hours%> hr : <%=minutes%> min</p>
-                            </div> 
-                            <div class="info_contest">
-                                <p><strong>Problem range :</strong>  <%=data1[i].minRange%> - <%=data1[i].maxRange%></p>
-                                <p><strong>Problem count :</strong>  <%=data1[i].numberofProblems%></p>
-                            </div>     
-                            <p>YOU ARE REGISTERED</p>
-                        </div>
-                    <%}%>
-                <%}%>
-            <%}%>
-        </div>
-        <div class="card_list_mashup">
-            <span>PAST</span>
-            <%for(let i=0;i<data2.length;i++) {%>
-                <% let flag = 0 %>
-                     <% for (let j=0;j<data2[i].registered.length;j++) {%>
-                         
-                         <% if(user && user.ishandle && (data2[i].registered[j].handle == user.cfusername)) {%>
-                            <% flag=1 %>
-                            
-                         <% } %>  
-                     <%}%>
-                <% if(data2[i].visibility == "PUBLIC") {%>
-                <div class="contest_box">
-                    <span>Mashup # <%=data2[i].contestID%></span>
-                    <div class="info_contest">
-                        <p><strong>Problem range :</strong>  <%=data2[i].minRange%> - <%=data2[i].maxRange%></p>
-                        <p><strong>Problem count :</strong>  <%=data2[i].numberofProblems%></p>
-                     </div>
-                     <a href="/contest/mashup/<%=data2[i].contestID%>/problems">VIEW CONTEST</a>
-                </div>
-                <%} else {%>
-                    <%if(flag == 1) {%>
-                        <div class="contest_box">
-                            <span>Mashup # <%=data2[i].contestID%></span>
-                            <div class="info_contest">
-                                <p><strong>Problem range :</strong>  <%=data2[i].minRange%> - <%=data2[i].maxRange%></p>
-                                <p><strong>Problem count :</strong>  <%=data2[i].numberofProblems%></p>
-                             </div>
-                             <a href="/contest/mashup/<%=data2[i].contestID%>/problems">VIEW CONTEST</a>
-                        </div>
-                    <%}%>
                 <%}%>
             <%}%>
         </div>

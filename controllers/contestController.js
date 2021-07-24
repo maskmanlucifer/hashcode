@@ -11,20 +11,15 @@ module.exports.contest_landing_page = (req,res)=>{
 // mashup contest landing page 
 module.exports.mashup_landing_page = async (req,res)=>{
 
-    let data1 = await Mashup.find({phase:"UPCOMING"});
-    let data2 = await Mashup.find({phase:"FINISHED"});
-    let data3 = await Mashup.find({phase:"ONGOING"});
-
-    res.render('mashup',{user:req.user,data1:data1,data2:data2,data3:data3}); 
+    let data = await Mashup.find();
+    res.render('mashup',{user:req.user,data:data}); 
 };
 
 
 // lockout contest landing page 
 module.exports.lockout_landing_page = async (req,res)=>{
-    let data1 = await Lockout.find({phase:"UPCOMING"});
-    let data2 = await Lockout.find({phase:"FINISHED"});
-    let data3 = await Lockout.find({phase:"ONGOING"});
-    res.render('lockout',{user:req.user,data1:data1,data2:data2,data3:data3}); 
+    let data = await Lockout.find();
+    res.render('lockout',{user:req.user,data:data}); 
 };
 
 module.exports.mashup_form = (req,res)=>{
@@ -50,7 +45,7 @@ module.exports.mashup_registered_users = async (req,res) => {
       };
       res.render('error',{data:error,user:req.user});
     } else {
-    res.render('registrants',{user:req.user,data:data[0]});
+    res.render('mashupContest',{user:req.user,data:data[0],type:"REGISTERED"});
     }
 };
 
@@ -359,14 +354,12 @@ module.exports.mashup_create = async (req,res)=>{
         visibility : visibility,
         minRange : min_level,
         maxRange : max_level,
-        phase : "UPCOMING",
         registered :[{
           handle : user.cfusername,
           email : user.googleid
         }],
         numberofProblems : no_of_problems,
         problems: [],
-        rankList : []
      };
   
       await new Mashup(obj).save();
@@ -418,7 +411,6 @@ module.exports.lockout_create = async (req,res)=>{
           visibility : visibility,
           minRange : min_level,
           maxRange : max_level,
-          phase : "UPCOMING",
           creator : {handle : user.cfusername,
             email : user.googleid},
           opponent : {
@@ -427,7 +419,6 @@ module.exports.lockout_create = async (req,res)=>{
           },
           numberofProblems : no_of_problems,
           problems: [],
-          rankList : []
        };
 
       await new Lockout(obj).save();
@@ -457,6 +448,7 @@ module.exports.mashup_contest_landing_page_problems = async (req,res) => {
    let contest = req.params.contestID;
    let contestno = Number(contest);
    let data1 = await Mashup.find({contestID:contestno});
+   
    if(data1.length == 0) {
       let error = {
          server_error : 'Contest does not exist',
@@ -467,7 +459,15 @@ module.exports.mashup_contest_landing_page_problems = async (req,res) => {
       };
       res.render('error',{data:error,user:req.user});
    } else {
-   let data = data1[0];
+      let data = data1[0];
+      let secondsSinceEpoch = Date.now();
+      let date = new Date();
+      let offset = date.getTimezoneOffset() * 60*1000;
+      secondsSinceEpoch = Math.round(secondsSinceEpoch/1000.0);
+   if(secondsSinceEpoch<data.starttimeSecond) {
+      res.render('mashupContest',{user:req.user,server_error:1,data:data,type:"PROBLEMS"}); 
+   }
+   else {
    if(data.visibility == "PRIVATE") {
       let flag = 0;
       if(user && user.ishandle) {
@@ -499,7 +499,7 @@ module.exports.mashup_contest_landing_page_problems = async (req,res) => {
             };
             res.render('error',{data:error,user:req.user});
          } else {
-         res.render('mashupContest',{user:req.user,data:data,type:"PROBLEMS"}); 
+         res.render('mashupContest',{user:req.user,data:data,type:"PROBLEMS",server_error:undefined}); 
          }
       }
    } else {
@@ -513,10 +513,10 @@ module.exports.mashup_contest_landing_page_problems = async (req,res) => {
          };
          res.render('error',{data:error,user:req.user});
       } else {
-      res.render('mashupContest',{user:req.user,data:data,type:"PROBLEMS"}); 
+      res.render('mashupContest',{user:req.user,data:data,type:"PROBLEMS",server_error:undefined}); 
       }
    }
-   
+   }
    }
 };
 
@@ -536,7 +536,14 @@ module.exports.mashup_contest_landing_page_standing = async (req,res) => {
       };
       res.render('error',{data:error,user:req.user});
    } else {
-   let data = data1[0];
+      let data = data1[0];
+      let secondsSinceEpoch = Date.now();
+      let date = new Date();
+      let offset = date.getTimezoneOffset() * 60*1000;
+      secondsSinceEpoch = Math.round(secondsSinceEpoch/1000.0);
+   if(secondsSinceEpoch<data.starttimeSecond) {
+      res.render('mashupContest',{user:req.user,server_error:1,data:data,type:"STANDING"}); 
+   } else {
    if(data.visibility == "PRIVATE") {
       let flag = 0;
       if(user && user.ishandle) {
@@ -568,7 +575,7 @@ module.exports.mashup_contest_landing_page_standing = async (req,res) => {
             };
             res.render('error',{data:error,user:req.user});
          } else {
-         res.render('mashupContest',{user:req.user,data:data,type:"STANDING"}); 
+         res.render('mashupContest',{user:req.user,data:data,type:"STANDING",server_error:undefined}); 
          }
       }
    } else {
@@ -582,11 +589,12 @@ module.exports.mashup_contest_landing_page_standing = async (req,res) => {
          };
          res.render('error',{data:error,user:req.user});
       } else {
-      res.render('mashupContest',{user:req.user,data:data,type:"STANDING"}); 
+      res.render('mashupContest',{user:req.user,data:data,type:"STANDING",server_error:undefined}); 
       }
    }
    
    }
+}
 
 };
 
