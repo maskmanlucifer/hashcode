@@ -25,7 +25,7 @@ passport.use(
     clientSecret:process.env.clientSecret
 },
 (accessToken,refreshToken,profile,done)=>{
-   User.findOne({googleid:profile.id})
+   User.findOne({googleId:profile.id})
    .then((currentUser)=> {
         if(currentUser) {
         done(null,currentUser);

@@ -5,7 +5,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300&display=swap" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -84,15 +83,15 @@
             <span>ALL</span>
             <%for(let i=data.length-1;i>=0;i--) {%>
                 <% let flag =0 ;%>
-                <% if(user && user.ishandle && data[i].creator.handle == user.cfusername) {%>
+                <% if(user && user.isHandle && data[i].creator.handle == user.cfHandle) {%>
                     <%flag =1 %>
                 <%}%>
-                <% if(user && user.ishandle && (data[i].opponent.email != "undefined") && (data[i].opponent.handle == user.cfusername)) {%>
+                <% if(user && user.isHandle && (data[i].opponent.googleId != "undefined") && (data[i].opponent.handle == user.cfHandle)) {%>
                     <%flag =1 %>
                 <%}%>
                 <% if (data[i].visibility == "PUBLIC") {%>
                     <div class="contest_box">
-                        <span>Lockout # <%=data[i].contestID%></span>
+                        <span>Lockout # <%=data[i].contestId%></span>
                         <div class="info_contest">
                             <%let myDate = new Date(data[i].starttimeSecond *1000) %>
                             <p><strong>Start time :</strong>  <%=myDate.toLocaleString()%></p>
@@ -107,15 +106,15 @@
                         </div>
                         <div class="info_contest">
                             <p><strong>Participant-1 :</strong> <a href="https://codeforces.com/profile/<%=data[i].creator.handle%>"><%=data[i].creator.handle%></a> </p>
-                            <%if(data[i].opponent.email != "undefined"){%>
+                            <%if(data[i].opponent.googleId != "undefined"){%>
                             <p><strong>Participant-2 :</strong> <a href="https://codeforces.com/profile/<%=data[i].opponent.handle%>"><%=data[i].opponent.handle%></a> </p>
                             <% } %>
                         </div>
                         
-                        <%if(data[i].opponent.email != "undefined"){%>
+                        <%if(data[i].opponent.googleId != "undefined"){%>
                             <%if(flag == 1){%>
                                 You are registered
-                                <a href="/contest/lockout/<%=data[i].contestID%>">ENTER</a>
+                                <a href="/contest/lockout/<%=data[i].contestId%>">ENTER</a>
                                <%} else {%>
                                 Contest is full
                                <%}%>
@@ -123,16 +122,16 @@
                         <% } else { %>
                             <%if(flag == 1){%>
                                 You are registered
-                                <a href="/contest/lockout/<%=data[i].contestID%>">ENTER</a>
+                                <a href="/contest/lockout/<%=data[i].contestId%>">ENTER</a>
                             <%} else {%>
-                                <a href="/contest/lockout/<%=data[i].contestID%>/register">REGISTER</a>
+                                <a href="/contest/lockout/<%=data[i].contestId%>/register">REGISTER</a>
                             <%}%>
                         <%}%>   
                     </div>
                 <%} else {%>
                     <% if(flag ==1 ){%>
                         <div class="contest_box">
-                            <span>Lockout # <%=data[i].contestID%></span>
+                            <span>Lockout # <%=data[i].contestId%></span>
                             <div class="info_contest">
                                 <%let myDate = new Date(data[i].starttimeSecond *1000) %>
                                 <p><strong>Start time :</strong>  <%=myDate.toLocaleString()%></p>
@@ -152,7 +151,7 @@
                                 <% } %>
                             </div>
                             <p>You are registered</p>
-                            <a href="/contest/lockout/<%=data[i].contestID%>">ENTER</a>
+                            <a href="/contest/lockout/<%=data[i].contestId%>">ENTER</a>
                         </div>
                     <%}%>
                 <%}%>

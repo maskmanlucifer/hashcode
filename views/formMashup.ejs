@@ -47,7 +47,7 @@
             </li>
             <%if(user){%>
             <li>
-                <a href="#">
+                <a href="/profile">
                     <i class="material-icons">account_circle</i>
                 </a>
                 <span class="tooltip">PROFILE</span>
@@ -112,6 +112,7 @@
         let link=document.querySelector('.link');
         let link_info=document.querySelector('.link_info');
         let contestError=document.querySelector('.contestError');
+
         $('button').click(async (e) => {
             e.preventDefault();
 
@@ -125,30 +126,40 @@
             let starttime=form.start_time.valueAsNumber;
             let no_of_problems=form.no_of_problems.value;
             let visibility=form.visibility.value;
+
             let secondsSinceEpoch = Date.now();
             let date = new Date();
             let offset = date.getTimezoneOffset() * 60*1000;
             starttime += offset;
-            console.log(secondsSinceEpoch,starttime);
-            if((!duration) || (!min_level) || (!max_level) || (!starttime) || (!no_of_problems)) {
+
+            
+            if((!duration) || (!min_level) || (!max_level) || (!starttime) || (!no_of_problems)) 
+            {
                 contestError.textContent='Some values are not entered';
             }
-            else if(no_of_problems>10){
+            else if(no_of_problems>10)
+            {
                 contestError.textContent='Number of problems should be less than  11';
             }
-            else if(min_level <800 || min_level>3500) {
+            else if(min_level <800 || min_level>3500) 
+            {
                 contestError.textContent='Min level of problem should be in between 800 and 3500';
             }
-            else if(max_level <800 || max_level>3500) {
+            else if(max_level <800 || max_level>3500) 
+            {
                 contestError.textContent='Max level of problem should be in between 800 and 3500';
             }
-            else if(secondsSinceEpoch>starttime){
+            else if(secondsSinceEpoch>starttime)
+            {
                 contestError.textContent='You can not set contest in past';
             }
-            else {
+            else 
+            {
                 duration*=60;
                 starttime = Math.round(starttime/1000.0);
-                try { 
+
+                try 
+                { 
                     
                     const res = await fetch('/contest/mashup/create', { 
                         method: 'POST', 
@@ -157,23 +168,27 @@
                     });
                     
                     const data = await res.json(); 
+
                     if (data.contestError) 
                     { 
                         contestError.textContent=data.contestError;
                     }
+
                     if(data.info)
                     {
                         link_info.innerHTML = `<p>${data.info}</p>`;
                     }
+
                     if(data.link)
                     {
                         link.innerHTML = `<a href="${data.link}">Link</a>`;
                     }
                 }
-                catch (err) {
+                catch (err) 
+                {
                     console.log(err);
-                    }
                 }
+            }
         });
     </script>
 </body>

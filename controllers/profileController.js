@@ -13,7 +13,9 @@ module.exports.profile_get = (req,res) => {
    if(data1.status != "OK") 
    {
        res.send({contestError:'Invalid Handle',info:undefined});
-   } else {
+   } 
+   else 
+   {
        let googleId = req.user.googleId;
        await User.findOneAndUpdate({googleId:googleId},{$set: { "cfHandle" : cfHandle }});
        res.send({contestError:undefined,info:1});
@@ -24,20 +26,25 @@ module.exports.profile_get = (req,res) => {
     let googleId = req.user.googleId;
     let cfHandle = req.body.cfHandle;
     let user = await User.find({googleId:googleId});
-    let url = `https://codeforces.com/api/user.status?handle=${cfHandle}&from=1&count=1`;
+
+    let url = `https://codeforces.com/api/user.status?handle=${cfHandle}&from=1&count=10`;
     let data = await fetch(url);
-    console.log(url);
+    
     let data1 = await data.json();
     if(data1.status != "OK") 
     {
         res.send({contestError:'Handle not verified',info:undefined});
-    } else {
+    } 
+    else 
+    {
+        let secondsSinceEpoch = Date.now();
+        
         let flag = 0 ;
-        console.log(data1);
-        console.log(data1.result.length);
         for(let i=0;i<data1.result.length;i++)
         {
-            if(data1.result[i].problem.contestId==1331 && data1.result[i].problem.index=='A')
+            let submissionTime = data1.result[i].creationTimeSeconds * 1000;
+            let diff = secondsSinceEpoch - submissionTime;
+            if(data1.result[i].problem.contestId==1331 && data1.result[i].problem.index=='A' && (diff<=700000))
             {
                 flag=1;
             }

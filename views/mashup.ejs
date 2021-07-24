@@ -105,10 +105,10 @@
                         </div>
                         <%if(flag ==1 ){%>
                             You are registered
-                            <a href="/contest/mashup/<%=data[i].contestID%>/problems">ENTER</a>
+                            <a href="/contest/mashup/<%=data[i].contestId%>/problems">ENTER</a>
                         <%} else {%>
-                            <a href="/contest/mashup/<%=data[i].contestID%>/register">REGISTER</a>
-                            <a href="/contest/mashup/<%=data[i].contestID%>/problems">VIEW CONTEST</a>
+                            <a href="/contest/mashup/<%=data[i].contestId%>/register">REGISTER</a>
+                            <a href="/contest/mashup/<%=data[i].contestId%>/problems">VIEW CONTEST</a>
                         <%}%>
                     </div>
                 <%} else {%>
@@ -128,7 +128,7 @@
                                 <p><strong>Problem count :</strong>  <%=data[i].numberofProblems%></p>
                             </div>
                             You are registered
-                            <a href="/contest/mashup/<%=data[i].contestID%>/problems">ENTER</a>
+                            <a href="/contest/mashup/<%=data[i].contestId%>/problems">ENTER</a>
                         </div>
                     <%}%> 
                 <%}%>

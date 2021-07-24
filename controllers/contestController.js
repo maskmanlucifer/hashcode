@@ -1,5 +1,7 @@
 const Mashup = require('../models/mashupModel');
 const Lockout = require('../models/lockoutModel');
+const User = require('../models/userModel');
+
 const jwt=require('jsonwebtoken');
 
 
@@ -14,12 +16,6 @@ module.exports.mashup_landing_page = async (req,res)=>{
     res.render('mashup',{user:req.user,data:data}); 
 };
 
-module.exports.get_registered_list = async(req,res)=>{
-   let contest = req.params.contestID;
-   let contestID = Number(contest);
-   let data1 = await Mashup.find({contestID:contestID});
-   res.send(data1);
-}
 
 // lockout contest landing page 
 module.exports.lockout_landing_page = async (req,res)=>{
@@ -34,6 +30,13 @@ module.exports.mashup_form = (req,res)=>{
 module.exports.lockout_form = (req,res)=>{
     res.render('formLockout',{user:req.user});
 };
+
+module.exports.get_registered_list = async(req,res)=>{
+   let contest = req.params.contestID;
+   let contestID = Number(contest);
+   let data1 = await Mashup.find({contestID:contestID});
+   res.send(data1);
+}
 
 module.exports.mashup_registered_users = async (req,res) => {
 
@@ -61,72 +64,86 @@ module.exports.mashup_register_public = async (req,res) => {
     let contestno = Number(contest);
     let user = req.user;
     
+
     // if user is not logged 
-    if(user === undefined) {
-     let error = {
-        server_error : undefined,
-        login_error : 'You are not logged in',
-        cfhandle_error : undefined,
-        visualizer_error : undefined
-  
-     };
-     res.render('error',{data:error,user:req.user});
+    if(user === undefined) 
+    {
+         let error = {
+            server_error : undefined,
+            login_error : 'You are not logged in',
+            cfhandle_error : undefined,
+            visualizer_error : undefined
+      
+         };
+         res.render('error',{data:error,user:req.user});
     
-    // if user haven't added codeforces handle
-    } else if(!user.ishandle) {
-     let error = {
-        server_error : undefined,
-        login_error : undefined,
-        cfhandle_error : 'Please verify your codeforces username in profile section',
-        visualizer_error : undefined
-  
-     };
-     res.render('error',{data:error,user:req.user});
     
-    }  else {
-       let obj ={
-          handle:user.cfusername,
-          email:user.googleid
-       };
+    } 
+    else if(!user.isHandle) 
+    {
+         let error = {
+            server_error : undefined,
+            login_error : undefined,
+            cfhandle_error : 'Please verify your codeforces username in profile section',
+            visualizer_error : undefined
+      
+         };
+         res.render('error',{data:error,user:req.user});
     
+    }  
+    else 
+    {
        
-       let data = await Mashup.find({contestID: contestno});
+       let data = await Mashup.find({contestId: contestno});
 
-       if(data.length > 0) {
-       let flag =0;
-       for(let i=0;i<data[0].registered.length;i++) {
-          if(data[0].registered[i].email == user.googleid) {
-             flag =1;
-          }
-       }
-       
-       if(flag == 0 ) {
-       await Mashup.findOneAndUpdate({ contestID: contestno},{ $push: { "registered" : obj }});
-       res.redirect('/contest/mashup');
+       if(data.length > 0) 
+       {
+            let flag = 0;
+            for(let i=0;i<data[0].registered.length;i++) 
+            {
+               if(data[0].registered[i].googleId == user.googleId) 
+               {
+                  flag = 1;
+                  break;
+               }
+               
+            }
+            let obj ={
+               handle:user.cfHandle,
+               googleId:user.googleId
+            };
+            if(flag == 0 ) 
+            {
+               await Mashup.findOneAndUpdate({ contestId: contestno},{ $push: { "registered" : obj }});
+               await User.findOneAndUpdate({googleId:user.googleId},{$push:{"contestList" : {type:"mashup",contestId:contestno}}});
+               res.redirect('/contest/mashup');
+            } 
+            else 
+            {
 
-       } else {
-        // if user is already registered
-        let error = {
-           server_error : undefined,
-           login_error : 'You are already registered',
-           cfhandle_error : undefined,
-           visualizer_error : undefined
-     
-        };
+               let error = {
+                  server_error : undefined,
+                  login_error : 'You are already registered',
+                  cfhandle_error : undefined,
+                  visualizer_error : undefined
+            
+               };
 
-        res.render('error',{data:error,user:req.user});
+               res.render('error',{data:error,user:req.user});
 
-       }
-   } else {
-      let error = {
-         server_error : 'Contest does not exist',
-         login_error : undefined,
-         cfhandle_error : undefined,
-         visualizer_error : undefined
-   
-      };
-      res.render('error',{data:error,user:req.user});
-   }
+            }
+      } 
+      else 
+      {
+            let error = {
+               server_error : 'Contest does not exist',
+               login_error : undefined,
+               cfhandle_error : undefined,
+               visualizer_error : undefined
+         
+            };
+            res.render('error',{data:error,user:req.user});
+      }
 }
     
 };
@@ -137,8 +154,9 @@ module.exports.lockout_register_public = async (req,res)=>{
     let contestno = Number(contest);
     let user = req.user;
     
-    // if user is not logged in
-    if(user === undefined) {
+   
+    if(user === undefined) 
+    {
        let error = {
           server_error : undefined,
           login_error : 'You are not logged in',
@@ -149,7 +167,9 @@ module.exports.lockout_register_public = async (req,res)=>{
        res.render('error',{data:error,user:req.user});
 
       // if handle is not provided  
-      } else if(!user.ishandle) {
+    } 
+    else if(!user.isHandle) 
+    {
        let error = {
           server_error : undefined,
           login_error : undefined,
@@ -160,200 +180,231 @@ module.exports.lockout_register_public = async (req,res)=>{
        res.render('error',{data:error,user:req.user});
 
 
-      }  else {
+    }  
+    else 
+    {
  
        let obj = {
-          handle:user.cfusername,
-          email:user.googleid
+          handle:user.cfHandle,
+          googleId:user.googleId
        };
-       let data = await Lockout.find({contestID: contestno});
-       
-       if(data.length > 0) {
-       if((data[0].opponent.email== "undefined") && (data[0].creator.email != user.googleid)) {
 
-       await Lockout.findOneAndUpdate({ contestID: contestno},{ $set: { "opponent" : obj }});
-
-       res.redirect('/contest/lockout');
-       
-       // if user is already registered
-       } else {
-            if(data[0].creator.email == user.googleid)
+       let data = await Lockout.find({contestId: contestno});
+       if(data.length > 0) 
+       {
+            if((data[0].opponent.googleId == "undefined") && (data[0].creator.googleId != user.googleId)) 
             {
-               let error = {
-                  server_error : undefined,
-                  login_error : 'You are already registered',
-                  cfhandle_error : undefined,
-                  visualizer_error : undefined
-            
-               };
-               res.render('error',{data:error,user:req.user});
-            }
-            else
+                  await Lockout.findOneAndUpdate({ contestId: contestno},{ $set: { "opponent" : obj }});
+                  await User.findOneAndUpdate({googleId:user.googleId},{$push:{"contestList" : {type:"lockout",contestId:contestno}}});
+                  res.redirect('/contest/lockout');
+            } 
+            else 
             {
-               let error = {
-                  server_error : undefined,
-                  login_error : 'Lockout is full',
-                  cfhandle_error : undefined,
-                  visualizer_error : undefined
-            
-               };
-               res.render('error',{data:error,user:req.user});
+                  if(data[0].creator.googleId == user.googleId)
+                  {
+                     let error = {
+                        server_error : undefined,
+                        login_error : 'You are already registered',
+                        cfhandle_error : undefined,
+                        visualizer_error : undefined
+                  
+                     };
+                     res.render('error',{data:error,user:req.user});
+                  }
+                  else
+                  {
+                     let error = {
+                        server_error : undefined,
+                        login_error : 'Lockout is full',
+                        cfhandle_error : undefined,
+                        visualizer_error : undefined
+                  
+                     };
+                     res.render('error',{data:error,user:req.user});
+                  }
             }
-       }
-    } else {
-      let error = {
-         server_error : 'Contest does not exist',
-         login_error : undefined,
-         cfhandle_error : undefined,
-         visualizer_error : undefined
-   
-      };
-      res.render('error',{data:error,user:req.user});
+      } 
+      else 
+      {
+            let error = {
+               server_error : 'Contest does not exist',
+               login_error : undefined,
+               cfhandle_error : undefined,
+               visualizer_error : undefined
+         
+            };
+            res.render('error',{data:error,user:req.user});
     }
    } 
 };
 
-module.exports.lockout_mashup_register_private = async(req,res)=>{
+module.exports.lockout_mashup_register_private = async(req,res) => {
+
    let user = req.user;
    
-   // if user is not logged in
-   if(user === undefined) {
-      let error = {
-         server_error : undefined,
-         login_error : 'You are not logged in',
-         cfhandle_error : undefined,
-         visualizer_error : undefined
-   
-      };
-      res.render('error',{data:error,user:req.user});
-
-     // if user havent set codeforces handle
-     } else if(!user.ishandle) {
-      let error = {
-         server_error : undefined,
-         login_error : undefined,
-         cfhandle_error : 'Please verify your codeforces username in profile section',
-         visualizer_error : undefined
-   
-      };
-      res.render('error',{data:error,user:req.user});
-      
-     } else {
-      // getting code from url
-      let code = req.params.code;
-
-      // varifying code
-
-      jwt.verify(code, process.env.JWT_KEY, async (e, decoded) => {
-      if (e) {
-
-          let error = {
-            server_error : 'Server error occured',
-            login_error : undefined,
+   if(user === undefined) 
+      {
+         let error = {
+            server_error : undefined,
+            login_error : 'You are not logged in',
             cfhandle_error : undefined,
             visualizer_error : undefined
       
          };
          res.render('error',{data:error,user:req.user});
+     } 
+     else if(!user.isHandle) 
+     {
+         let error = {
+            server_error : undefined,
+            login_error : undefined,
+            cfhandle_error : 'Please verify your codeforces username in profile section',
+            visualizer_error : undefined
+      
+         };
+         res.render('error',{data:error,user:req.user});
+      
+     } 
+     else 
+     {
+     
+         let code = req.params.code;
 
-      } else {
 
-          // extract contest by decoding 
-          let contestno = Number(decoded.id);
-          let type = String(decoded.type);
+         jwt.verify(code, process.env.JWT_KEY, async (e, decoded) => {
+         if (e) {
 
-          if(type == "MASHUP") {
-            let obj ={
-               handle:user.cfusername,
-               email:user.googleid
+            let error = {
+               server_error : 'Server error occured',
+               login_error : undefined,
+               cfhandle_error : undefined,
+               visualizer_error : undefined
+         
             };
-            
-            let data = await Mashup.find({contestID: contestno});
-            if(data.registered.length==10) {
-               let error = {
-                  server_error : 'No place left mashup is full',
-                  login_error : undefined,
-                  cfhandle_error : undefined,
-                  visualizer_error : undefined
-            
-               };
-               res.render('error',{data:error,user:req.user});
-            } else {
-            let flag =0;
-            for(let i=0;i<data[0].registered.length;i++) {
-               if(data[0].registered[i].email == user.googleid) {
-                  flag =1;
-               }
-            }
-            if(flag == 0 ){
-            await Mashup.findOneAndUpdate({ contestID: contestno},{ $push: { "registered" : obj }});
-            res.redirect('/contest/mashup');
+            res.render('error',{data:error,user:req.user});
 
-            } else {
-               let error = {
-                  server_error : undefined,
-                  login_error : 'You are already registered',
-                  cfhandle_error : undefined,
-                  visualizer_error : undefined
-            
-               };
-               res.render('error',{data:error,user:req.user});
-            }
-          }
-          }
-          else {
-            let obj ={
-               handle:user.cfusername,
-               email:user.googleid
-            };
+         } 
+         else 
+         {
 
-            let data = await Lockout.find({contestID: contestno});
-            if((data[0].opponent.email== "undefined") && (data[0].creator.email != user.googleid)) {
-            await Lockout.findOneAndUpdate({ contestID: contestno},{ $set: { "opponent" : obj }});
+            // extract contest by decoding 
+            let contestno = Number(decoded.id);
+            let type = String(decoded.type);
 
-            res.redirect('/contest/lockout');
-
-            } else {
-               if(data[0].creator.email == user.googleid)
-               {
-                  let error = {
-                     server_error : undefined,
-                     login_error : 'You are already registered',
-                     cfhandle_error : undefined,
-                     visualizer_error : undefined
-               
+            if(type == "MASHUP") 
+            {
+                  let obj ={
+                     handle:user.cfHandle,
+                     googleId:user.googleId
                   };
-                  res.render('error',{data:error,user:req.user});
-               }
-               else
-               {
-                  let error = {
-                     server_error : undefined,
-                     login_error : 'Lockout is full',
-                     cfhandle_error : undefined,
-                     visualizer_error : undefined
                
-                  };
-                  res.render('error',{data:error,user:req.user});
-               }
-               
+                  let data1 = await Mashup.find({contestId: contestno});
+                  
+                  let data = data1[0];
+                  console.log(data);
+                  if(data.registered.length == 10) 
+                  {
+                     let error = {
+                        server_error : 'No place left mashup is full',
+                        login_error : undefined,
+                        cfhandle_error : undefined,
+                        visualizer_error : undefined
+                  
+                     };
+                     res.render('error',{data:error,user:req.user});
+                  } 
+                  else 
+                  {
+                     let flag = 0;
+                     for(let i=0;i<data.registered.length;i++) 
+                     {
+                        if(data.registered[i].googleId == user.googleId) 
+                        {
+                           flag = 1;
+                        }
+                     }
+                     if(flag == 0 )
+                     {
+                           await Mashup.findOneAndUpdate({ contestId: contestno},{ $push: { "registered" : obj }});
+                           await User.findOneAndUpdate({googleId:user.googleId},{$push:{"contestList" : {type:"mashup",contestId:contestno}}});
+                           res.redirect('/contest/mashup');
+
+                     } 
+                     else 
+                     {
+                           let error = {
+                              server_error : undefined,
+                              login_error : 'You are already registered',
+                              cfhandle_error : undefined,
+                              visualizer_error : undefined
+                        
+                           };
+                           res.render('error',{data:error,user:req.user});
+                     }
+                  }
             }
-          }
-      }
-  });
-  }
+            else 
+            {
+                  let obj = {
+                     handle:user.cfHandle,
+                     googleId:user.googleId
+                  };
+
+                  let data = await Lockout.find({contestId: contestno});
+                  if((data[0].opponent.googleId== "undefined") && (data[0].creator.googleId != user.googleId)) 
+                  {
+                     await Lockout.findOneAndUpdate({ contestId: contestno},{ $set: { "opponent" : obj }});
+                     await User.findOneAndUpdate({googleId:user.googleId},{$push:{"contestList" : {type:"lockout",contestId:contestno}}});
+                     res.redirect('/contest/lockout');
+
+                  } 
+                  else 
+                  {
+                     if(data[0].creator.googleId == user.googleId)
+                     {
+                        let error = {
+                           server_error : undefined,
+                           login_error : 'You are already registered',
+                           cfhandle_error : undefined,
+                           visualizer_error : undefined
+                     
+                        };
+                        res.render('error',{data:error,user:req.user});
+                     }
+                     else
+                     {
+                        let error = {
+                           server_error : undefined,
+                           login_error : 'Lockout is full',
+                           cfhandle_error : undefined,
+                           visualizer_error : undefined
+                     
+                        };
+                        res.render('error',{data:error,user:req.user});
+                     }
+                  }
+            }
+         }
+         });
+     }
 };
 
-module.exports.mashup_create = async (req,res)=>{
+module.exports.mashup_create = async (req,res) => {
+
     let {duration,min_level,max_level,starttime,no_of_problems,visibility} = req.body;
     let user=req.user;
     
     // if user is not logged in
-    if(user === undefined) {
+    if(user === undefined) 
+    {
       res.status(400).json({ contestError : 'You are not logged in' });
-     } else if(!user.ishandle) {
+    } 
+    else if(!user.isHandle) 
+    {
       res.status(400).json({ contestError : 'Please set your codeforces handle in profile page' });
-     }  else {
+    }  
+    else 
+    {
 
        let size = await Mashup.estimatedDocumentCount();
        let mi =Math.min(min_level,max_level);
@@ -363,38 +414,40 @@ module.exports.mashup_create = async (req,res)=>{
        max_level=ma;
 
        let obj = {
-        contestID : size+1,
+        contestId : size+1,
         starttimeSecond:starttime,
         durationtimeSecond: duration,
-        author: user.cfusername,
         visibility : visibility,
         minRange : min_level,
         maxRange : max_level,
         registered :[{
-          handle : user.cfusername,
-          email : user.googleid
+          handle : user.cfHandle,
+          googleId : user.googleId
         }],
         numberofProblems : no_of_problems,
         problems: [],
+        rankList: []
      };
   
       await new Mashup(obj).save();
-  
-      if(visibility === "PRIVATE") {
-
-        let secret={
+      await User.findOneAndUpdate({googleId:user.googleId},{$push:{"contestList" : {type:"mashup",contestId:size+1}}});
+      if(visibility === "PRIVATE") 
+      {
+        let secret = {
            "id":String(size+1),
            "type":"MASHUP"
-         }
+         };
         const code=jwt.sign(secret,process.env.JWT_KEY,{
            expiresIn:'30d'
         });
         let url = `http://localhost:3000/contest/private/register/`
         url += code;
-        res.status(201).json({ contestError:'contest created scroll down to see your contest details',info : `Your private MASHUP # ${size+1} is created, share above link to whom you want to invite` , link : url });
+        res.status(201).json({ contestError:'Contest created scroll down to see your contest details',info : `Your private MASHUP # ${size+1} is created, share above link to whom you want to invite` , link : url });
 
-      } else {
-        res.status(201).json({ contestError:'contest created scroll down to see your contest details',info : `Your  MASHUP # ${size+1} is created , Enjoy the contest`});
+      } 
+      else 
+      {
+        res.status(201).json({ contestError:'Contest created scroll down to see your contest details',info : `Your  MASHUP # ${size+1} is created , Enjoy the contest`});
 
       }
     }  
@@ -403,14 +456,20 @@ module.exports.mashup_create = async (req,res)=>{
 module.exports.lockout_create = async (req,res)=>{
 
     let {duration,min_level,max_level,starttime,no_of_problems,visibility} = req.body;
+
     let user=req.user;
   
     // if user is not logged in
-    if(user === undefined) {
+    if(user === undefined) 
+    {
       res.status(400).json({ contestError : 'You are not logged in' });
-     } else if(!user.ishandle) {
+    } 
+    else if(!user.isHandle) 
+    {
       res.status(400).json({ contestError : 'Please set your codeforces handle in profile page' });
-     }  else {
+    }  
+    else 
+    {
 
        let size = await Lockout.estimatedDocumentCount();
        let mi =Math.min(min_level,max_level);
@@ -420,26 +479,27 @@ module.exports.lockout_create = async (req,res)=>{
        max_level=ma;
       
        let obj = {
-          contestID : size+1,
+          contestId : size+1,
           starttimeSecond:starttime,
           durationtimeSecond: duration,
-          author: user.cfusername,
           visibility : visibility,
           minRange : min_level,
           maxRange : max_level,
-          creator : {handle : user.cfusername,
-            email : user.googleid},
+          creator : {handle : user.cfHandle,
+            googleId : user.googleId},
           opponent : {
              handle:"",
-             email : "undefined"
+             googleId : "undefined"
           },
           numberofProblems : no_of_problems,
           problems: [],
+          rankList: []
        };
 
       await new Lockout(obj).save();
-      
-      if(visibility === "PRIVATE") {
+      await User.findOneAndUpdate({googleId:user.googleId},{$push:{"contestList" : {type:"lockout",contestId:size+1}}});
+      if(visibility === "PRIVATE") 
+      {
 
         let secret={
             "id":String(size+1),
@@ -448,14 +508,16 @@ module.exports.lockout_create = async (req,res)=>{
          const code=jwt.sign(secret,process.env.JWT_KEY,{
             expiresIn:'30d'
          });
-       let url = `http://localhost:3000/contest/private/register/`
 
-       url += code;
-        res.status(201).json({ contestError:'contest created scroll down to see your contest details',info : `Your private Lockout # ${size+1} is created, share above link to whom you want to invite` , link : url });
-      } else {
-        res.status(201).json({ contestError:'contest created scroll down to see your contest details',info : `Your  Lockout # ${size+1} is created , Enjoy the contest`});
+         let url = `http://localhost:3000/contest/private/register/`
+         url += code;
+         res.status(201).json({ contestError:'Contest created scroll down to see your contest details',info : `Your private Lockout # ${size+1} is created, share above link to whom you want to invite` , link : url });
+      } 
+      else 
+      {
+         res.status(201).json({ contestError:'Contest created scroll down to see your contest details',info : `Your  Lockout # ${size+1} is created , Enjoy the contest`});
       }
-      }
+   }
 };
 
  
