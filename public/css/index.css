@@ -541,7 +541,8 @@
 
   /* open > 113 contest page */
 
-  .filter_bar_contest {
+  .filter_bar_contest 
+  {
     width: 70%;
     height: 60px;
     background-color: var(--bg-secondary);
@@ -555,7 +556,8 @@
     
   }
 
-  .filter_bar_contest span { 
+  .filter_bar_contest span 
+  { 
     padding : 4px;
     padding-left: 6px;
     padding-right: 6px;
@@ -565,7 +567,8 @@
     font-size: 1.5rem;
   }
   
-  .card_list_contest {
+  .card_list_contest 
+  {
     margin: auto;
     margin-top: 2rem;
     margin-bottom: 1rem;
@@ -577,7 +580,8 @@
     align-items: center;
     justify-content: space-evenly;
   }
-  .card_list_contest span {
+  .card_list_contest span 
+  {
     width: 100%;
     text-align: center;
     font-size: 2rem;
@@ -585,9 +589,12 @@
     color: var(--text-secondary);
   }
   
-  .card_list_contest .instructions {
+  .card_list_contest .instructions 
+  {
+    margin-left: 1.5rem;
+    margin-right: 1.5rem;
     color: var(--text-secondary);
-    padding: 8px;
+    padding: 10px;
     margin-top: 1rem;
     margin-bottom: 1rem;
     border-radius: 10px;
@@ -605,7 +612,7 @@
     background-color: var(--bg-secondary);
     color: var(--text-secondary);
     font-size: 1.2rem;
-    border: 2px solid turquoise;
+    border: 2px solid var(--extra);
   }
   .card_list_contest button a{
     text-decoration: none;

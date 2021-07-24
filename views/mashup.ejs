@@ -84,17 +84,17 @@
             <%for(let i=data.length-1;i>=0;i--) {%>
                 <% let flag = 0 %>
                      <% for (let j=0;j<data[i].registered.length;j++) {%>
-                         <% if(user && user.ishandle && data[i].registered[j].handle == user.cfusername) {%>
+                         <% if(user && user.isHandle && data[i].registered[j].handle == user.cfHandle) {%>
                             <% flag =1 %>
                          <% } %>  
                      <%}%>
                 <% if(data[i].visibility == "PUBLIC") {%>
                     <div class="contest_box">
-                        <span>Mashup # <%=data[i].contestID%></span>
+                        <span>Mashup # <%=data[i].contestId%></span>
                         <div class="info_contest">
                         <%let myDate = new Date(data[i].starttimeSecond *1000) %>
                         <p><strong>Start time :</strong>  <%=myDate.toLocaleString()%></p>
-                        <% let duration =Math.floor(data[i].durationtimeSecond/60.0)%>
+                        <% let duration = Math.floor(data[i].durationtimeSecond/60.0)%>
                         <% let hours = Math.floor(duration/60.0) %>
                         <% let minutes = duration - (hours*60) %>
                         <p> <strong>Duration :</strong>   <%=hours%> hr : <%=minutes%> min</p>
@@ -114,7 +114,7 @@
                 <%} else {%>
                     <%if (flag==1) {%>
                         <div class="contest_box">
-                            <span>Mashup # <%=data[i].contestID%></span>
+                            <span>Mashup # <%=data[i].contestId%></span>
                             <div class="info_contest">
                             <%let myDate = new Date(data[i].starttimeSecond *1000) %>
                             <p><strong>Start time :</strong>  <%=myDate.toLocaleString()%></p>

@@ -19,27 +19,18 @@ const mashupSchema = new mongoose.Schema({
     maxRange : {
         type : Number
     },
-    registered :[{
-      handle : String,
-      googleId : String
-    }],
+    registered :{
+      type : Array
+    },
     numberofProblems : {
         type : Number
     },
-    problems: [{
-        contestId: Number,
-        index : String,
-        points : Number,
-        numberofAc : Number
-    }],
-    rankList : [{
-      handle: String,
-      totalPoints : Number,
-      problemResults : [{
-          contestId: Number,
-          submissionId: Number
-      }]
-  }]
+    problems: {
+      type : Array
+    },
+    rankList : {
+      type : Array
+    }
 });
 
 const Mashup = mongoose.model('mashup', mashupSchema);

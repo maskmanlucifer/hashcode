@@ -30,19 +30,12 @@ const lockoutSchema = new mongoose.Schema({
     numberofProblems : {
         type : Number
     },
-    problems: [{
-        contestId: Number,
-        index : String,
-        points : Number
-    }],
-    rankList : [{
-      handle: String,
-      totalPoints : Number,
-      problemResults : [{
-          contestId: Number,
-          submissionId: Number
-      }]
-  }]
+    problems: {
+      type : Array
+    },
+    rankList : {
+      type : Array
+    }
 });
 
 const Lockout = mongoose.model('lockout', lockoutSchema);
