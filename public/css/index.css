@@ -910,7 +910,7 @@
 
     #timer {
       width: 80%;
-      font-size: 1.2rem;
+      font-size: 1.1rem;
       display: flex;
       flex-direction: column;
       text-align: center;
@@ -928,12 +928,12 @@
     }
 
     #timer p:first-child {
-      border-bottom: 1px solid var(--text-secondary);
+      border-bottom: 1px solid turquoise;
       color: var(--text-secondary);
     }
 
     #timer p:last-child {
-      color: turquoise;
+      color: var(--extra);
     }
 
     /* close < 116 main contest page */
@@ -965,18 +965,42 @@
 
 
   /* profile page open */
- 
-  .welcome {
+  
+  .my_contest 
+  {
+      width: 80%;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-around;
+      align-items: center;
+      background-color: var(--bg-primary);
+      border-radius: 25px;
+      margin-top: 12px;
+      margin-bottom: 12px;
+  }
+  .my_contest p 
+  {
+    font-size: 1.3rem;
+  }
+  .my_contest a 
+  {
+    text-decoration: none;
+    color: turquoise;
+  }
+  .welcome 
+  {
     margin-top: 1rem;
   }
- .welcome p {
+ .welcome p 
+ {
    color: var(--extra);
    text-align: center;
    font-size: 1.7rem;
    font-weight: 600;
  }
 
-  .profile_box {
+  .profile_box 
+  {
     width: 70%;
     margin: auto;
     background-color: var(--bg-secondary);
@@ -987,63 +1011,72 @@
     padding-top: 5px;
   }
 
-  .profile_box form label {
+  .profile_box form label 
+  {
     display: block;
     font-size: 1.3rem;
     text-align: center;
     color: var(--text-secondary);
     padding-top: 8px;
   }
-  .profile_box  p {
+  .profile_box  p 
+  {
     display: block;
     margin-top: 1rem;
-    font-size: 1.3rem;
+    font-size: 1.2rem;
     text-align: center;
     color: var(--text-secondary);
     padding-top: 8px;
     color: turquoise;
   }
-  .profile_box form input{
+  .profile_box form input
+  {
     display: block;
     margin: auto;
     margin-top: 1rem;
-    background-color: var(--bg-primary);
-    color: var(--text-primary);
-    border: 2px solid turquoise;
-    font-size: 1rem;
-    padding: 6px;
-    padding-left: 12px;
-    border-radius: 10px;
-  }
-
-  .profile_box form button{
-    display: block;
-    margin: auto;
-    margin-top: 1rem;
-    background-color: var(--bg-primary);
+    background-color: var(--bg-secondary);
     color: var(--text-primary);
     border: 2px solid var(--extra);
     font-size: 1rem;
-    padding: 8px;
-    padding-left: 12px;
-    padding-right: 12px;
-    border-radius: 10px;
+    padding: 6px;
+    padding-left: 16px;
+    border-radius: 16px;
+  }
+
+  .profile_box form button
+  {
+    display: block;
+    margin: auto;
+    margin-top: 1rem;
+    background-color: var(--bg-secondary);
+    color: var(--text-secondary);
+    border: 2px solid var(--extra);
+    font-size: 1rem;
+    padding: 9px;
+    padding-left: 14px;
+    padding-right: 14px;
+    border-radius: 20px;
   }
    
-  .profile_box form button:hover {
+  .profile_box form button:hover 
+  {
     cursor: pointer;
   }
 
-  .profile_box form .info {
+  .profile_box form .info 
+  {
     color: var(--text-secondary);
     text-align: center;
-    font-size: 1.2rem;
+    font-size: 1.1rem;
   }
   
-  .profile_box form .info a {
+  .profile_box form .info a 
+  {
     text-decoration: none;
     color: turquoise;
   }
+
+  
   /* profile page clsoe */
 
 

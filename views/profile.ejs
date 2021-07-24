@@ -83,8 +83,8 @@
             <div class="card_list_mashup">
                 <span>YOUR CONTESTS</span> 
                 <%for(let i=user.contestList.length-1;i>=0;i--) {%>
-                    <div class="contest_box">
-                        <span><%=user.contestList[i].type.toUpperCase()%> # <%=user.contestList[i].contestId%></span>
+                    <div class="my_contest">
+                        <p><%=user.contestList[i].type.toUpperCase()%> # <%=user.contestList[i].contestId%></p>
                         <a href="/contest/<%=user.contestList[i].type%>/<%=user.contestList[i].contestId%>">GOTO CONTEST</a>
                     </div>
                 <%}%>
@@ -110,6 +110,7 @@
         const form = document.querySelector('form');
         let contestError=document.querySelector('.contestError');
         let info=document.querySelector('.info');
+
         $('button').click(async (e) => {
             e.preventDefault();
 
@@ -117,7 +118,8 @@
             info.innerHTML = '';
             let cfHandle = form.cfHandle.value;
             
-            try { 
+            try 
+            { 
                 const res = await fetch('/profile/handle/save', { 
                     method: 'POST', 
                     body: JSON.stringify({cfHandle:cfHandle}),
@@ -143,7 +145,6 @@
                             
                             const data2 = await res2.json(); 
 
-                            console.log(data2);
                             if (data2.contestError) 
                             { 
                                 contestError.textContent=data2.contestError;
@@ -162,15 +163,20 @@
                     }
                     info.innerHTML = `Submit <a href="https://gist.github.com/maskmanlucifer/a3cf6a401e67e74176f99cd1765a6a75">Code</a> to <a href="https://codeforces.com/contest/1331/problem/A">Problem</a> within 50 second`;
                     let now = new Date().getTime();
-                    let target = now + (2*1000);
-                    let x = setInterval(()=>{
+                    let target = now + (50*1000);
+
+                    let x = setInterval(() => {
                         now = new Date().getTime();
                         let distance = target - now;
                         let seconds = Math.floor((distance % (1000 * 60)) / 1000);
-                        document.getElementById("demo1").textContent = "Verification will be done in 50s don't refresh the page";
+
+                        document.getElementById("demo1").textContent = "Verification will be done in 50s please don't refresh the page";
+
                         let finaltime = seconds + "s ";
                         document.getElementById("demo").innerHTML = finaltime;
-                        if (distance <= 1) {
+
+                        if (distance <= 1)
+                        {
                             check();
                             clearInterval(x);
                             document.getElementById("demo1").innerHTML='';
@@ -181,7 +187,8 @@
                     },1000);
                 }
             }
-            catch (err) {
+            catch (err) 
+            {
                 console.log(err);
             }
         });
