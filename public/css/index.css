@@ -899,7 +899,7 @@
       padding: 6px;
     }
 
-    .main_contest_box .problem_box table th {
+    .main_contest_box .problem_box table tr:first-child {
       color: turquoise;
     }
     

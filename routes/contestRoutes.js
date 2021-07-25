@@ -34,4 +34,6 @@ router.get('/contest/mashup/:contestId/standing', contestController.mashup_conte
 
 router.get('/api/registered/:contestId',contestController.get_registered_list);
 
+router.post('/save/mashup/problems',contestController.save_mashup_problems);
+
 module.exports = router;

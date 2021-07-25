@@ -9,7 +9,7 @@ const jwt=require('jsonwebtoken');
 module.exports.contest_landing_page = (req,res)=> {
     res.render('contest',{user:req.user}); 
 };
-
+ 
 // mashup contest landing page 
 module.exports.mashup_landing_page = async (req,res)=>{
     let data = await Mashup.find();
@@ -612,7 +612,6 @@ module.exports.mashup_contest_landing_page_problems = async (req,res) => {
             } 
             else if(secondsSinceEpoch - starttime <= duration + (86400*10*1000))
             {
-               console.log("YO");
                res.render('mashupContest',{user:req.user,data:data,type:"PROBLEMS",error:1}); 
             }
             else 
@@ -723,4 +722,8 @@ module.exports.mashup_contest_landing_page_standing = async (req,res) => {
 
 };
 
-
+module.exports.save_mashup_problems = async (req,res) => {
+  const {problem,contestId} = req.body;
+  await Mashup.findOneAndUpdate({contestId:contestId},{$set:{"problems":problem}});
+  res.send("saved");
+};

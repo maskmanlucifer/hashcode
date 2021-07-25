@@ -12,7 +12,7 @@ let secondsSinceEpoch = Date.now();
 starttime = Number(starttime)*1000;
 duration = Number(duration)*1000;
 
-if(secondsSinceEpoch - starttime <= duration + (86400*10)) 
+if(secondsSinceEpoch - starttime <= duration + (86400*10*1000)) 
 {
     if(type == "PROBLEMS") 
     {
@@ -25,13 +25,14 @@ if(secondsSinceEpoch - starttime <= duration + (86400*10))
          if(problems == 0)
          {
               let exclusedProblems = {};
-              async function extractRanklist()
+              async function extractProblemList()
               {
                 let url = "/api/registered/";
                 url += contestId;
                 let data1 = await fetch(url);
                 data = await data1.json();
                 data = data[0];
+
                 let noofRegistered = data.registered.length;
                 for(let i=0;i<Math.min(5,noofRegistered);i++) 
                 {
@@ -39,6 +40,7 @@ if(secondsSinceEpoch - starttime <= duration + (86400*10))
                     uri += data.registered[i].handle;
                     let data2 = await fetch(uri);
                     data1 = await data2.json();
+
                     for(let j=0;j<data1.result.length;j++)
                     {
                         if(data1.result[j].verdict == "OK") 
@@ -51,6 +53,7 @@ if(secondsSinceEpoch - starttime <= duration + (86400*10))
                         }
                     }
                 }
+
                 if(noofRegistered>5)
                 {
                   await delay(1);
@@ -73,6 +76,7 @@ if(secondsSinceEpoch - starttime <= duration + (86400*10))
                       }
                   }
                 }
+
                 let ratingofProblems = {};
                 let required = [];
 
@@ -85,6 +89,7 @@ if(secondsSinceEpoch - starttime <= duration + (86400*10))
 
                 let z1 = Math.floor(noofProblems / diff);
                 let z2 = noofProblems % diff;
+
                 for(let j=miRange;j<=maRange;j++)
                 {
                   required[j]=z1;
@@ -144,6 +149,7 @@ if(secondsSinceEpoch - starttime <= duration + (86400*10))
                     }
                   }
                 });
+
                 let problem = [];
                 for(let i=0;i<vect.length;i++) 
                 {
@@ -156,6 +162,7 @@ if(secondsSinceEpoch - starttime <= duration + (86400*10))
                      required[r1]--;
                    }
                 }
+
                 let table = document.getElementById('myTable');
                 
                 let c = ['A','B','C','D','E','F','G','H','I','J'];
@@ -189,26 +196,340 @@ if(secondsSinceEpoch - starttime <= duration + (86400*10))
                     cell3.innerHTML = `${p5}`;
                     cell4.innerHTML = `${0}`;
                 }
+                
+                const res = await fetch('/save/mashup/problems', { 
+                  method: 'POST', 
+                  body: JSON.stringify({problem,contestId}),
+                  headers: {'Content-Type': 'application/json'}
+                });
+              
+                const data5 = await res.json();
               }
-              extractRanklist();
+              
+              extractProblemList();
          }
          else
          {
-              async function extractRanklist()
+              
+              async function extractProblemList()
               {
                 let url = "/api/registered/";
                 url += contestId;
+
                 let data1 = await fetch(url);
                 data = await data1.json();
-                return data;
-              }
+                data = data[0];
+
+                let noofRegistered = data.registered.length;
+                for(let i=0;i<data.problems.length;i++)
+                {
+                  data.problems[i].numberofAc = 0;
+                }
+                for(let i=0;i<Math.min(5,noofRegistered);i++) 
+                {
+                    let uri = "https://codeforces.com/api/user.status?handle=";
+                    uri += data.registered[i].handle;
+                    uri+= "&from=1&count=400";
+
+                    let data2 = await fetch(uri);
+                    data1 = await data2.json();
+
+                    let solved = {};
+                    for(let j=0;j<data1.result.length;j++)
+                    {
+                        if((data1.result[j].verdict == "OK") &&  (data1.result[j].creationTimeSeconds*1000>=starttime) && (data1.result[j].creationTimeSeconds*1000<=starttime + duration)) 
+                        { 
+                           let id = data1.result[j].problem.contestId + data1.result[j].problem.index;
+                           if(solved[id]==undefined)
+                           {
+                              solved[id]=1;
+                           }
+                        }
+                    }
+
+                    for(let j=0;j<data.problems.length;j++)
+                    {
+                       let id = data.problems[j].contestId + data.problems[j].index;
+                       if(solved[id]!=undefined)
+                       {
+                         data.problems[j].numberofAc++;
+                       }
+                    }
+                }
+                if(noofRegistered>5)
+                {
+                  await delay(1);
+                  for(let i=5;i<Math.min(10,noofRegistered);i++) 
+                  {
+                      let uri = "https://codeforces.com/api/user.status?handle=";
+                      uri += data.registered[i].handle;
+                      uri+= "&from=1&count=400";
+
+                      let data2 = await fetch(uri);
+                      data1 = await data2.json();
+
+                      let solved = {};
+                      for(let j=0;j<data1.result.length;j++)
+                      {
+                          if((data1.result[j].verdict == "OK") &&  (data1.result[j].creationTimeSeconds*1000>=starttime) && (data1.result[j].creationTimeSeconds*1000<=starttime + duration)) 
+                          { 
+                            let id = data1.result[j].problem.contestId + data1.result[j].problem.index;
+                            if(solved[id]==undefined)
+                            {
+                                solved[id]=1;
+                            }
+                          }
+                      }
+                      
+                      for(let j=0;j<data.problems.length;j++)
+                      {
+                        let id = data.problems[j].contestId + data.problems[j].index;
+                        if(solved[id]!=undefined)
+                        {
+                          data.problems[j].numberofAc++;
+                        }
+                      }
+                  }
+                }
+                
+                let table = document.getElementById('myTable');
+                
+                let c = ['A','B','C','D','E','F','G','H','I','J'];
+                let row = table.insertRow(0);
+                let cell1 =row.insertCell(0);
+                let cell2 = row.insertCell(1);
+                let cell3 = row.insertCell(2);
+                let cell4 = row.insertCell(3);
+
+                cell1.innerHTML = `#`;
+                cell2.innerHTML = `NAME`;
+                cell3.innerHTML = `POINTS`;
+                cell4.innerHTML = `NUMBER OF AC`;
+
+                for(let i=0;i<data.problems.length;i++)
+                {
+                    let row = table.insertRow(i+1);
+                    let cell1 =row.insertCell(0);
+                    let cell2 = row.insertCell(1);
+                    let cell3 = row.insertCell(2);
+                    let cell4 = row.insertCell(3);
+
+                    let p1=i+1;
+                    let p2=data.problems[i].contestId;
+                    let p3=data.problems[i].index;
+                    let p4=c[i];
+                    let p5=data.problems[i].points;
+                    let p6=data.problems[i].numberofAc;
+
+                    cell1.innerHTML = `${p1}`;
+                    cell2.innerHTML = `<a href="https://codeforces.com/contest/${p2}/problem/${p3}">PROBLEM-${p4}</a>`;
+                    cell3.innerHTML = `${p5}`;
+                    cell4.innerHTML = `${p6}`;
+                }
+                let problem = data.problems;
+                const res = await fetch('/save/mashup/problems', { 
+                  method: 'POST', 
+                  body: JSON.stringify({problem,contestId}),
+                  headers: {'Content-Type': 'application/json'}
+                });
               
-              extractRanklist();
+                const data5 = await res.json();
+                
+              }
+              extractProblemList();
          }
     }
     else if(type == "STANDING")
     {
+         async function extractRankList()
+         {
+            let rankList = [];
 
+            let url = "/api/registered/";
+            url += contestId;
+
+            let data1 = await fetch(url);
+            data = await data1.json();
+            data = data[0];
+
+            let noofRegistered = data.registered.length;
+    
+            for(let i=0;i<Math.min(5,noofRegistered);i++) 
+            {
+                let uri = "https://codeforces.com/api/user.status?handle=";
+                uri += data.registered[i].handle;
+                uri+= "&from=1&count=400";
+
+                let data2 = await fetch(uri);
+                data1 = await data2.json();
+
+                let solvedTime = {},submissionId = {};
+
+                for(let j=0;j<data1.result.length;j++)
+                {
+                    if((data1.result[j].verdict == "OK") &&  (data1.result[j].creationTimeSeconds*1000>=starttime) && (data1.result[j].creationTimeSeconds*1000<=starttime + duration)) 
+                    { 
+                        let id = data1.result[j].problem.contestId + data1.result[j].problem.index;
+                        if(solvedTime[id]==undefined)
+                        {
+                          solvedTime[id]=data1.result[i].creationTimeSeconds;
+                          submissionId[id]=data1.result[i].id;
+                        }
+                        else 
+                        {
+                          solvedTime[id]=data1.result[i].creationTimeSeconds;
+                          submissionId[id]=data1.result[i].id;
+                        }
+                    }
+                }
+                let obj = {
+                  handle : data.registered[i].handle,
+                  points : 0,
+                  problemResults : []
+                };
+                for(let j=0;j<data.problems.length;j++)
+                {
+                  let id = data.problems[j].contestId + data.problems[j].index;
+                  if(solvedTime[id]!=undefined)
+                  {
+                     let initial = Math.round(starttime/1000);
+                     let penality = solvedTime[id] - initial;
+                     penality = Math.round(penality/5);
+                     let point = Math.max(100,data.problems[j].points-penality);
+                     obj.points += point;
+                     obj.problemResults.push({contestId:data.problems[j].contestId,index:data.problems[j].index,submissionId:submissionId[id]});
+                  }
+                  else 
+                  {
+                    obj.problemResults.push({contestId:-1,index:"U",submissionId:0});
+                  }
+                }
+                rankList.push(obj);
+            }
+            if(noofRegistered>5)
+            {
+              await delay(1);
+              for(let i=5;i<Math.min(10,noofRegistered);i++) 
+              {
+                let uri = "https://codeforces.com/api/user.status?handle=";
+                uri += data.registered[i].handle;
+                uri+= "&from=1&count=400";
+
+                let data2 = await fetch(uri);
+                data1 = await data2.json();
+
+                let solvedTime = {},submissionId = {};
+
+                for(let j=0;j<data1.result.length;j++)
+                {
+                    if((data1.result[j].verdict == "OK") &&  (data1.result[j].creationTimeSeconds*1000>=starttime) && (data1.result[j].creationTimeSeconds*1000<=starttime + duration)) 
+                    { 
+                        let id = data1.result[j].problem.contestId + data1.result[j].problem.index;
+                        if(solvedTime[id]==undefined)
+                        {
+                          solvedTime[id]=data1.result[i].creationTimeSeconds;
+                          submissionId[id]=data1.result[i].creationTimeSeconds;
+                        }
+                        else 
+                        {
+                          solvedTime[id]=data1.result[i].creationTimeSeconds;
+                          submissionId[id]=data1.result[i].creationTimeSeconds;
+                        }
+                    }
+                }
+                let obj = {
+                  handle : data.registered[i].handle,
+                  points : 0,
+                  problemResults : []
+                };
+                for(let j=0;j<data.problems.length;j++)
+                {
+                  let id = data.problems[j].contestId + data.problems[j].index;
+                  if(solvedTime[id]!=undefined)
+                  {
+                     let penality = solvedTime[id] - starttime;
+                     penality = Math.round(penality/3);
+                     let point = Math.max(100,data.problems[j].points-penality);
+                     obj.points += point;
+                     obj.problemResults.push({contestId:data.problems[j].contestId,index:data.problems[j].index,submissionId:submissionId[id]});
+                  }
+                  else 
+                  {
+                    obj.problemResults.push({contestId:-1,index:"U",submissionId:0});
+                  }
+                }
+                rankList.push(obj);
+              }
+            }
+            rankList.sort((p1,p2)=>{
+              if(p1.points>p2.points)
+              {
+                  return -1;
+              }
+              else if(p1.points<p1.points)
+              {
+                  return 1;
+              }
+              else
+              {
+                  return 0;
+              }
+            });
+            let table = document.getElementById('myTable');
+                
+            let c = ['A','B','C','D','E','F','G','H','I','J'];
+            let row = table.insertRow(0);
+            let cell1 =row.insertCell(0);
+            cell1.innerHTML = `#`;
+            let cell2 = row.insertCell(1);
+            cell2.innerHTML = `USERNAME`;
+            let cell3 = row.insertCell(2);
+            cell3.innerHTML = `POINTS`;
+            for(let i=0;i<data.problems.length;i++)
+            {
+                let cell = row.insertCell(3+i);
+                cell.innerHTML = `${c[i]}`;
+            }
+
+            console.log(rankList[0].problemResults[0].contestId);
+            for(let i=0;i<rankList.length;i++)
+            {
+                let row = table.insertRow(i+1);
+                let cell1 =row.insertCell(0);
+                let cell2 = row.insertCell(1);
+                let cell3 = row.insertCell(2);
+                
+
+                let p1=i+1;
+                cell1.innerHTML = `${p1}`;
+                cell2.innerHTML = `<a href="https://codeforces.com/profile/${rankList[i].handle}">${rankList[i].handle}</a>`;
+                cell3.innerHTML = `${rankList[i].points}`;
+                for(let j=0;j<rankList[i].problemResults.length;j++)
+                {
+                    let cell = row.insertCell(3+j);
+                    console.log(rankList[i].problemResults[j].contestId);
+                    if(rankList[i].problemResults[j].contestId!=-1)
+                    {
+                      cell.innerHTML = `<a href="https://codeforces.com/contest/${rankList[i].problemResults[j].contestId}/submission/${rankList[i].problemResults[j].submissionId}">AC</a>`;
+                    }
+                    else
+                    {
+                      cell.innerHTML = `-`;
+                    }
+                    
+                }
+            }
+            let problem = data.problems;
+            const res = await fetch('/save/mashup/problems', { 
+              method: 'POST', 
+              body: JSON.stringify({problem,contestId}),
+              headers: {'Content-Type': 'application/json'}
+            });
+          
+            const data5 = await res.json();
+         };
+         extractRankList();
+         
     }
 }
 
