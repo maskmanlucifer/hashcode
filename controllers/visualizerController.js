@@ -10,16 +10,13 @@ module.exports.visualizer_main_page_get = (req,res) => {
 module.exports.visualizer_contest_page = async (req,res)=>{
 
     let contestNo = Number(req.params.contestno);
+
     let uri=`https://codeforces.com/api/contest.ratingChanges?contestId=${contestNo}`;
     let response =  await fetch(uri);
     let data = await response.json();
 
     let error = {
-       server_error : undefined,
-       login_error : undefined,
-       cfhandle_error : undefined,
-       visualizer_error : 'Can not show this contest'
- 
+       error : 'Can not show this contest'
     };
 
     if(data.status != "OK" || data.result.length==0) 

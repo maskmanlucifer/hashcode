@@ -9,12 +9,12 @@ const authCheck = (req,res,next)=> {
     } else {
         next();
     }
-};
+}; 
 
 // getting profile main page 
 router.get('/profile',authCheck, profileController.profile_get);
 
-router.post('/profile/handle/save',profileController.verify);
+router.post('/profile/handle/save',profileController.handle_save);
 
 router.post('/profile/handle/verify',profileController.change_isHandle);
 

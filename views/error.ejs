@@ -76,17 +76,8 @@
         </ul>
     </nav>
     <main class="main">
-        <%if(data.server_error != undefined) {%>
-            <div class="common_error"><p><%=data.server_error%></p></div>
-        <%}%>
-        <%if(data.login_error != undefined) {%>
-            <div class="common_error"><p><%=data.login_error%></p></div>
-        <%}%>
-        <%if(data.cfhandle_error != undefined) {%>
-            <div class="common_error"><p><%=data.cfhandle_error%></p></div>
-        <%}%>
-        <%if(data.visualizer_error != undefined) {%>
-            <div class="common_error"><p><%=data.visualizer_error%></p></div>
+        <%if(data.error != undefined) {%>
+            <div class="common_error"><p><%=data.error%></p></div>
         <%}%>
     </main>
 </body>

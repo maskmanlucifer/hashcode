@@ -60,9 +60,7 @@ let findLevel = (rating) => {
     } 
     else 
     {
-
         return "LGM";
-
     }
 };
 
@@ -98,11 +96,10 @@ let dataExtract =  async (contestID) => {
     // mapping handle with level 
     for(let i = data1.result.length - 1;i>=0;i--) 
     {
-        
         let oldRating = data1.result[i].oldRating;
         if(oldRating >=0 ) 
         {
-
+            oldRating=oldRating;
         } 
         else 
         {
@@ -220,7 +217,5 @@ dataExtract(contest_id)
         }
     })
 .catch((err)=>{
-
 console.log(err.message);
-
 })

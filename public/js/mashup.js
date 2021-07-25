@@ -372,13 +372,13 @@ if(secondsSinceEpoch - starttime <= duration + (86400*10*1000))
                         let id = data1.result[j].problem.contestId + data1.result[j].problem.index;
                         if(solvedTime[id]==undefined)
                         {
-                          solvedTime[id]=data1.result[i].creationTimeSeconds;
-                          submissionId[id]=data1.result[i].id;
+                          solvedTime[id]=data1.result[j].creationTimeSeconds;
+                          submissionId[id]=data1.result[j].id;
                         }
                         else 
                         {
-                          solvedTime[id]=data1.result[i].creationTimeSeconds;
-                          submissionId[id]=data1.result[i].id;
+                          solvedTime[id]=data1.result[j].creationTimeSeconds;
+                          submissionId[id]=data1.result[j].id;
                         }
                     }
                 }
@@ -397,11 +397,11 @@ if(secondsSinceEpoch - starttime <= duration + (86400*10*1000))
                      penality = Math.round(penality/5);
                      let point = Math.max(100,data.problems[j].points-penality);
                      obj.points += point;
-                     obj.problemResults.push({contestId:data.problems[j].contestId,index:data.problems[j].index,submissionId:submissionId[id]});
+                     obj.problemResults.push({contestId:data.problems[j].contestId,submissionId:submissionId[id]});
                   }
                   else 
                   {
-                    obj.problemResults.push({contestId:-1,index:"U",submissionId:0});
+                    obj.problemResults.push({contestId:-1,submissionId:0});
                   }
                 }
                 rankList.push(obj);
@@ -427,13 +427,13 @@ if(secondsSinceEpoch - starttime <= duration + (86400*10*1000))
                         let id = data1.result[j].problem.contestId + data1.result[j].problem.index;
                         if(solvedTime[id]==undefined)
                         {
-                          solvedTime[id]=data1.result[i].creationTimeSeconds;
-                          submissionId[id]=data1.result[i].creationTimeSeconds;
+                          solvedTime[id]=data1.result[j].creationTimeSeconds;
+                          submissionId[id]=data1.result[j].creationTimeSeconds;
                         }
                         else 
                         {
-                          solvedTime[id]=data1.result[i].creationTimeSeconds;
-                          submissionId[id]=data1.result[i].creationTimeSeconds;
+                          solvedTime[id]=data1.result[j].creationTimeSeconds;
+                          submissionId[id]=data1.result[j].creationTimeSeconds;
                         }
                     }
                 }
@@ -451,11 +451,11 @@ if(secondsSinceEpoch - starttime <= duration + (86400*10*1000))
                      penality = Math.round(penality/3);
                      let point = Math.max(100,data.problems[j].points-penality);
                      obj.points += point;
-                     obj.problemResults.push({contestId:data.problems[j].contestId,index:data.problems[j].index,submissionId:submissionId[id]});
+                     obj.problemResults.push({contestId:data.problems[j].contestId,submissionId:submissionId[id]});
                   }
                   else 
                   {
-                    obj.problemResults.push({contestId:-1,index:"U",submissionId:0});
+                    obj.problemResults.push({contestId:-1,submissionId:0});
                   }
                 }
                 rankList.push(obj);
@@ -491,7 +491,7 @@ if(secondsSinceEpoch - starttime <= duration + (86400*10*1000))
                 cell.innerHTML = `${c[i]}`;
             }
 
-            console.log(rankList[0].problemResults[0].contestId);
+          
             for(let i=0;i<rankList.length;i++)
             {
                 let row = table.insertRow(i+1);
@@ -507,7 +507,7 @@ if(secondsSinceEpoch - starttime <= duration + (86400*10*1000))
                 for(let j=0;j<rankList[i].problemResults.length;j++)
                 {
                     let cell = row.insertCell(3+j);
-                    console.log(rankList[i].problemResults[j].contestId);
+                   
                     if(rankList[i].problemResults[j].contestId!=-1)
                     {
                       cell.innerHTML = `<a href="https://codeforces.com/contest/${rankList[i].problemResults[j].contestId}/submission/${rankList[i].problemResults[j].submissionId}">AC</a>`;

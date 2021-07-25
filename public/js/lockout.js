@@ -133,7 +133,7 @@ if(secondsSinceEpoch - starttime <= duration + (86400*10*1000))
                    r1-=8;
                    if(required[r1]>0)
                    {
-                     problem.push({contestId:vect[i].contestId,index:vect[i].index,numberofAc:0,points:vect[i].points,acFirst:"-"});
+                     problem.push({contestId:vect[i].contestId,index:vect[i].index,points:vect[i].points,acFirst:"-"});
                      required[r1]--;
                    }
                 }
@@ -254,22 +254,26 @@ if(secondsSinceEpoch - starttime <= duration + (86400*10*1000))
                 data = await data1.json();
                 data = data[0];
                 let registered = [];
+
                 registered.push(data.creator.handle);
+
                 if(data.opponent.googleId!="undefined")
                 {
                     registered.push(data.opponent.handle);
                 }
+
                 let noofRegistered = registered.length;
 
                 let solveTime1 = {}, submissionId1 = {};
-                let solveTime2 = {},submissionId2 = {};
+                let solveTime2 = {}, submissionId2 = {};
+
                 for(let i=0;i<1;i++) 
                 {
                     
                     let uri = "https://codeforces.com/api/user.status?handle=";
 
                     uri += registered[i];
-                    url += "&from=1&count=400";
+                    uri += "&from=1&count=400";
 
                     let data2 = await fetch(uri);
                     data1 = await data2.json();
@@ -324,7 +328,7 @@ if(secondsSinceEpoch - starttime <= duration + (86400*10*1000))
 
 
                 let problem = [], rankList = [];
-
+                
                 for(let i=0;i<data.problems.length;i++)
                 {
                     let id = data.problems[i].contestId + data.problems[i].index;
@@ -334,33 +338,34 @@ if(secondsSinceEpoch - starttime <= duration + (86400*10*1000))
                         {
                             if(solveTime2[id]>solveTime1[id])
                             {
-                                problem.push({contestId:data.problem[i].contestId,index:data.problem[i].index,acFirst:registered[0]});
+                                problem.push({contestId:data.problems[i].contestId,index:data.problems[i].index,points:data.problems[i].points,acFirst:registered[0]});
                             }
                             else 
                             {
-                                problem.push({contestId:data.problem[i].contestId,index:data.problem[i].index,acFirst:registered[1]});
+                                problem.push({contestId:data.problems[i].contestId,index:data.problems[i].index,points:data.problems[i].points,acFirst:registered[1]});
                             }
                         }
                         else 
                         {
-                            problem.push({contestId:data.problem[i].contestId,index:data.problem[i].index,acFirst:registered[0]});
+                            problem.push({contestId:data.problems[i].contestId,index:data.problems[i].index,points:data.problems[i].points,acFirst:registered[0]});
                         }
                     }
                     else
                     {
                         if(solveTime2[id]!=undefined)
                         {
-                            problem.push({contestId:data.problem[i].contestId,index:data.problem[i].index,acFirst:registered[1]});
+                            problem.push({contestId:data.problems[i].contestId,index:data.problems[i].index,points:data.problems[i].points,acFirst:registered[1]});
                         }
                         else 
                         {
-                            problem.push({contestId:data.problem[i].contestId,index:data.problem[i].index,acFirst:"-"});
+                            problem.push({contestId:data.problems[i].contestId,index:data.problems[i].index,points:data.problems[i].points,acFirst:"-"});
                         }
                     }
                 }
                 
                 if(registered.length>1)
                 {
+                    console.log("YES");
                     let obj1 = {
                         handle:registered[0],
                         points:0,
@@ -381,13 +386,13 @@ if(secondsSinceEpoch - starttime <= duration + (86400*10*1000))
                                 if(solveTime2[id]>solveTime1[id])
                                 {
                                     obj1.points+= data.problems[i].points;
-                                    obj1.problemResults.push({contestId:data.problem[i].contestId,submissionId:submissionId1[id]});
+                                    obj1.problemResults.push({contestId:data.problems[i].contestId,submissionId:submissionId1[id]});
                                     obj2.problemResults.push({contestId:-1,submissionId:-1});
                                 }
                                 else 
                                 {
-                                    obj2.points+= data.problems[i].points;
-                                    obj2.problemResults.push({contestId:data.problem[i].contestId,submissionId:submissionId1[id]});
+                                    obj2.points+= data.problemss[i].points;
+                                    obj2.problemResults.push({contestId:data.problems[i].contestId,submissionId:submissionId1[id]});
                                     obj1.problemResults.push({contestId:-1,submissionId:-1});
                                 }
                             }
@@ -419,27 +424,31 @@ if(secondsSinceEpoch - starttime <= duration + (86400*10*1000))
                 }
                 else 
                 {
+                   
                     let obj1 = {
                         handle:registered[0],
                         points:0,
                         problemResults:[]
                     };
+
                     for(let i=0;i<data.problems.length;i++)
                     {
                         let id = data.problems[i].contestId + data.problems[i].index;
                         if(solveTime1[id]!=undefined)
                         {
                             obj1.points+= data.problems[i].points;
-                            obj1.problemResults.push({contestId:data.problem[i].contestId,submissionId:submissionId1[id]});
+                            obj1.problemResults.push({contestId:data.problems[i].contestId,submissionId:submissionId1[id]});
                         }
                         else 
                         {
                             obj1.problemResults.push({contestId:-1,submissionId:-1});
                         }
                     }
+                    console.log(rankList);
                     rankList.push(obj1);
+                    console.log(rankList);
                 }
-
+                console.log(rankList);
                 let table = document.getElementById('myTable1');
                 
                 let c = ['A','B','C','D','E','F','G','H','I','J'];
@@ -476,20 +485,6 @@ if(secondsSinceEpoch - starttime <= duration + (86400*10*1000))
                 
                 let table1 = document.getElementById('myTable2');
 
-                l
-                for(let i=0;i<registered.length;i++)
-                {
-                    let obj = {
-                        handle:registered[i],
-                        points:0,
-                        problemResults:[]
-                    };
-                    for(let j=0;j<problem.length;j++)
-                    {
-                        obj.problemResults.push({contestId:-1,submissionId:-1});
-                    }
-                    rankList.push(obj);
-                }
 
                 let row1 = table1.insertRow(0);
                 let cll1 =row1.insertCell(0);

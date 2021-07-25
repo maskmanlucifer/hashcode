@@ -447,9 +447,11 @@ module.exports.mashup_create = async (req,res) => {
            "id":String(size+1),
            "type":"MASHUP"
          };
+
         const code=jwt.sign(secret,process.env.JWT_KEY,{
            expiresIn:'30d'
         });
+
         let url = `http://localhost:3000/contest/private/register/`
         url += code;
         res.status(201).json({ contestError:'Contest created scroll down to see your contest details',info : `Your private MASHUP # ${size+1} is created, share above link to whom you want to invite` , link : url });
@@ -514,7 +516,8 @@ module.exports.lockout_create = async (req,res)=>{
         let secret={
             "id":String(size+1),
             "type":"LOCKOUT"
-          }
+         }
+
          const code=jwt.sign(secret,process.env.JWT_KEY,{
             expiresIn:'30d'
          });

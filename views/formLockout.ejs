@@ -112,11 +112,14 @@
         let link=document.querySelector('.link');
         let link_info=document.querySelector('.link_info');
         let contestError=document.querySelector('.contestError');
+
         $('button').click(async (e) => {
             e.preventDefault();
+
             contestError.textContent='';
             link.innerHTML = '';
             link_info.innerHTML = '';
+
             let duration = form.duration.value;
             let min_level = form.min_level.value;
             let max_level = form.max_level.value;
@@ -124,27 +127,37 @@
             let no_of_problems=form.no_of_problems.value;
             let visibility=form.visibility.value;
             
-            if((!duration) || (!min_level) || (!max_level) || (!starttime) || (!no_of_problems)) {
+            let secondsSinceEpoch = Date.now();
+            let date = new Date();
+            let offset = date.getTimezoneOffset() * 60*1000;
+            starttime += offset;
+
+            if((!duration) || (!min_level) || (!max_level) || (!starttime) || (!no_of_problems)) 
+            {
                 contestError.textContent='Some values are not entered';
             }
-            else if(no_of_problems>10){
+            else if(no_of_problems>10)
+            {
                 contestError.textContent='Number of problems should be less than 11';
             }
-            else if(min_level <800 || min_level>3500) {
+            else if(min_level <800 || min_level>3500) 
+            {
                 contestError.textContent='Min level of problem should be in between 800 and 3500';
             }
-            else if(max_level <800 || max_level>3500) {
+            else if(max_level <800 || max_level>3500) 
+            {
                 contestError.textContent='Max level of problem should be in between 800 and 3500';
             }
-            else {
-                const secondsSinceEpoch = Math.round(Date.now() / 1000.0);
-                let date = new Date();
-                let offset = date.getTimezoneOffset() * 60*1000;
-                starttime += offset;
-                
+            else if(secondsSinceEpoch>starttime)
+            {
+                contestError.textContent='You can not set contest in past';
+            }
+            else 
+            {
                 starttime = Math.round(starttime/1000.0);
                 duration*=60;
-                try { 
+                try 
+                { 
                     const res = await fetch('/contest/lockout/create', { 
                         method: 'POST', 
                         body: JSON.stringify({ duration,min_level,max_level,starttime,no_of_problems,visibility}),
@@ -164,10 +177,11 @@
                         link.innerHTML = `<a href="${data.link}">Link</a>`;
                     }
                 }
-                catch (err) {
+                catch (err) 
+                {
                     console.log(err);
-                    }
                 }
+            }
         });
     </script>
 </body>

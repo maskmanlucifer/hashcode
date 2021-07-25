@@ -81,12 +81,14 @@
         <div class="filter_bar_contest_visualizer">
             <a href="https://codeforces.com/contest/<%=contestID%>"> <%=contestName%> </a>
         </div>
+
         <%for(let i=0;i<problems.length;i++){%>
         <div class="chart_box">
         <a href="https://codeforces.com/contest/<%=contestID%>/problem/<%=problems[i]%>">PROBLEM - <%=problems[i]%></a>
         <canvas id="myChart<%=i%>"></canvas>
         </div>
         <%}%>
+        
     </main>
     <script src="/js/visualizer.js"></script>
 </body>

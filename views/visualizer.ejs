@@ -87,9 +87,8 @@
             <div class="contestError"></div>
             <div class="info">
                 <p>Bar graph of how many users of level x solved particular problem</p>
-                <p>Seperate bar graph for each problem</p>
                 <p>Contest no. can be found in url of that contest</p>
-                <p>Due to quite large data fetching it might take 6-7 seconds to load the chart</p>
+                <p>Due to quite large data fetching it might take 8-10 seconds to load the chart</p>
                 <p>Any contest can be visualized only after rating change of that contest</p>
             </div>
             </div>
@@ -107,7 +106,7 @@
     <script>
         let contestError = document.querySelector('.contestError');
 
-        $('.contest_button').click((e)=>{
+        $('.contest_button').click((e) => {
             e.preventDefault();
 
             contestError.textContent='';

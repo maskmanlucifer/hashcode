@@ -985,6 +985,7 @@
       border-radius: 25px;
       margin-top: 12px;
       margin-bottom: 12px;
+      border: 1px solid turquoise;
   }
   .my_contest p 
   {
@@ -993,7 +994,7 @@
   .my_contest a 
   {
     text-decoration: none;
-    color: turquoise;
+    color: var(--extra);
   }
   .welcome 
   {
@@ -1017,6 +1018,7 @@
     height: 400px;
     padding: 20px;
     padding-top: 5px;
+    
   }
 
   .profile_box form label 
