@@ -75,7 +75,7 @@
             </li>
         </ul>
     </nav>
-    <main class="main">
+    <main class="main"> 
 
         <p id="starttime" style="display: none;"><%=data.starttimeSecond%></p>
         <p id="duration" style="display:none;"><%=data.durationtimeSecond%></p>
@@ -99,7 +99,7 @@
                     </div>
                 <% } else if(error!=2) {%>
                     <div class="problem_box" style=" overflow-x:auto;">
-                        <p class="contestError"><%=error.server_error%></p>
+                        <p class="contestError"><%=error.error%></p>
                     </div>
                 <% } else {%>
                     
@@ -115,15 +115,13 @@
                                     <th>NUMBER OF AC</th>
                                 </tr>
                                 <% let c = ['A','B','C','D','E','F','G','H','I','J']; %>
-                                <% let j=0; %>
                                 <%for(let i=0;i<data.problems.length;i++) {%>
                                 <tr>
                                     <td><%=i+1%></td>
-                                    <td><a href="https://codeforces.com/contest/<%=data.problems[i].contestId%>/problem/<%=data.problems[i].index%>">PROBLEM-<%=c[j]%></a></td>
+                                    <td><a href="https://codeforces.com/contest/<%=data.problems[i].contestId%>/problem/<%=data.problems[i].index%>">PROBLEM-<%=c[i]%></a></td>
                                     <td><%=data.problems[i].points%></td>
                                     <td><%=data.problems[i].numberofAc%></td>
                                 </tr>
-                                <% j=j+1 %>
                                 <%}%>
                             </table>
                         <%}%>    
@@ -144,7 +142,7 @@
                     </div>
                 <% } else if(error!=2) {%>
                     <div class="problem_box" style=" overflow-x:auto;">
-                        <p class="contestError"><%=error.server_error%></p>
+                        <p class="contestError"><%=error.error%></p>
                     </div>
                 <% } else {%>
                     <div class="problem_box" style=" overflow-x:auto;"> 
@@ -157,10 +155,8 @@
                                     <th>USERNAME</th>
                                     <th>TOTAL POINTS</th>
                                     <% let c = ['A','B','C','D','E','F','G','H','I','J']; %>
-                                    <% let j=0; %>
                                     <%for(let i=0;i<data.problems.length;i++) {%>
-                                    <th><a href="https://codeforces.com/contest/<%=data.problems[i].contestId%>/problem/<%=data.problems[i].index%>"><%=c[j]%></a></th>
-                                    <% j=j+1 %>
+                                    <th><a href="https://codeforces.com/contest/<%=data.problems[i].contestId%>/problem/<%=data.problems[i].index%>"><%=c[i]%></a></th>
                                     <%}%>
                                 </tr>
                                 <tr>

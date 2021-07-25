@@ -1,3 +1,4 @@
+// extarcting all ejs data from frontend
 let starttime = document.getElementById('starttime').textContent;
 let duration = document.getElementById('duration').textContent;
 let problems = document.getElementById('problems').textContent;
@@ -7,8 +8,8 @@ let minRange = Number(document.getElementById('minRange').textContent);
 let maxRange = Number(document.getElementById('maxRange').textContent);
 let noofProblems = Number(document.getElementById('noofProblems').textContent);
 
-let secondsSinceEpoch = Date.now();
 
+let secondsSinceEpoch = Date.now();
 starttime = Number(starttime)*1000;
 duration = Number(duration)*1000;
 
@@ -16,15 +17,18 @@ if(secondsSinceEpoch - starttime <= duration + (86400*10*1000))
 {
     if(type == "PROBLEMS") 
     {
+         // for creating awaits 
          function delay(n) 
          {
             return new Promise(function(resolve){
                 setTimeout(resolve,n*1000);
             });
          }
+
          if(problems == 0)
          {
               let exclusedProblems = {};
+
               async function extractProblemList()
               {
                 let url = "/api/registered/";
@@ -63,6 +67,7 @@ if(secondsSinceEpoch - starttime <= duration + (86400*10*1000))
                       uri += data.registered[i].handle;
                       let data2 = await fetch(uri);
                       data1 = await data2.json();
+
                       for(let j=0;j<data1.result.length;j++)
                       {
                           if(data1.result[j].verdict == "OK") 
@@ -76,6 +81,7 @@ if(secondsSinceEpoch - starttime <= duration + (86400*10*1000))
                       }
                   }
                 }
+
 
                 let ratingofProblems = {};
                 let required = [];
@@ -112,6 +118,7 @@ if(secondsSinceEpoch - starttime <= duration + (86400*10*1000))
                     ratingofProblems[id]=data.result.problems[i].rating;
                   }
                 }
+
                 let vect = [];
                 for(let i=0;i<data.result.problemStatistics.length;i++)
                 {
@@ -121,7 +128,9 @@ if(secondsSinceEpoch - starttime <= duration + (86400*10*1000))
                     vect.push({contestId:data.result.problemStatistics[i].contestId,index:data.result.problemStatistics[i].index,points:ratingofProblems[id],count:data.result.problemStatistics[i].solvedCount});
                   }
                 }
-                vect.sort((p1,p2)=>{
+                
+                // sorting problems on the basis of rating and number of submissions
+                vect.sort((p1,p2)=> {
                   if(p1.points==p2.points) 
                   {
                         if(p1.count<p2.count)
@@ -150,6 +159,7 @@ if(secondsSinceEpoch - starttime <= duration + (86400*10*1000))
                   }
                 });
 
+                // picking problems from the list 
                 let problem = [];
                 for(let i=0;i<vect.length;i++) 
                 {
@@ -163,8 +173,8 @@ if(secondsSinceEpoch - starttime <= duration + (86400*10*1000))
                    }
                 }
 
+
                 let table = document.getElementById('myTable');
-                
                 let c = ['A','B','C','D','E','F','G','H','I','J'];
                 let row = table.insertRow(0);
                 let cell1 =row.insertCell(0);
@@ -326,6 +336,7 @@ if(secondsSinceEpoch - starttime <= duration + (86400*10*1000))
                     cell3.innerHTML = `${p5}`;
                     cell4.innerHTML = `${p6}`;
                 }
+
                 let problem = data.problems;
                 const res = await fetch('/save/mashup/problems', { 
                   method: 'POST', 
@@ -387,6 +398,7 @@ if(secondsSinceEpoch - starttime <= duration + (86400*10*1000))
                   points : 0,
                   problemResults : []
                 };
+
                 for(let j=0;j<data.problems.length;j++)
                 {
                   let id = data.problems[j].contestId + data.problems[j].index;
@@ -401,7 +413,7 @@ if(secondsSinceEpoch - starttime <= duration + (86400*10*1000))
                   }
                   else 
                   {
-                    obj.problemResults.push({contestId:-1,submissionId:0});
+                    obj.problemResults.push({contestId:-1,submissionId:-1});
                   }
                 }
                 rankList.push(obj);
@@ -455,13 +467,15 @@ if(secondsSinceEpoch - starttime <= duration + (86400*10*1000))
                   }
                   else 
                   {
-                    obj.problemResults.push({contestId:-1,submissionId:0});
+                    obj.problemResults.push({contestId:-1,submissionId:-1});
                   }
                 }
                 rankList.push(obj);
               }
             }
-            rankList.sort((p1,p2)=>{
+
+            // sort ranlist according to points gained by each user
+            rankList.sort((p1,p2)=> {
               if(p1.points>p2.points)
               {
                   return -1;
@@ -475,6 +489,8 @@ if(secondsSinceEpoch - starttime <= duration + (86400*10*1000))
                   return 0;
               }
             });
+
+
             let table = document.getElementById('myTable');
                 
             let c = ['A','B','C','D','E','F','G','H','I','J'];
@@ -533,7 +549,7 @@ if(secondsSinceEpoch - starttime <= duration + (86400*10*1000))
     }
 }
 
-if(secondsSinceEpoch<starttime) 
+if(secondsSinceEpoch < starttime) 
 {
     var countDownDate = starttime;
     var x = setInterval(function() {
