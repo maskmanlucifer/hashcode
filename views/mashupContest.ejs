@@ -163,7 +163,7 @@
                                     <%for(let i=0;i<data.rankList.length;i++) {%>
                                         <tr>
                                             <td><%=i+1%></td>
-                                            <td><a href="https://codeforces.com/profile/${data.rankList[i].handle}">${data.rankList[i].handle}</a></td>
+                                            <td><a href="https://codeforces.com/profile/<%=data.rankList[i].handle%>"><%=data.rankList[i].handle%></a></td>
                                             <td><%=data.rankList[i].points%></td>
                                             <%for(let j=0;j<data.rankList[i].problemResults.length;j++) {%>
                                             <% if(data.rankList[i].problemResults[j].contestId != -1) {%>

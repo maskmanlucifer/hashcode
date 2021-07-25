@@ -653,15 +653,12 @@ module.exports.lockout_contest_landing_page = async (req,res) => {
    let contest = req.params.contestId;
    let contestId = Number(contest);
    let data1 = await Lockout.find({contestId:contestId});
+
    let secondsSinceEpoch = Date.now();
    if(data1.length == 0) 
    {
       let error = {
-         server_error : 'Contest does not exist',
-         login_error : undefined,
-         cfhandle_error : undefined,
-         visualizer_error : undefined
-   
+         error : 'Contest does not exist',
       };
       res.render('error',{data:error,user:req.user});
    } 
@@ -675,23 +672,22 @@ module.exports.lockout_contest_landing_page = async (req,res) => {
       {
          let flag = 0;
          
-         if(data.creator.handle == user.cfHandle)
+         if(user && user.isHandle)
          {
-            flag = 1;
+            if((data.creator.handle == user.cfHandle))
+            {
+               flag = 1;
+            }
+            if((data.opponent.googleId != "undefined") && data.opponent.handle==user.cfHandle)
+            {
+               flag = 1;
+            }
          }
-         if((data.opponent.googleId != "undefined") && data.opponent.handle==user.cfHandle)
-         {
-            flag = 1;
-         }
-
+         
          if(flag == 0) 
          {
                let error = {
-                  server_error : 'You can not access this contest',
-                  login_error : undefined,
-                  cfhandle_error : undefined,
-                  visualizer_error : undefined
-            
+                  error : 'You can not access this contest'
                };
                res.render('error',{data:error,user:req.user});
          } 
@@ -700,11 +696,7 @@ module.exports.lockout_contest_landing_page = async (req,res) => {
                if(secondsSinceEpoch < starttime) 
                {
                   let error = {
-                     server_error : 'CONTEST NOT STARTED',
-                     login_error : undefined,
-                     cfhandle_error : undefined,
-                     visualizer_error : undefined
-               
+                     error : 'CONTEST NOT STARTED'
                   };
                   res.render('lockoutContest',{data:data,user:req.user,error:error});
                } 
@@ -724,11 +716,7 @@ module.exports.lockout_contest_landing_page = async (req,res) => {
             if(secondsSinceEpoch < starttime) 
             {
                let error = {
-                  server_error : 'CONTEST NOT STARTED',
-                  login_error : undefined,
-                  cfhandle_error : undefined,
-                  visualizer_error : undefined
-            
+                  error : 'CONTEST NOT STARTED'
                };
                res.render('lockoutContest',{data:data,user:req.user,error:error});
             } 

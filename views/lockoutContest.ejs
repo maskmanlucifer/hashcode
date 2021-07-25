@@ -75,7 +75,7 @@
             </li>
         </ul>
     </nav>
-    <main class="main"> 
+    <main class="main">  
 
         <p id="starttime" style="display: none;"><%=data.starttimeSecond%></p>
         <p id="duration" style="display:none;"><%=data.durationtimeSecond%></p>
@@ -110,7 +110,7 @@
                     <span class="active_buttons" style="color: turquoise;">PROBLEMS</span>
                 </div>
                 <div class="problem_box" style=" overflow-x:auto;">
-                    <p class="contestError"><%=error.server_error%></p>
+                    <p class="contestError"><%=error.error%></p>
                 </div>
             </div>
             <div class="main_contest_box">
@@ -118,7 +118,7 @@
                     <span class="active_buttons" style="color: turquoise;">STANDING</span>
                 </div>
                 <div class="problem_box" style=" overflow-x:auto;">
-                    <p class="contestError"><%=error.server_error%></p>
+                    <p class="contestError"><%=error.error%></p>
                 </div>
             </div>
         <% } else {%>
@@ -131,18 +131,21 @@
                         <tr>
                             <th>#</th>
                             <th>NAME</th>
+                            <th>POINTS</th>
                             <th>FIRST SOLVED BY</th>
                         </tr>
                         <% for(let i=0;i<data.problems.length;i++){%>
                             <tr>
                                 <td><%=i+1%></td>
                                 <td><a href="https://codeforces.com/contest/<%=data.problems[i].contestId%>/problem/<%=data.problems[i].index%>">PROBLEM-<%=c[i]%></a></td>
+                                <td><%=data.problems[i].points%></td>
                                 <td><%=data.problems[i].acFirst%></td>
                             </tr>
                         <%}%>
                     </table>
                 </div>
             </div>
+
             <div class="main_contest_box">
                 <div class="buttons">
                     <span class="active_buttons" style="color: turquoise;">STANDING</span>
@@ -161,7 +164,7 @@
                         <% for(let i=0;i<data.rankList.length;i++){%>
                             <tr>
                                 <td><%=i+1%></td>
-                                <td><a href="https://codeforces.com/profile/${data.rankList[i].handle}">${data.rankList[i].handle}</a></td>
+                                <td><a href="https://codeforces.com/profile/<%=data.rankList[i].handle%>"><%=data.rankList[i].handle%></a></td>
                                 <td><%=data.rankList[i].points%></td>
                                 <%for(let j=0;j<data.rankList[i].problemResults.length;j++) {%>
                                     <% if(data.rankList[i].problemResults[j].contestId != -1) {%>

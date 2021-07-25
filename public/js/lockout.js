@@ -1,3 +1,4 @@
+// extracting data from front end
 let starttime = document.getElementById('starttime').textContent;
 let duration = document.getElementById('duration').textContent;
 let problems = document.getElementById('problems').textContent;
@@ -23,12 +24,14 @@ if(secondsSinceEpoch - starttime <= duration + (86400*10*1000))
                 let data1 = await fetch(url);
                 data = await data1.json();
                 data = data[0];
+
                 let registered = [];
                 registered.push(data.creator.handle);
                 if(data.opponent.googleId!="undefined")
                 {
                     registered.push(data.opponent.handle);
                 }
+
                 let noofRegistered = registered.length;
                 for(let i=0;i<Math.min(5,noofRegistered);i++) 
                 {
@@ -196,6 +199,7 @@ if(secondsSinceEpoch - starttime <= duration + (86400*10*1000))
                 cll2.innerHTML = `USERNAME`;
                 let cll3 = row1.insertCell(2);
                 cll3.innerHTML = `POINTS`;
+
                 for(let i=0;i<problem.length;i++)
                 {
                     let cll = row1.insertCell(3+i);
@@ -302,7 +306,7 @@ if(secondsSinceEpoch - starttime <= duration + (86400*10*1000))
                     let uri = "https://codeforces.com/api/user.status?handle=";
 
                     uri += registered[1];
-                    url += "&from=1&count=400";
+                    uri += "&from=1&count=400";
 
                     let data2 = await fetch(uri);
                     data1 = await data2.json();
@@ -365,7 +369,7 @@ if(secondsSinceEpoch - starttime <= duration + (86400*10*1000))
                 
                 if(registered.length>1)
                 {
-                    console.log("YES");
+                    
                     let obj1 = {
                         handle:registered[0],
                         points:0,
@@ -391,15 +395,15 @@ if(secondsSinceEpoch - starttime <= duration + (86400*10*1000))
                                 }
                                 else 
                                 {
-                                    obj2.points+= data.problemss[i].points;
-                                    obj2.problemResults.push({contestId:data.problems[i].contestId,submissionId:submissionId1[id]});
+                                    obj2.points+= data.problems[i].points;
+                                    obj2.problemResults.push({contestId:data.problems[i].contestId,submissionId:submissionId2[id]});
                                     obj1.problemResults.push({contestId:-1,submissionId:-1});
                                 }
                             }
                             else 
                             {
                                     obj1.points+= data.problems[i].points;
-                                    obj1.problemResults.push({contestId:data.problem[i].contestId,submissionId:submissionId1[id]});
+                                    obj1.problemResults.push({contestId:data.problems[i].contestId,submissionId:submissionId1[id]});
                                     obj2.problemResults.push({contestId:-1,submissionId:-1});
                             }
                         }
@@ -408,7 +412,7 @@ if(secondsSinceEpoch - starttime <= duration + (86400*10*1000))
                             if(solveTime2[id]!=undefined)
                             {
                                     obj2.points+= data.problems[i].points;
-                                    obj2.problemResults.push({contestId:data.problem[i].contestId,submissionId:submissionId1[id]});
+                                    obj2.problemResults.push({contestId:data.problems[i].contestId,submissionId:submissionId2[id]});
                                     obj1.problemResults.push({contestId:-1,submissionId:-1});
                             }
                             else 
@@ -444,11 +448,9 @@ if(secondsSinceEpoch - starttime <= duration + (86400*10*1000))
                             obj1.problemResults.push({contestId:-1,submissionId:-1});
                         }
                     }
-                    console.log(rankList);
                     rankList.push(obj1);
-                    console.log(rankList);
                 }
-                console.log(rankList);
+            
                 let table = document.getElementById('myTable1');
                 
                 let c = ['A','B','C','D','E','F','G','H','I','J'];
@@ -484,7 +486,6 @@ if(secondsSinceEpoch - starttime <= duration + (86400*10*1000))
                 }
                 
                 let table1 = document.getElementById('myTable2');
-
 
                 let row1 = table1.insertRow(0);
                 let cll1 =row1.insertCell(0);
