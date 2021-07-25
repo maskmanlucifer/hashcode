@@ -424,7 +424,7 @@ module.exports.lockout_mashup_register_private = async(req,res) => {
                     else
                     {
                        let error = {
-                          login_error : 'Lockout is full'
+                          error : 'Lockout is full'
                        };
                        res.render('error',{data:error,user:req.user});
                     }

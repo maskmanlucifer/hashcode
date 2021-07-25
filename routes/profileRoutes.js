@@ -12,10 +12,10 @@ const authCheck = (req,res,next)=> {
 }; 
 
 // getting profile main page 
-router.get('/profile',authCheck, profileController.profile_get);
+router.get('/profile',authCheck, profileController.profile_get); // getting profile page 
 
-router.post('/profile/handle/save',profileController.handle_save);
+router.post('/profile/handle/save',profileController.handle_save); // saving handle for verification
 
-router.post('/profile/handle/verify',profileController.change_isHandle);
+router.post('/profile/handle/verify',profileController.change_isHandle); // verifying by seeing submission
 
 module.exports = router;
