@@ -47,7 +47,7 @@
             </li>
             <%if(user){%>
             <li>
-                <a href="#">
+                <a href="/profile">
                     <i class="material-icons">account_circle</i>
                 </a>
                 <span class="tooltip">PROFILE</span>
@@ -76,75 +76,107 @@
         </ul>
     </nav>
     <main class="main">
-        <div class="main_contest_box">
-            <div class="buttons">
-                <span class="active_buttons">PROBLEMS</span>
+
+        <p id="starttime" style="display: none;"><%=data.starttimeSecond%></p>
+        <p id="duration" style="display:none;"><%=data.durationtimeSecond%></p>
+        <p id="problems" style="display: none;"><%=data.problems.length%></p>
+        <p id="contestId" style="display: none;"><%=data.contestId%></p>
+        <p id="minRange" style="display: none;"><%=data.minRange%></p>
+        <p id="maxRange" style="display: none;"><%=data.maxRange%></p>
+        <p id="noofProblems" style="display: none;"><%=data.numberofProblems%></p>
+        <% let c = ['A','B','C','D','E','F','G','H','I','J']; %>
+
+        <%if(error==1) {%>
+            <div class="main_contest_box">
+                <div class="buttons">
+                    <span class="active_buttons" style="color: turquoise;">PROBLEMS</span>
+                </div>
+                <div class="problem_box" style=" overflow-x:auto;">
+                    <table id="myTable1"></table>
+                </div>
             </div>
-            <div class="problem_box" style=" overflow-x:auto;">
-                <table >
-                    <tr>
-                        <th>#</th>
-                        <th>NAME</th>
-                        <th>SOLVED BY</th>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>PROBLEM-A</td>
-                        <td>maskmanlucifer</td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>PROBLEM-A</td>
-                        <td>jareehd</td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>PROBLEM-A</td>
-                        <td>roopam_mishra</td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>PROBLEM-A</td>
-                        <td>maik</td>
-                    </tr>
-                </table>
+            <div class="main_contest_box">
+                <div class="buttons">
+                    <span class="active_buttons" style="color: turquoise;">STANDING</span>
+                </div>
+                <div class="problem_box" style=" overflow-x:auto;">
+                   <table id="myTable2"></table>
+                </div>
             </div>
-        </div>
-        <div class="main_contest_box">
-            <div class="buttons">
-                <span class="active_buttons">STANDING</span>
+        <% } else if(error!=2) {%>
+            <div class="main_contest_box">
+                <div class="buttons">
+                    <span class="active_buttons" style="color: turquoise;">PROBLEMS</span>
+                </div>
+                <div class="problem_box" style=" overflow-x:auto;">
+                    <p class="contestError"><%=error.server_error%></p>
+                </div>
             </div>
-            <div class="problem_box" style=" overflow-x:auto;">
-                <table >
-                    <tr>
-                        <th>#</th>
-                        <th>USERNAME</th>
-                        <th>POINTS</th>
-                        <th>A</th>
-                        <th>B</th>
-                        <th>C</th>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>maskmanlucifer</td>
-                        <td>200</td>
-                        <td>VIEW</td>
-                        <td>-</td>
-                        <td>VIEW</td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>jareehd</td>
-                        <td>100</td>
-                        <td>-</td>
-                        <td>VIEW</td>
-                        <td>-</td>
-                    </tr>
-                </table>
+            <div class="main_contest_box">
+                <div class="buttons">
+                    <span class="active_buttons" style="color: turquoise;">STANDING</span>
+                </div>
+                <div class="problem_box" style=" overflow-x:auto;">
+                    <p class="contestError"><%=error.server_error%></p>
+                </div>
             </div>
-        </div>
+        <% } else {%>
+            <div class="main_contest_box">
+                <div class="buttons">
+                    <span class="active_buttons" style="color: turquoise;">PROBLEMS</span>
+                </div>
+                <div class="problem_box" style=" overflow-x:auto;">
+                    <table >
+                        <tr>
+                            <th>#</th>
+                            <th>NAME</th>
+                            <th>FIRST SOLVED BY</th>
+                        </tr>
+                        <% for(let i=0;i<data.problems.length;i++){%>
+                            <tr>
+                                <td><%=i+1%></td>
+                                <td><a href="https://codeforces.com/contest/<%=data.problems[i].contestId%>/problem/<%=data.problems[i].index%>">PROBLEM-<%=c[i]%></a></td>
+                                <td><%=data.problems[i].acFirst%></td>
+                            </tr>
+                        <%}%>
+                    </table>
+                </div>
+            </div>
+            <div class="main_contest_box">
+                <div class="buttons">
+                    <span class="active_buttons" style="color: turquoise;">STANDING</span>
+                </div>
+                <div class="problem_box" style=" overflow-x:auto;">
+                    <table >
+                        <tr>
+                            <th>#</th>
+                            <th>USERNAME</th>
+                            <th>POINTS</th>
+                            <%for(let i=0;i<data.problems.length;i++) {%>
+                                <th><%=c[i]%></th>
+                            <%}%>
+                        </tr>
+                        
+                        <% for(let i=0;i<data.rankList.length;i++){%>
+                            <tr>
+                                <td><%=i+1%></td>
+                                <td><a href="https://codeforces.com/profile/${data.rankList[i].handle}">${data.rankList[i].handle}</a></td>
+                                <td><%=data.rankList[i].points%></td>
+                                <%for(let j=0;j<data.rankList[i].problemResults.length;j++) {%>
+                                    <% if(data.rankList[i].problemResults[j].contestId != -1) {%>
+                                    <td><a href="https://codeforces.com/contest/<%=data.rankList[i].problemResults[j].contestId%>/submission/<%=data.rankList[i].problemResults[j].submissionId%>">AC</a></td>
+                                    <%} else {%>
+                                    -
+                                    <%}%>
+                                <%}%>
+                            </tr>
+                        <%}%>
+                    </table>
+                </div>
+            </div>
+        <% } %>
         <div id="timer">
-            <p>Time Remaining</p>
+            <p id="demo1"></p>
             <p id="demo"></p>
         </div>
     </main>

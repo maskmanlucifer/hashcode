@@ -38,6 +38,13 @@ module.exports.get_registered_list = async(req,res) => {
    res.send(data1);
 }
 
+module.exports.get_lockout = async(req,res) => {
+   let contest = req.params.contestId;
+   let contestId = Number(contest);
+   let data1 = await Lockout.find({contestId:contestId});
+   res.send(data1);
+}
+
 module.exports.mashup_registered_users = async (req,res) => {
 
     let contest = req.params.contestId;
@@ -119,7 +126,7 @@ module.exports.mashup_register_public = async (req,res) => {
             if(flag == 0 ) 
             {
                await Mashup.findOneAndUpdate({ contestId: contestId},{ $push: { "registered" : obj }});
-               await User.findOneAndUpdate({googleId:user.googleId},{$push:{"contestList" : {type:"mashup",contestId:contestno}}});
+               await User.findOneAndUpdate({googleId:user.googleId},{$push:{"contestList" : {type:"mashup",contestId:contestId}}});
                res.redirect('/contest/mashup');
             } 
             else 
@@ -198,7 +205,7 @@ module.exports.lockout_register_public = async (req,res)=>{
             if((data[0].opponent.googleId == "undefined") && (data[0].creator.googleId != user.googleId)) 
             {
                   await Lockout.findOneAndUpdate({ contestId: contestId},{ $set: { "opponent" : obj }});
-                  await User.findOneAndUpdate({googleId:user.googleId},{$push:{"contestList" : {type:"lockout",contestId:contestno}}});
+                  await User.findOneAndUpdate({googleId:user.googleId},{$push:{"contestList" : {type:"lockout",contestId:contestId}}});
                   res.redirect('/contest/lockout');
             } 
             else 
@@ -329,7 +336,7 @@ module.exports.lockout_mashup_register_private = async(req,res) => {
                      if(flag == 0 )
                      {
                            await Mashup.findOneAndUpdate({ contestId: contestId},{ $push: { "registered" : obj }});
-                           await User.findOneAndUpdate({googleId:user.googleId},{$push:{"contestList" : {type:"mashup",contestId:contestno}}});
+                           await User.findOneAndUpdate({googleId:user.googleId},{$push:{"contestList" : {type:"mashup",contestId:contestId}}});
                            res.redirect('/contest/mashup');
 
                      } 
@@ -357,7 +364,7 @@ module.exports.lockout_mashup_register_private = async(req,res) => {
                   if((data[0].opponent.googleId== "undefined") && (data[0].creator.googleId != user.googleId)) 
                   {
                      await Lockout.findOneAndUpdate({ contestId: contestId},{ $set: { "opponent" : obj }});
-                     await User.findOneAndUpdate({googleId:user.googleId},{$push:{"contestList" : {type:"lockout",contestId:contestno}}});
+                     await User.findOneAndUpdate({googleId:user.googleId},{$push:{"contestList" : {type:"lockout",contestId:contestId}}});
                      res.redirect('/contest/lockout');
 
                   } 
@@ -721,9 +728,117 @@ module.exports.mashup_contest_landing_page_standing = async (req,res) => {
    }
 
 };
+module.exports.save_lockout = async (req,res) => {
+ const {problem,rankList,contestId} = req.body;
+ await Lockout.findOneAndUpdate({contestId:contestId},{$set:{"problems":problem, "rankList":rankList}});
+ res.send("saved");
+}
 
 module.exports.save_mashup_problems = async (req,res) => {
   const {problem,contestId} = req.body;
   await Mashup.findOneAndUpdate({contestId:contestId},{$set:{"problems":problem}});
   res.send("saved");
+};
+
+module.exports.save_mashup_ranklist = async (req,res) => {
+   const {rankList,contestId} = req.body;
+   await Mashup.findOneAndUpdate({contestId:contestId},{$set:{"rankList":rankList}});
+   res.send("saved");
+};
+ 
+
+module.exports.lockout_contest_landing_page = async (req,res) => {
+
+   let contest = req.params.contestId;
+   let contestId = Number(contest);
+   let data1 = await Lockout.find({contestId:contestId});
+   let secondsSinceEpoch = Date.now();
+   if(data1.length == 0) 
+   {
+      let error = {
+         server_error : 'Contest does not exist',
+         login_error : undefined,
+         cfhandle_error : undefined,
+         visualizer_error : undefined
+   
+      };
+      res.render('error',{data:error,user:req.user});
+   } 
+   else 
+   {
+      let data = data1[0];
+      let starttime = data.starttimeSecond*1000;
+      let duration = data.durationtimeSecond*1000;
+
+      if(data.visibility == "PRIVATE") 
+      {
+         let flag = 0;
+         
+         if(data.creator.handle == user.cfHandle)
+         {
+            flag = 1;
+         }
+         if((data.opponent.googleId != "undefined") && data.opponent.handle==user.cfHandle)
+         {
+            flag = 1;
+         }
+
+         if(flag == 0) 
+         {
+               let error = {
+                  server_error : 'You can not access this contest',
+                  login_error : undefined,
+                  cfhandle_error : undefined,
+                  visualizer_error : undefined
+            
+               };
+               res.render('error',{data:error,user:req.user});
+         } 
+         else 
+         {
+               if(secondsSinceEpoch < starttime) 
+               {
+                  let error = {
+                     server_error : 'CONTEST NOT STARTED',
+                     login_error : undefined,
+                     cfhandle_error : undefined,
+                     visualizer_error : undefined
+               
+                  };
+                  res.render('lockoutContest',{data:data,user:req.user,error:error});
+               } 
+               else if(secondsSinceEpoch - starttime <= duration + (86400*10*1000))
+               {
+                  res.render('lockoutContest',{user:req.user,data:data,error:1}); 
+               }
+               else 
+               {
+                  res.render('lockoutContest',{user:req.user,data:data,error:2}); 
+               }
+         }
+      } 
+      else 
+      {
+           
+            if(secondsSinceEpoch < starttime) 
+            {
+               let error = {
+                  server_error : 'CONTEST NOT STARTED',
+                  login_error : undefined,
+                  cfhandle_error : undefined,
+                  visualizer_error : undefined
+            
+               };
+               res.render('lockoutContest',{data:data,user:req.user,error:error});
+            } 
+            else if(secondsSinceEpoch - starttime <= duration + (86400*10*1000))
+            {
+               res.render('lockoutContest',{user:req.user,data:data,error:1}); 
+            }
+            else 
+            {
+               res.render('lockoutContest',{user:req.user,data:data,error:2}); 
+            }
+      }
+   }
 };

@@ -519,10 +519,10 @@ if(secondsSinceEpoch - starttime <= duration + (86400*10*1000))
                     
                 }
             }
-            let problem = data.problems;
-            const res = await fetch('/save/mashup/problems', { 
+
+            const res = await fetch('/save/mashup/rankList', { 
               method: 'POST', 
-              body: JSON.stringify({problem,contestId}),
+              body: JSON.stringify({rankList,contestId}),
               headers: {'Content-Type': 'application/json'}
             });
           

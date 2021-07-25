@@ -30,10 +30,16 @@ router.get('/contest/mashup/:contestId',contestController.mashup_contest_landing
 
 router.get('/contest/mashup/:contestId/standing', contestController.mashup_contest_landing_page_standing);
 
-// router.get('/contest/lockout/:contestId',contestController.lockout_contest_landing_page);
-
 router.get('/api/registered/:contestId',contestController.get_registered_list);
 
 router.post('/save/mashup/problems',contestController.save_mashup_problems);
+
+router.post('/save/mashup/ranklist',contestController.save_mashup_ranklist);
+
+router.post('/save/lockout',contestController.save_lockout);
+
+router.get('/api/lockout/:contestId',contestController.get_lockout);
+
+router.get('/contest/lockout/:contestId',contestController.lockout_contest_landing_page);
 
 module.exports = router;
