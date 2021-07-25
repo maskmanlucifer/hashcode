@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="/css/index.css">
     <title>hashcode</title>
 </head>
-<body> 
+<body>  
     <nav class="navbar">
         <ul class="navbar-nav">
             <li>
@@ -47,7 +47,7 @@
             </li>
             <%if(user){%>
             <li>
-                <a href="#">
+                <a href="/profile">
                     <i class="material-icons">account_circle</i>
                 </a>
                 <span class="tooltip">PROFILE</span>
@@ -76,62 +76,117 @@
         </ul>
     </nav>
     <main class="main">
+
         <p id="starttime" style="display: none;"><%=data.starttimeSecond%></p>
         <p id="duration" style="display:none;"><%=data.durationtimeSecond%></p>
         <p id="problems" style="display: none;"><%=data.problems.length%></p>
         <p id="type" style="display: none;"><%=type%></p>
-        <p id="contestID" style="display: none;"><%=data.contestID%></p>
-        <% let secondsSinceEpoch = Date.now(); %>
-        <% let start = (data.starttimeSecond + data.durationtimeSecond)* 1000 %>
+        <p id="contestId" style="display: none;"><%=data.contestId%></p>
+        <p id="minRange" style="display: none;"><%=data.minRange%></p>
+        <p id="maxRange" style="display: none;"><%=data.maxRange%></p>
+        <p id="noofProblems" style="display: none;"><%=data.numberofProblems%></p>
+
         <%if(type=="PROBLEMS") {%>
-        <div class="main_contest_box">
-            <div class="buttons">
-                <span class="active_buttons"><a href="#">PROBLEMS</a></span><span ><a href="/contest/mashup/<%=data.contestID%>/standing">STANDING</a></span><span ><a href="/contest/mashup/<%=data.contestID%>/registered">REGISTERED</a></span>
-            </div>
-            <%if(secondsSinceEpoch > start) {%>
-                <div class="problem_box" style=" overflow-x:auto;"> 
-                    <% if(data.problems.length == 0) {%>
-                        <p class="contestError">NO ONE ATTEMPTED CONTEST</p>
-                    <% } else {%>
-                        <table >
-                            <tr>
-                                <th>#</th>
-                                <th>NAME</th>
-                                <th>POINTS</th>
-                            </tr>
-                            <% let c = ['A','B','C','D','E','F','G','H','I','J']; %>
-                            <% let j=0; %>
-                            <%for(let i=0;i<data.problems.length;i++) {%>
-                            <tr>
-                                <td><%=i+1%></td>
-                                <td><a href="https://codeforces.com/contest/<%=data.problems[i].contestID%>/problem/<%=data.problems[i].index%>">PROBLEM-<%=c[j]%></a></td>
-                                <td><%=data.problems[i].points%></td>
-                            </tr>
-                            <% j=j+1 %>
-                            <%}%>
-                        </table>
-                    <%}%>    
+            <div class="main_contest_box">
+                <div class="buttons">
+                    <span class="active_buttons"><a href="#">PROBLEMS</a></span><span ><a href="/contest/mashup/<%=data.contestId%>/standing">STANDING</a></span><span ><a href="/contest/mashup/<%=data.contestId%>/registered">REGISTERED</a></span>
                 </div>
-            <%} else {%>
-                <div class="problem_box" style=" overflow-x:auto;">
-                    <p class="contestError"></p>
+                <%if(error==1) {%>
+                    <div class="problem_box" style=" overflow-x:auto;">
+                       <table id="myTable">
+
+                       </table>
+                    </div>
+                <% } else if(error!=2) {%>
+                    <div class="problem_box" style=" overflow-x:auto;">
+                        <p class="contestError"><%=error.server_error%></p>
+                    </div>
+                <% } else {%>
                     
-                </div>
-            <%}%>
-        </div>
+                    <div class="problem_box" style=" overflow-x:auto;"> 
+                        <% if(data.problems.length == 0) {%>
+                            <p class="contestError">NO ONE ATTEMPTED CONTEST</p>
+                        <% } else {%>
+                            <table >
+                                <tr>
+                                    <th>#</th>
+                                    <th>NAME</th>
+                                    <th>POINTS</th>
+                                    <th>NUMBER OF AC</th>
+                                </tr>
+                                <% let c = ['A','B','C','D','E','F','G','H','I','J']; %>
+                                <% let j=0; %>
+                                <%for(let i=0;i<data.problems.length;i++) {%>
+                                <tr>
+                                    <td><%=i+1%></td>
+                                    <td><a href="https://codeforces.com/contest/<%=data.problems[i].contestId%>/problem/<%=data.problems[i].index%>">PROBLEM-<%=c[j]%></a></td>
+                                    <td><%=data.problems[i].points%></td>
+                                    <td><%=data.problems[i].numberofAc%></td>
+                                </tr>
+                                <% j=j+1 %>
+                                <%}%>
+                            </table>
+                        <%}%>    
+                    </div>
+                <% } %>
+            </div>
         <% } else if(type=="STANDING") { %>
-        <div class="main_contest_box">
-            <div class="buttons">
-                <span ><a href="/contest/mashup/<%=data.contestID%>/problems">PROBLEMS</a></span><span class="active_buttons"><a href="#">STANDING</a></span><span ><a href="/contest/mashup/<%=data.contestID%>/registered">REGISTERED</a></span>
+
+            <div class="main_contest_box">
+                <div class="buttons">
+                    <span ><a href="/contest/mashup/<%=data.contestId%>/problems">PROBLEMS</a></span><span class="active_buttons"><a href="#">STANDING</a></span><span ><a href="/contest/mashup/<%=data.contestId%>/registered">REGISTERED</a></span>
+                </div>
+                <%if(error==1) {%>
+                    <div class="problem_box" style=" overflow-x:auto;">
+
+                    </div>
+                <% } else if(error!=2) {%>
+                    <div class="problem_box" style=" overflow-x:auto;">
+                        <p class="contestError"><%=error.server_error%></p>
+                    </div>
+                <% } else {%>
+                    <div class="problem_box" style=" overflow-x:auto;"> 
+                        <% if(data.problems.length == 0) {%>
+                            <p class="contestError">NO ONE ATTEMPTED CONTEST</p>
+                        <% } else {%>
+                            <table >
+                                <tr>
+                                    <th>RANK</th>
+                                    <th>USERNAME</th>
+                                    <th>TOTAL POINTS</th>
+                                    <% let c = ['A','B','C','D','E','F','G','H','I','J']; %>
+                                    <% let j=0; %>
+                                    <%for(let i=0;i<data.problems.length;i++) {%>
+                                    <th><a href="https://codeforces.com/contest/<%=data.problems[i].contestId%>/problem/<%=data.problems[i].index%>"><%=c[j]%></a></th>
+                                    <% j=j+1 %>
+                                    <%}%>
+                                </tr>
+                                <tr>
+                                    <%for(let i=0;i<data.rankList.length;i++) {%>
+                                        <tr>
+                                            <td><%=i+1%></td>
+                                            <td><%=data.rankList[i].handle%></td>
+                                            <td><%=data.rankList[i].points%></td>
+                                            <%for(let j=0;j<data.rankList[i].problemResults.length;j++) {%>
+                                            <% if(data.rankList[i].problemResults[j].contestId != -1) {%>
+                                            <td><a href="https://codeforces.com/contest/<%=data.rankList[i].problemResults[j].contestId%>/submission/<%=data.rankList[i].problemResults[j].submissionId%>">VIEW</a></td>
+                                            <%} else {%>
+                                            -
+                                            <%}%>
+                                            <%}%>
+                                        </tr>
+                                    <%}%>
+                                </tr>
+                           </table> 
+                        <%}%>    
+                    </div>
+                <% } %>
             </div>
-            <div class="problem_box" style=" overflow-x:auto;">
-                <p class="contestError"></p>
-            </div>
-        </div>
+
         <%} else {%>
             <div class="main_contest_box">
             <div class="buttons">
-                <span ><a href="/contest/mashup/<%=data.contestID%>/problems">PROBLEMS</a></span><span ><a href="/contest/mashup/<%=data.contestID%>/standing">STANDING</a></span><span class="active_buttons"><a href="#">REGISTERED</a></span>
+                <span ><a href="/contest/mashup/<%=data.contestId%>/problems">PROBLEMS</a></span><span ><a href="/contest/mashup/<%=data.contestId%>/standing">STANDING</a></span><span class="active_buttons"><a href="#">REGISTERED</a></span>
             </div>
             <div class="problem_box" style=" overflow-x:auto;">
                 <table >

@@ -2,109 +2,262 @@ let starttime = document.getElementById('starttime').textContent;
 let duration = document.getElementById('duration').textContent;
 let problems = document.getElementById('problems').textContent;
 let type = document.getElementById('type').textContent;
-let contestID = document.getElementById('contestID').textContent;
+let contestId = document.getElementById('contestId').textContent;
+let minRange = Number(document.getElementById('minRange').textContent);
+let maxRange = Number(document.getElementById('maxRange').textContent);
+let noofProblems = Number(document.getElementById('noofProblems').textContent);
+
 let secondsSinceEpoch = Date.now();
-
-
 
 starttime = Number(starttime)*1000;
 duration = Number(duration)*1000;
-// contest is upcoming 
-if(secondsSinceEpoch<starttime) {
-    document.getElementsByClassName("contestError")[0].textContent = "CONTEST NOT STARTED";
- 
-var countDownDate = starttime;
-var x = setInterval(function() {
-  var now = new Date().getTime();
-  var distance = countDownDate - now;
-  var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-  var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-  var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-  var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-  
-  document.getElementById("demo1").textContent = "CONTEST WILL START IN";
-  
-  let finaltime;
-  if(days) {
-    finaltime = days + "d " + hours + "h "
-  + minutes + "m " + seconds + "s ";
-  } else if(hours) {
-    finaltime= hours + "h "
-    + minutes + "m " + seconds + "s ";
-  } else if(minutes) {
-    finaltime =  minutes + "m " + seconds + "s ";
-  } else {
-    finaltime = seconds + "s ";
-  }
-  document.getElementById("demo").innerHTML = finaltime;
 
-  if (distance < 0) {
-    clearInterval(x);
-    document.getElementById("demo").innerHTML = "CONTEST STARTED";
-  }
-}, 1000);
-// contest is running
-} else if(secondsSinceEpoch<=starttime+duration) {
-  
+if(secondsSinceEpoch - starttime <= duration + (86400*10)) 
+{
+    if(type == "PROBLEMS") 
+    {
+         function delay(n) 
+         {
+            return new Promise(function(resolve){
+                setTimeout(resolve,n*1000);
+            });
+         }
+         if(problems == 0)
+         {
+              let exclusedProblems = {};
+              async function extractRanklist()
+              {
+                let url = "/api/registered/";
+                url += contestId;
+                let data1 = await fetch(url);
+                data = await data1.json();
+                data = data[0];
+                let noofRegistered = data.registered.length;
+                for(let i=0;i<Math.min(5,noofRegistered);i++) 
+                {
+                    let uri = "https://codeforces.com/api/user.status?handle=";
+                    uri += data.registered[i].handle;
+                    let data2 = await fetch(uri);
+                    data1 = await data2.json();
+                    for(let j=0;j<data1.result.length;j++)
+                    {
+                        if(data1.result[j].verdict == "OK") 
+                        { 
+                           let id = data1.result[j].problem.contestId + data1.result[j].problem.index;
+                           if(exclusedProblems[id]==undefined)
+                           {
+                              exclusedProblems[id]=1;
+                           }
+                        }
+                    }
+                }
+                if(noofRegistered>5)
+                {
+                  await delay(1);
+                  for(let i=5;i<Math.min(10,noofRegistered);i++) 
+                  {
+                      let uri = "https://codeforces.com/api/user.status?handle=";
+                      uri += data.registered[i].handle;
+                      let data2 = await fetch(uri);
+                      data1 = await data2.json();
+                      for(let j=0;j<data1.result.length;j++)
+                      {
+                          if(data1.result[j].verdict == "OK") 
+                          { 
+                            let id = data1.result[j].problem.contestId + data1.result[j].problem.index;
+                            if(exclusedProblems[id]==undefined)
+                            {
+                                exclusedProblems[id]=1;
+                            }
+                          }
+                      }
+                  }
+                }
+                let ratingofProblems = {};
+                let required = [];
 
-  // case -1 -- first user makes request problemlist size is zero 
-  // in this case make a call to backend to access register list 
-  // generate problems fill them in array and send them to backend and save 
-  // if page was problem page just show him problem page 
+                let maRange = Math.floor(maxRange/100);
+                let miRange = Math.floor(minRange/100);
+                let diff = maRange - miRange +1;
 
-  // case-2 -- any user makes any request now problem size is not zero 
-  // if asked for standing page 
-  // pick last 500 submission of users and see in contest duration how many problem they solved 
-  // create rank list on the basis of data 
-  // show that page to users 
+                maRange-=8;
+                miRange-=8;
 
-  // if asked for problems page 
-  // pick last 500 submission of users in contets and for each problem see how many users solved that
-  // show that list on the page 
+                let z1 = Math.floor(noofProblems / diff);
+                let z2 = noofProblems % diff;
+                for(let j=miRange;j<=maRange;j++)
+                {
+                  required[j]=z1;
+                  if(z2>0)
+                  {
+                    required[j]+=1;
+                    z2--;
+                  }
+                }
+                
+                url = "https://codeforces.com/api/problemset.problems";
+                data1 = await fetch(url);
+                data = await data1.json();
+                
+                for(let i=0;i<data.result.problems.length;i++) 
+                {
+                  let id = data.result.problems[i].contestId + data.result.problems[i].index;
+                  if(exclusedProblems[id]==undefined)
+                  {
+                    ratingofProblems[id]=data.result.problems[i].rating;
+                  }
+                }
+                let vect = [];
+                for(let i=0;i<data.result.problemStatistics.length;i++)
+                {
+                  let id = data.result.problemStatistics[i].contestId + data.result.problemStatistics[i].index;
+                  if(ratingofProblems[id]!=undefined) 
+                  {
+                    vect.push({contestId:data.result.problemStatistics[i].contestId,index:data.result.problemStatistics[i].index,points:ratingofProblems[id],count:data.result.problemStatistics[i].solvedCount});
+                  }
+                }
+                vect.sort((p1,p2)=>{
+                  if(p1.points==p2.points) 
+                  {
+                        if(p1.count<p2.count)
+                        {
+                            return 1;
+                        }
+                        else if(p1.count>p2.count)
+                        {
+                            return -1;
+                        }
+                        else
+                        {
+                             return 0;
+                        }
+                  }
+                  else
+                  {
+                    if(p1.points<p2.points)
+                    {
+                        return -1;
+                    }
+                    else
+                    {
+                         return 1;
+                    }
+                  }
+                });
+                let problem = [];
+                for(let i=0;i<vect.length;i++) 
+                {
+                   let r1 = vect[i].points;
+                   r1 = Math.floor(r1/100); 
+                   r1-=8;
+                   if(required[r1]>0)
+                   {
+                     problem.push({contestId:vect[i].contestId,index:vect[i].index,numberofAc:0,points:vect[i].points});
+                     required[r1]--;
+                   }
+                }
+                let table = document.getElementById('myTable');
+                
+                let c = ['A','B','C','D','E','F','G','H','I','J'];
+                let row = table.insertRow(0);
+                let cell1 =row.insertCell(0);
+                let cell2 = row.insertCell(1);
+                let cell3 = row.insertCell(2);
+                let cell4 = row.insertCell(3);
 
+                cell1.innerHTML = `#`;
+                cell2.innerHTML = `NAME`;
+                cell3.innerHTML = `POINTS`;
+                cell4.innerHTML = `NUMBER OF AC`;
 
-  if(Number(problems)==0) {
+                for(let i=0;i<problem.length;i++)
+                {
+                    let row = table.insertRow(i+1);
+                    let cell1 =row.insertCell(0);
+                    let cell2 = row.insertCell(1);
+                    let cell3 = row.insertCell(2);
+                    let cell4 = row.insertCell(3);
 
-  //   const res = await fetch('/api/registered', { 
-  //     method: 'POST', 
-  //     body: JSON.stringify({ duration,min_level,max_level,starttime,no_of_problems,visibility}),
-  //     headers: {'Content-Type': 'application/json'}
-  // });
-    // let url ="/api/registered/";
-    // url += contestID;
-    //  fetch(url)
-    //  .then((res)=>{
-    //    return res.json();
-    //  })
-    //  .then((data)=>{
-    //    console.log(data);
-    //  })
-    async function extract (){
-      let url ="/api/registered/";
-      url += contestID;
-      let data = await fetch(url);
-      cosole.log(data);
+                    let p1=i+1;
+                    let p2=problem[i].contestId;
+                    let p3=problem[i].index;
+                    let p4=c[i];
+                    let p5=problem[i].points;
+                    
+                    cell1.innerHTML = `${p1}`;
+                    cell2.innerHTML = `<a href="https://codeforces.com/contest/${p2}/problem/${p3}">PROBLEM-${p4}</a>`;
+                    cell3.innerHTML = `${p5}`;
+                    cell4.innerHTML = `${0}`;
+                }
+              }
+              extractRanklist();
+         }
+         else
+         {
+              async function extractRanklist()
+              {
+                let url = "/api/registered/";
+                url += contestId;
+                let data1 = await fetch(url);
+                data = await data1.json();
+                return data;
+              }
+              
+              extractRanklist();
+         }
     }
-    let data = extract();
-    console.log(data);
-  
-  } else {
-   if(type=="PROBLEMS") {
+    else if(type == "STANDING")
+    {
 
+    }
+}
+
+if(secondsSinceEpoch<starttime) 
+{
+    var countDownDate = starttime;
+    var x = setInterval(function() {
+    var now = new Date().getTime();
+    var distance = countDownDate - now;
+    var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    var seconds = Math.floor((distance % (1000 * 60)) / 1000);
     
-   } else if(type=="STANDING") {
+    document.getElementById("demo1").textContent = "CONTEST WILL START IN";
+    
+    let finaltime;
+    if(days) 
+    {
+      finaltime = days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
+    } 
+    else if(hours) 
+    {
+      finaltime= hours + "h " + minutes + "m " + seconds + "s ";
+    } 
+    else if(minutes) 
+    {
+      finaltime =  minutes + "m " + seconds + "s ";
+    } 
+    else 
+    {
+      finaltime = seconds + "s ";
+    }
+    document.getElementById("demo").innerHTML = finaltime;
 
-   }
-  }
+    if (distance < 0) 
+    {
+      clearInterval(x);
+      document.getElementById("demo").innerHTML = "CONTEST STARTED";
+    }
+  }, 1000);
+
+} 
+else if(secondsSinceEpoch<=starttime+duration) 
+{
   var countDownDate = starttime+ duration;
-
   var x = setInterval(function() {
-
   var now = new Date().getTime();
-  
   var distance = countDownDate - now;
-
-  
 
   var days = Math.floor(distance / (1000 * 60 * 60 * 24));
   var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
@@ -114,28 +267,36 @@ var x = setInterval(function() {
   document.getElementById("demo1").textContent = "CONTEST WILL END IN";
   
   let finaltime;
-  if(days) {
-    finaltime = days + "d " + hours + "h "
-  + minutes + "m " + seconds + "s ";
-  } else if(hours) {
-    finaltime= hours + "h " 
-    + minutes + "m " + seconds + "s ";
-  } else if(minutes) {
+  if(days) 
+  {
+    finaltime = days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
+  } 
+  else if(hours)
+  {
+    finaltime= hours + "h "  + minutes + "m " + seconds + "s ";
+  } 
+  else if(minutes) 
+  {
     finaltime =  minutes + "m " + seconds + "s ";
-  } else {
+  } 
+  else 
+  {
     finaltime = seconds + "s ";
   }
   document.getElementById("demo").innerHTML = finaltime;
 
-  if (distance < 0) {
+  if (distance < 0) 
+  {
     clearInterval(x);
     document.getElementById("demo").innerHTML = "CONTEST ENDED";
   }
+
 }, 1000);
 
-} else  {
-  if(type=="STANDING") {
-    document.getElementsByClassName("contestError")[0].textContent = "STANDING CAN BE ACCESSED DURING CONTEST ONLY";
-  }
-  document.getElementById("demo1").textContent = "CONTEST IS FINISHED";
+} 
+else  
+{
+    document.getElementById("demo1").textContent = "CONTEST IS FINISHED";
 }
+
+
