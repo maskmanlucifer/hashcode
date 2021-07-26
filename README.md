@@ -1,4 +1,4 @@
-### :rocket: Helping-Verb
+### :rocket: hashcode
     hashcode is a website developed for creating and attempting virtual contest on codeforces.
     Features of hashcode are -- 
     1. Creating public/private , mashup/lockout virtual contests.
