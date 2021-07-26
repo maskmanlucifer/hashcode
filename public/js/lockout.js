@@ -496,7 +496,7 @@ if(secondsSinceEpoch - starttime <= duration + (86400*10*1000))
                     let p6=problem[i].acFirst;
                     
                     cell1.innerHTML = `${p1}`;
-                    cell2.innerHTML = `<a href="https://codeforces.com/contest/${p2}/problem/${p3}">PROBLEM-${p4}</a>`;
+                    cell2.innerHTML = `<a target="_blank" rel="noopener noreferrer" href="https://codeforces.com/contest/${p2}/problem/${p3}">PROBLEM-${p4}</a>`;
                     cell3.innerHTML = `${p5}`;
                     cell4.innerHTML = `${p6}`;
                 }
