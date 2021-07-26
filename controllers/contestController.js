@@ -442,6 +442,7 @@ module.exports.mashup_contest_landing_page_problems = async (req,res) => {
    let contestId = Number(contest);
    let data1 = await Mashup.find({contestId:contestId});
    let secondsSinceEpoch = Date.now();
+   let user = req.user;
 
    if(data1.length == 0) 
    {
@@ -526,7 +527,7 @@ module.exports.mashup_contest_landing_page_standing = async (req,res) => {
    let contest = req.params.contestId;
    let contestId = Number(contest);
    let data1 = await Mashup.find({contestId:contestId});
-
+   let user = req.user;
    let secondsSinceEpoch = Date.now();
 
    if(data1.length == 0) 
@@ -653,7 +654,7 @@ module.exports.lockout_contest_landing_page = async (req,res) => {
    let contest = req.params.contestId;
    let contestId = Number(contest);
    let data1 = await Lockout.find({contestId:contestId});
-
+   let user = req.user;
    let secondsSinceEpoch = Date.now();
    if(data1.length == 0) 
    {
