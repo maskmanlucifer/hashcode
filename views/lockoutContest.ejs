@@ -138,7 +138,7 @@
                         <% for(let i=0;i<data.problems.length;i++){%>
                             <tr>
                                 <td><%=i+1%></td>
-                                <td><a href="https://codeforces.com/contest/<%=data.problems[i].contestId%>/problem/<%=data.problems[i].index%>">PROBLEM-<%=c[i]%></a></td>
+                                <td><a target="_blank" rel="noopener noreferrer" href="https://codeforces.com/contest/<%=data.problems[i].contestId%>/problem/<%=data.problems[i].index%>">PROBLEM-<%=c[i]%></a></td>
                                 <td><%=data.problems[i].points%></td>
                                 <td><%=data.problems[i].acFirst%></td>
                             </tr>
@@ -165,11 +165,11 @@
                         <% for(let i=0;i<data.rankList.length;i++){%>
                             <tr>
                                 <td><%=i+1%></td>
-                                <td><a href="https://codeforces.com/profile/<%=data.rankList[i].handle%>"><%=data.rankList[i].handle%></a></td>
+                                <td><a target="_blank" rel="noopener noreferrer" href="https://codeforces.com/profile/<%=data.rankList[i].handle%>"><%=data.rankList[i].handle%></a></td>
                                 <td><%=data.rankList[i].points%></td>
                                 <%for(let j=0;j<data.rankList[i].problemResults.length;j++) {%>
                                     <% if(data.rankList[i].problemResults[j].contestId != -1) {%>
-                                    <td><a href="https://codeforces.com/contest/<%=data.rankList[i].problemResults[j].contestId%>/submission/<%=data.rankList[i].problemResults[j].submissionId%>">AC</a></td>
+                                    <td><a target="_blank" rel="noopener noreferrer" href="https://codeforces.com/contest/<%=data.rankList[i].problemResults[j].contestId%>/submission/<%=data.rankList[i].problemResults[j].submissionId%>">AC</a></td>
                                     <%} else {%>
                                     -
                                     <%}%>
@@ -178,7 +178,7 @@
                         <%}%>
                     </table>
                 </div>
-            </div>
+            </div> 
         <% } %>
         <div id="timer">
             <p id="demo1"></p>

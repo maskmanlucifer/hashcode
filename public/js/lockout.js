@@ -170,7 +170,7 @@ if(secondsSinceEpoch - starttime <= duration + (86400*10*1000))
                     let p5=problem[i].points;
                     
                     cell1.innerHTML = `${p1}`;
-                    cell2.innerHTML = `<a href="https://codeforces.com/contest/${p2}/problem/${p3}">PROBLEM-${p4}</a>`;
+                    cell2.innerHTML = `<a target="_blank" rel="noopener noreferrer" href="https://codeforces.com/contest/${p2}/problem/${p3}">PROBLEM-${p4}</a>`;
                     cell3.innerHTML = `${p5}`;
                     cell4.innerHTML = `-`;
                 }
@@ -216,7 +216,7 @@ if(secondsSinceEpoch - starttime <= duration + (86400*10*1000))
 
                     let p1=i+1;
                     cell1.innerHTML = `${p1}`;
-                    cell2.innerHTML = `<a href="https://codeforces.com/profile/${rankList[i].handle}">${rankList[i].handle}</a>`;
+                    cell2.innerHTML = `<a target="_blank" rel="noopener noreferrer" href="https://codeforces.com/profile/${rankList[i].handle}">${rankList[i].handle}</a>`;
                     cell3.innerHTML = `${rankList[i].points}`;
 
                     for(let j=0;j<rankList[i].problemResults.length;j++)
@@ -225,7 +225,7 @@ if(secondsSinceEpoch - starttime <= duration + (86400*10*1000))
 
                         if(rankList[i].problemResults[j].contestId!=-1)
                         {
-                            cell.innerHTML = `<a href="https://codeforces.com/contest/${rankList[i].problemResults[j].contestId}/submission/${rankList[i].problemResults[j].submissionId}">AC</a>`;
+                            cell.innerHTML = `<a target="_blank" rel="noopener noreferrer" href="https://codeforces.com/contest/${rankList[i].problemResults[j].contestId}/submission/${rankList[i].problemResults[j].submissionId}">AC</a>`;
                         }
                         else
                         {
@@ -248,7 +248,7 @@ if(secondsSinceEpoch - starttime <= duration + (86400*10*1000))
          }
          else
          {
-             
+              
               async function extractProblemRankList()
               {
                 let url = "/api/lockout/";
@@ -266,6 +266,7 @@ if(secondsSinceEpoch - starttime <= duration + (86400*10*1000))
                     registered.push(data.opponent.handle);
                 }
 
+                
                 let noofRegistered = registered.length;
 
                 let solveTime1 = {}, submissionId1 = {};
@@ -301,6 +302,8 @@ if(secondsSinceEpoch - starttime <= duration + (86400*10*1000))
                     }
                 }
 
+                
+
                 if(noofRegistered>1)
                 {
                     let uri = "https://codeforces.com/api/user.status?handle=";
@@ -329,10 +332,11 @@ if(secondsSinceEpoch - starttime <= duration + (86400*10*1000))
                         }
                     }
                 }
-
+                
 
                 let problem = [], rankList = [];
                 
+                console.log(data.problems);
                 for(let i=0;i<data.problems.length;i++)
                 {
                     let id = data.problems[i].contestId + data.problems[i].index;
@@ -366,6 +370,7 @@ if(secondsSinceEpoch - starttime <= duration + (86400*10*1000))
                         }
                     }
                 }
+                
                 
                 if(registered.length>1)
                 {
@@ -478,11 +483,12 @@ if(secondsSinceEpoch - starttime <= duration + (86400*10*1000))
                     let p3=problem[i].index;
                     let p4=c[i];
                     let p5=problem[i].points;
+                    let p6=problem[i].acFirst;
                     
                     cell1.innerHTML = `${p1}`;
                     cell2.innerHTML = `<a href="https://codeforces.com/contest/${p2}/problem/${p3}">PROBLEM-${p4}</a>`;
                     cell3.innerHTML = `${p5}`;
-                    cell4.innerHTML = `-`;
+                    cell4.innerHTML = `${p6}`;
                 }
                 
                 let table1 = document.getElementById('myTable2');
@@ -510,7 +516,7 @@ if(secondsSinceEpoch - starttime <= duration + (86400*10*1000))
 
                     let p1=i+1;
                     cell1.innerHTML = `${p1}`;
-                    cell2.innerHTML = `<a href="https://codeforces.com/profile/${rankList[i].handle}">${rankList[i].handle}</a>`;
+                    cell2.innerHTML = `<a target="_blank" rel="noopener noreferrer" href="https://codeforces.com/profile/${rankList[i].handle}">${rankList[i].handle}</a>`;
                     cell3.innerHTML = `${rankList[i].points}`;
 
                     for(let j=0;j<rankList[i].problemResults.length;j++)
@@ -519,7 +525,7 @@ if(secondsSinceEpoch - starttime <= duration + (86400*10*1000))
 
                         if(rankList[i].problemResults[j].contestId!=-1)
                         {
-                            cell.innerHTML = `<a href="https://codeforces.com/contest/${rankList[i].problemResults[j].contestId}/submission/${rankList[i].problemResults[j].submissionId}">AC</a>`;
+                            cell.innerHTML = `<a target="_blank" rel="noopener noreferrer" href="https://codeforces.com/contest/${rankList[i].problemResults[j].contestId}/submission/${rankList[i].problemResults[j].submissionId}">AC</a>`;
                         }
                         else
                         {

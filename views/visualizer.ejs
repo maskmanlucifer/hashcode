@@ -83,12 +83,13 @@
            </div>
             <div class="card_list_visualizer">
             <span>CONTEST</span>
-            <input type="number" placeholder="ENTER CONTEST NO." id="contest_no">
+            <input type="number" placeholder="ENTER CONTEST ID" id="contest_no">
             <a class="contest_button">GO</a>
             <div class="contestError"></div>
             <div class="info">
                 <p>Bar graph of how many users of level x solved particular problem</p>
-                <p>Contest no. can be found in url of that contest</p>
+                <p>Contest ID can be found in url of that contest</p>
+                <p id="contest_ID">https://codeforces.com/contest/<strong>1552</strong> | (1552 = Contest ID)</p>
                 <p>Due to quite large data fetching it might take 8-10 seconds to load the chart</p>
                 <p>Any contest can be visualized only after rating change of that contest</p>
             </div>
@@ -100,7 +101,7 @@
                     <p>(Bar , Doughnut etc.) Graphs for almost everything about your profile</p>
                     <p>Comparing two users profile</p>
                 </div>
-                <a href="https://cfviz.netlify.app/">CFVIZ</a>
+                <a href="https://cfviz.netlify.app/" target="_blank" rel="noopener noreferrer">CFVIZ</a>
            </div>
        </div>
     </main>

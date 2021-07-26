@@ -202,7 +202,7 @@ if(secondsSinceEpoch - starttime <= duration + (86400*10*1000))
                     let p5=problem[i].points;
                     
                     cell1.innerHTML = `${p1}`;
-                    cell2.innerHTML = `<a href="https://codeforces.com/contest/${p2}/problem/${p3}">PROBLEM-${p4}</a>`;
+                    cell2.innerHTML = `<a target="_blank" rel="noopener noreferrer" href="https://codeforces.com/contest/${p2}/problem/${p3}">PROBLEM-${p4}</a>`;
                     cell3.innerHTML = `${p5}`;
                     cell4.innerHTML = `${0}`;
                 }
@@ -332,7 +332,7 @@ if(secondsSinceEpoch - starttime <= duration + (86400*10*1000))
                     let p6=data.problems[i].numberofAc;
 
                     cell1.innerHTML = `${p1}`;
-                    cell2.innerHTML = `<a href="https://codeforces.com/contest/${p2}/problem/${p3}">PROBLEM-${p4}</a>`;
+                    cell2.innerHTML = `<a target="_blank" rel="noopener noreferrer" href="https://codeforces.com/contest/${p2}/problem/${p3}">PROBLEM-${p4}</a>`;
                     cell3.innerHTML = `${p5}`;
                     cell4.innerHTML = `${p6}`;
                 }
@@ -518,7 +518,7 @@ if(secondsSinceEpoch - starttime <= duration + (86400*10*1000))
 
                 let p1=i+1;
                 cell1.innerHTML = `${p1}`;
-                cell2.innerHTML = `<a href="https://codeforces.com/profile/${rankList[i].handle}">${rankList[i].handle}</a>`;
+                cell2.innerHTML = `<a target="_blank" rel="noopener noreferrer" href="https://codeforces.com/profile/${rankList[i].handle}">${rankList[i].handle}</a>`;
                 cell3.innerHTML = `${rankList[i].points}`;
                 for(let j=0;j<rankList[i].problemResults.length;j++)
                 {
@@ -526,7 +526,7 @@ if(secondsSinceEpoch - starttime <= duration + (86400*10*1000))
                    
                     if(rankList[i].problemResults[j].contestId!=-1)
                     {
-                      cell.innerHTML = `<a href="https://codeforces.com/contest/${rankList[i].problemResults[j].contestId}/submission/${rankList[i].problemResults[j].submissionId}">AC</a>`;
+                      cell.innerHTML = `<a target="_blank" rel="noopener noreferrer" href="https://codeforces.com/contest/${rankList[i].problemResults[j].contestId}/submission/${rankList[i].problemResults[j].submissionId}">AC</a>`;
                     }
                     else
                     {

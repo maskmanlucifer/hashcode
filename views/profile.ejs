@@ -164,7 +164,7 @@
                        
                     }
 
-                    info.innerHTML = `Submit <a href="https://gist.github.com/maskmanlucifer/a3cf6a401e67e74176f99cd1765a6a75" target="_blank" rel="noopener noreferrer">Code</a> to <a href="https://codeforces.com/contest/1331/problem/A" target="_blank" rel="noopener noreferrer">Problem</a> within 50 second`;
+                    info.innerHTML = `Submit this <a href="https://gist.github.com/maskmanlucifer/a3cf6a401e67e74176f99cd1765a6a75" target="_blank" rel="noopener noreferrer">Code</a> to this <a href="https://codeforces.com/contest/1331/problem/A" target="_blank" rel="noopener noreferrer">Problem</a> within 50 second`;
                     let now = new Date().getTime();
                     let target = now + (50*1000);
 
@@ -172,11 +172,10 @@
                         now = new Date().getTime();
                         let distance = target - now;
                         let seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-                        document.getElementById("demo1").textContent = "Verification will be done in 50 sec please don't refresh the page";
-
                         let finaltime = seconds + " sec";
                         document.getElementById("demo").innerHTML = finaltime;
+
+                        document.getElementById("demo1").textContent = `Verification will be done in ${finaltime}  please don't refresh the page`;
 
                         if (distance <= 1)
                         {
