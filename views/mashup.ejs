@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="/css/index.css">
     <title>hashcode</title>
 </head>
-<body> 
+<body onload="changetime()"> 
     <nav class="navbar">
         <ul class="navbar-nav">
             <li>
@@ -94,8 +94,7 @@
                     <div class="contest_box">
                         <span>Mashup # <%=data[i].contestId%></span>
                         <div class="info_contest">
-                        <%let myDate = new Date(data[i].starttimeSecond *1000) %>
-                        <p><strong>Start time :</strong>  <%=myDate.toLocaleString()%></p>
+                        <p class="time"><%=data[i].starttimeSecond%></p>
                         <% let duration = Math.floor(data[i].durationtimeSecond/60.0)%>
                         <% let hours = Math.floor(duration/60.0) %>
                         <% let minutes = duration - (hours*60) %>
@@ -118,8 +117,7 @@
                         <div class="contest_box">
                             <span>Mashup # <%=data[i].contestId%></span>
                             <div class="info_contest">
-                            <%let myDate = new Date(data[i].starttimeSecond *1000) %>
-                            <p><strong>Start time :</strong>  <%=myDate.toLocaleString()%></p>
+                            <p class="time"><%=data[i].starttimeSecond%></p>
                             <% let duration =Math.floor(data[i].durationtimeSecond/60.0)%>
                             <% let hours = Math.floor(duration/60.0) %>
                             <% let minutes = duration - (hours*60) %>
@@ -137,5 +135,16 @@
             <%}%>
         </div>
     </main>
+    <script>
+       function changetime(){
+        let time=document.getElementsByClassName("time");
+        for(let i=0;i<time.length;i++)
+        {
+            let timeChange = Number(time[i].textContent);
+            let myDate = new Date(timeChange *1000);
+            time[i].innerHTML = `<strong>Start time </strong>: ${myDate.toLocaleString()}`;
+        }
+        }
+    </script>
 </body>
 </html> 
