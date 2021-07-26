@@ -20,7 +20,7 @@ passport.deserializeUser((id,done)=> {
 //the strategy passport will use to communicate with google
 passport.use(
     new GoogleStrategy({
-    callbackURL:'/google/callback',
+    callbackURL:process.env.origin + '/google/callback',
     clientID:process.env.clientID,
     clientSecret:process.env.clientSecret
 },
