@@ -1,5 +1,6 @@
 ### :rocket: hashcode
-    hashcode is a website developed for creating and attempting virtual contest on codeforces.
+    hashcode is a website developed for creating and attempting virtual contest cooked using codeforces problems.
+    The major functions of website relies on communication with codeforces API.
     Features of hashcode are -- 
     1. Creating public/private , mashup/lockout virtual contests.
     2. Various useful links of competitive programming in organized way.
