@@ -456,6 +456,16 @@ if(secondsSinceEpoch - starttime <= duration + (86400*10*1000))
                     rankList.push(obj1);
                 }
             
+                rankList.sort((p1,p2)=>{
+                    if(p1.points<p2.points)
+                    {
+                        return 1;
+                    }
+                    else 
+                    {
+                        return -1;
+                    }
+                });
                 let table = document.getElementById('myTable1');
                 
                 let c = ['A','B','C','D','E','F','G','H','I','J'];
