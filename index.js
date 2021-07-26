@@ -27,7 +27,7 @@ mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true, useCrea
   console.log("Database is connected");
 });
 
-
+const PORT = process.env.PORT || 3000;
 
 const app=express();
 
@@ -56,6 +56,6 @@ app.get('/',(req,res)=>{
    res.render('home',{user:req.user});
 });
 
-app.listen(3000,()=>{
-  console.log("You are listening to 3000 port");
+app.listen(PORT,()=>{
+  console.log(`You are listening to ${PORT} port`);
 });
