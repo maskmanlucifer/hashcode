@@ -171,6 +171,10 @@
                     }
                     if(data.info)
                     {
+                        form.duration.value=null;
+                        form.min_level.value=null;
+                        form.max_level.value=null;
+                        form.no_of_problems.value=null;
                         link_info.innerHTML = `<p>${data.info}</p>`;
                     }
                     if(data.link)
