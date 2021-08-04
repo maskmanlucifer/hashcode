@@ -405,7 +405,6 @@ if(secondsSinceEpoch - starttime <= duration + (86400*10*1000))
                   {
                      let initial = Math.round(starttime/1000);
                      let penality = solvedTime[id] - initial;
-                     console.log(penality,solvedTime[id],starttime);
                      penality = Math.round(penality/5);
                      let point = Math.max(100,data.problems[j].points-penality);
                      obj.points += point;
