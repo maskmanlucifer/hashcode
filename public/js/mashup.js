@@ -15,16 +15,15 @@ duration = Number(duration)*1000;
 
 if(secondsSinceEpoch - starttime <= duration + (86400*10*1000)) 
 {
+  function delay(n) 
+  {
+    return new Promise(function(resolve){
+        setTimeout(resolve,n*1000);
+    });
+  }
     if(type == "PROBLEMS") 
     {
          // for creating awaits 
-         function delay(n) 
-         {
-            return new Promise(function(resolve){
-                setTimeout(resolve,n*1000);
-            });
-         }
-
          if(problems == 0)
          {
               let exclusedProblems = {};
@@ -220,7 +219,7 @@ if(secondsSinceEpoch - starttime <= duration + (86400*10*1000))
          }
          else
          {
-              
+             
               async function extractProblemList()
               {
                 let url = "/api/registered/";
@@ -406,6 +405,7 @@ if(secondsSinceEpoch - starttime <= duration + (86400*10*1000))
                   {
                      let initial = Math.round(starttime/1000);
                      let penality = solvedTime[id] - initial;
+                     console.log(penality,solvedTime[id],starttime);
                      penality = Math.round(penality/5);
                      let point = Math.max(100,data.problems[j].points-penality);
                      obj.points += point;
@@ -459,7 +459,8 @@ if(secondsSinceEpoch - starttime <= duration + (86400*10*1000))
                   let id = data.problems[j].contestId + data.problems[j].index;
                   if(solvedTime[id]!=undefined)
                   {
-                     let penality = solvedTime[id] - starttime;
+                    let initial = Math.round(starttime/1000);
+                     let penality = solvedTime[id] - initial;
                      penality = Math.round(penality/3);
                      let point = Math.max(100,data.problems[j].points-penality);
                      obj.points += point;
