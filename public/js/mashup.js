@@ -439,12 +439,12 @@ if(secondsSinceEpoch - starttime <= duration + (86400*10*1000))
                         if(solvedTime[id]==undefined)
                         {
                           solvedTime[id]=data1.result[j].creationTimeSeconds;
-                          submissionId[id]=data1.result[j].creationTimeSeconds;
+                          submissionId[id]=data1.result[j].id;
                         }
                         else 
                         {
                           solvedTime[id]=data1.result[j].creationTimeSeconds;
-                          submissionId[id]=data1.result[j].creationTimeSeconds;
+                          submissionId[id]=data1.result[j].id;
                         }
                     }
                 }
@@ -520,6 +520,7 @@ if(secondsSinceEpoch - starttime <= duration + (86400*10*1000))
                 cell1.innerHTML = `${p1}`;
                 cell2.innerHTML = `<a target="_blank" rel="noopener noreferrer" href="https://codeforces.com/profile/${rankList[i].handle}">${rankList[i].handle}</a>`;
                 cell3.innerHTML = `${rankList[i].points}`;
+                console.log(rankList[i].problemResults);
                 for(let j=0;j<rankList[i].problemResults.length;j++)
                 {
                     let cell = row.insertCell(3+j);
