@@ -16,7 +16,6 @@ const Mashup = require('./models/mashupModel');
 const Lockout = require('./models/lockoutModel');
 
 const fizzbuzzRoutes = require('./routes/fizzbuzzRoutes');
-const visualizerRoutes = require('./routes/visualizerRoutes');
 const contestRoutes = require('./routes/contestRoutes');
 mongoose.set('useFindAndModify', false);
 
@@ -46,7 +45,6 @@ app.use(passport.session());
 app.use(authRoutes);
 app.use(profileRoutes);
 app.use(fizzbuzzRoutes);
-app.use(visualizerRoutes);
 app.use(contestRoutes);
 
 
