@@ -535,7 +535,14 @@ if(secondsSinceEpoch - starttime <= duration + (86400*10*1000))
 
                         if(rankList[i].problemResults[j].contestId!=-1)
                         {
-                            cell.innerHTML = `<a target="_blank" rel="noopener noreferrer" href="https://codeforces.com/contest/${rankList[i].problemResults[j].contestId}/submission/${rankList[i].problemResults[j].submissionId}">AC</a>`;
+                            if(secondsSinceEpoch - starttime <= duration) 
+                            {
+                                cell.innerHTML = 'AC';
+                            } 
+                            else 
+                            {
+                                cell.innerHTML = `<a target="_blank" rel="noopener noreferrer" href="https://codeforces.com/contest/${rankList[i].problemResults[j].contestId}/submission/${rankList[i].problemResults[j].submissionId}">AC</a>`;
+                            }
                         }
                         else
                         {
