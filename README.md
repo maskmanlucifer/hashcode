@@ -16,9 +16,10 @@
     2. Building some interface to find coding buddies of same goal and interest. 
 
 ### :hammer_and_wrench: Installation:
+#### Code on Gitpod
 [![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/maskmanlucifer/hashcode)
 
-#### Local Enviornment Setup
+#### OR Local Enviornment Setup
     1. Cloning repository.
           git clone <repo link> or locally download zip folder.
           
