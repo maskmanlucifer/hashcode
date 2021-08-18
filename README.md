@@ -16,7 +16,7 @@
     2. Building some interface to find coding buddies of same goal and interest. 
 
 ### :hammer_and_wrench: Installation:
-[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/...)
+[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/hashcode)
 
 #### Local Enviornment Setup
     1. Cloning repository.
