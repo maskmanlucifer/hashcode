@@ -16,7 +16,12 @@
     2. Building some interface to find coding buddies of same goal and interest. 
 
 ### :hammer_and_wrench: Installation:
-#### Code on Gitpod
+#### Code on Gitpod 
+    1. Click below given button.
+    2. Dependencies will be installed automatically.
+    3. Create .env file and set enviornment variables.
+    4. start server by command (Node index).
+    
 [![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/maskmanlucifer/hashcode)
 
 #### OR Local Enviornment Setup
