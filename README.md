@@ -6,14 +6,12 @@
     2. Various useful links of competitive programming in organized way.
     3. List of some most frequent STL functions.
     4. Collection of good to know one liner facts of competitive programming.
-    5. Visulization of any rated contest of codeforces.
     
    :zap: Link to live website <a href="https://hashedcode.herokuapp.com" target="_blank">here</a>.
     
 ### :dart: In future features: 
     Here is the list of the features which can be added in hashcode in future--
-    1. Speedrun contests for improving speed in (A,B,C) problems.
-    2. Building some interface to find coding buddies of same goal and interest. 
+    1. Building some interface to find coding buddies of same goal and interest. 
 
 ### :hammer_and_wrench: Installation:
 #### Code on Gitpod 
